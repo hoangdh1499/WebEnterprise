@@ -17,8 +17,10 @@ namespace WebEnterprise.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public ActionResult Register(Account acc)
         {
             if (ModelState.IsValid)
@@ -34,6 +36,7 @@ namespace WebEnterprise.Controllers
                     if (!result.Succeeded)
                     {
                         ModelState.AddModelError("", "User Name already exists");
+                        return View(acc);
                     }
 
 
@@ -41,6 +44,7 @@ namespace WebEnterprise.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Confirm password is not matched");
+                   
                 }
             }
             return View(acc);
@@ -67,6 +71,12 @@ namespace WebEnterprise.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View(acc);
+        }
+        public ActionResult Logout(Account acc)
+        {
+            var authenticationManager = HttpContext.GetOwinContext().Authentication;
+            authenticationManager.SignOut();
+            return RedirectToAction("login", "Authen");
         }
     }
 }

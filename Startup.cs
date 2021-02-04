@@ -54,6 +54,14 @@ namespace WebEnterprise
                 var role = new IdentityRole("Student");
                 roleManager.Create(role);
             }
+            if(!roleManager.RoleExists("Admin"))
+            {
+                var role = new IdentityRole("Admin");
+                roleManager.Create(role);
+
+                var user = new IdentityUser("admin");
+                var result = manager.Create(user, "admin");
+            }
         }
     }
 }
