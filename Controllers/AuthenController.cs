@@ -68,5 +68,11 @@ namespace WebEnterprise.Controllers
             }
             return View(acc);
         }
+        public ActionResult LogOut()
+        {
+            var authenticationManager = HttpContext.GetOwinContext().Authentication;
+            authenticationManager.SignOut();
+            return RedirectToAction("Login", "Authen");
+        }
     }
 }
