@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<WebEnterprise.Models.CTent>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -25,3 +26,18 @@
         <p><a class="btn btn-default" href=" ">Learn more &raquo;</a></p>
     </div>
 </div>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.CTname)</th>
+        <th>@Html.DisplayNameFor(model => model.CTDescription)</th>
+        <th>@Html.DisplayNameFor(model => model.CTTag)</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.CTname)</td>
+            <td>@Html.DisplayFor(modelItem => item.CTDescription)</td>
+            <td>@Html.DisplayFor(modelItem => item.CTTag)</td>
+        </tr>
+}
+</table>
