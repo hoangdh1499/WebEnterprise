@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebEnterprise.Models.CTent>
+﻿@model IEnumerable<WebEnterprise.Models.ConTent>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -9,33 +9,16 @@
     <p><a href="https://cms.greenwich.edu.vn/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting starteddd</h2>
-        <p> </p>
-        <p><a class="btn btn-default" href="    ">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p> </p>
-        <p><a class="btn btn-default" href=" ">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p> </p>
-        <p><a class="btn btn-default" href=" ">Learn more &raquo;</a></p>
-    </div>
-</div>
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.CTname)</th>
+        <th>@Html.DisplayNameFor(model => model.CTName)</th>
         <th>@Html.DisplayNameFor(model => model.CTDescription)</th>
         <th>@Html.DisplayNameFor(model => model.CTTag)</th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.CTname)</td>
+            <td>@Html.DisplayFor(modelItem => item.CTName)</td>
             <td>@Html.DisplayFor(modelItem => item.CTDescription)</td>
             <td>@Html.DisplayFor(modelItem => item.CTTag)</td>
         </tr>

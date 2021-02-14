@@ -74,5 +74,14 @@ namespace WebEnterprise.Controllers
             authenticationManager.SignOut();
             return RedirectToAction("Login", "Authen");
         }
+        public static void CreateAccount(string userName, string password, string role)
+        {
+            var userStore = new UserStore<IdentityUser>();
+            var manager = new UserManager<IdentityUser>(userStore);
+
+            var user = new IdentityUser(userName);
+            manager.Create(user, password);
+            manager.AddToRole(user.Id, role);
+        }
     }
 }

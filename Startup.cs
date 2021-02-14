@@ -44,6 +44,19 @@ namespace WebEnterprise
                     manager.AddToRole(user.Id, "ManagerMarketing");
                 }
             }
+            if (!roleManager.RoleExists("Admin"))
+            {
+                var role = new IdentityRole("Admin");
+                roleManager.Create(role);
+
+                var user = new IdentityUser("admin");
+                var result = manager.Create(user, "123456");
+
+                if (result.Succeeded)
+                {
+                    manager.AddToRole(user.Id, "Admin");
+                }
+            }
             if (!roleManager.RoleExists("ManagerCoordinator"))
             {
                 var role = new IdentityRole("ManagerCoordinator");
@@ -52,6 +65,11 @@ namespace WebEnterprise
             if (!roleManager.RoleExists("Student"))
             {
                 var role = new IdentityRole("Student");
+                roleManager.Create(role);
+            }
+            if (!roleManager.RoleExists("Guest"))
+            {
+                var role = new IdentityRole("Guest");
                 roleManager.Create(role);
             }
         }

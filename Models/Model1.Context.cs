@@ -13,10 +13,10 @@ namespace WebEnterprise.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class G5EnterpriseDBEntities : DbContext
+    public partial class G5EnterpriseDBEntities1 : DbContext
     {
-        public G5EnterpriseDBEntities()
-            : base("name=G5EnterpriseDBEntities")
+        public G5EnterpriseDBEntities1()
+            : base("name=G5EnterpriseDBEntities1")
         {
         }
     
@@ -30,6 +30,10 @@ namespace WebEnterprise.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<CTent> CTents { get; set; }
+        public virtual DbSet<ConTent> ConTents { get; set; }
+        public virtual DbSet<CTTag> CTTags { get; set; }
+        public virtual DbSet<MarketingCoordinator> MarketingCoordinators { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

@@ -4,15 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3f42c0b61c3f4cbd99cac700b51d3069" Name="Diagram1">
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+      <Diagram DiagramId="0c7b3cd5566a447dbb49d305b85e70e0" Name="Diagram1">
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="G5EnterpriseDBModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="G5EnterpriseDBModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="G5EnterpriseDBModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="G5EnterpriseDBModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.CTent" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.ConTent" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.CTTag" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.MarketingCoordinator" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Student" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_Content_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_MarketingCoordinator_Content" ManuallyRouted="false" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_MarketingCoordinator_CTTag" ManuallyRouted="false" />
         <AssociationConnector Association="G5EnterpriseDBModel.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

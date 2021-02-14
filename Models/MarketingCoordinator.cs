@@ -12,11 +12,15 @@ namespace WebEnterprise.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CTent
+    public partial class MarketingCoordinator
     {
-        public string CTID { get; set; }
-        public string CTname { get; set; }
-        public string CTDescription { get; set; }
+        public string MCID { get; set; }
+        public string MCName { get; set; }
+        public string MCAddress { get; set; }
+        public string MCPhone { get; set; }
         public string CTTag { get; set; }
+    
+        public virtual ConTent ConTent { get; set; }
+        public virtual CTTag CTTag1 { get; set; }
     }
 }
