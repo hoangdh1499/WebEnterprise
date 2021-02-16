@@ -13,38 +13,6 @@ namespace WebEnterprise.Controllers
     public class AuthenController : Controller
     {
         // GET: Authen
-        public ActionResult Register()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(Account acc)
-        {
-            if (ModelState.IsValid)
-            {
-                if (acc.Password.Equals(acc.ConfirmPassword))
-                {
-                    var userStore = new UserStore<IdentityUser>();
-                    var manager = new UserManager<IdentityUser>(userStore);
-
-                    var user = new IdentityUser() { UserName = acc.Username };
-                    IdentityResult result = manager.Create(user, acc.Password);
-
-                    if (!result.Succeeded)
-                    {
-                        ModelState.AddModelError("", "User Name already exists");
-                    }
-
-
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Confirm password is not matched");
-                }
-            }
-            return View(acc);
-        }
         public ActionResult Login()
         {
             return View();
@@ -74,13 +42,13 @@ namespace WebEnterprise.Controllers
             authenticationManager.SignOut();
             return RedirectToAction("Login", "Authen");
         }
-        public static void CreateAccount(string userName, string password, string role)
+        public static void CreateAccount(string Username, string Password, string role)
         {
             var userStore = new UserStore<IdentityUser>();
             var manager = new UserManager<IdentityUser>(userStore);
 
-            var user = new IdentityUser(userName);
-            manager.Create(user, password);
+            var user = new IdentityUser(Username);
+            manager.Create(user, Password);
             manager.AddToRole(user.Id, role);
         }
     }

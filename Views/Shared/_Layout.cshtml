@@ -17,15 +17,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("UoG Magazine", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Login", "Login", "Authen")</li>
-                    <li>@Html.ActionLink("LogOut", "LogOut", "Authen")</li>
-                </ul>
+                @Html.Partial("_Login")
             </div>
         </div>
     </div>

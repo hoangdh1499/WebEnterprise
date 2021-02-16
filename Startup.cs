@@ -57,9 +57,9 @@ namespace WebEnterprise
                     manager.AddToRole(user.Id, "Admin");
                 }
             }
-            if (!roleManager.RoleExists("ManagerCoordinator"))
+            if (!roleManager.RoleExists("MarketingCoordinator"))
             {
-                var role = new IdentityRole("ManagerCoordinator");
+                var role = new IdentityRole("MarketingCoordinator");
                 roleManager.Create(role);
             }
             if (!roleManager.RoleExists("Student"))
