@@ -13,10 +13,10 @@ namespace WebEnterprise.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class G5EnterpriseDBEntities1 : DbContext
+    public partial class G5EnterpriseDBEntities3 : DbContext
     {
-        public G5EnterpriseDBEntities1()
-            : base("name=G5EnterpriseDBEntities1")
+        public G5EnterpriseDBEntities3()
+            : base("name=G5EnterpriseDBEntities3")
         {
         }
     
@@ -25,11 +25,6 @@ namespace WebEnterprise.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<ConTent> ConTents { get; set; }
         public virtual DbSet<CTTag> CTTags { get; set; }
         public virtual DbSet<MarketingCoordinator> MarketingCoordinators { get; set; }

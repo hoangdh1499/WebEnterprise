@@ -9,7 +9,7 @@ namespace WebEnterprise.Controllers
 {
     public class HomeController : Controller
     {
-        private G5EnterpriseDBEntities1 db = new G5EnterpriseDBEntities1();
+        private G5EnterpriseDBEntities3 db = new G5EnterpriseDBEntities3();
         public ActionResult Index(string searchString)
         {
             var ct = from m in db.ConTents select m;
@@ -18,7 +18,6 @@ namespace WebEnterprise.Controllers
                 ct = ct.Where(s => s.CTName.Contains(searchString));
             }
             return View(ct);
-
         }
 
         public ActionResult About()

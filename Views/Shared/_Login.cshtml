@@ -1,0 +1,31 @@
+﻿
+@if (Request.IsAuthenticated)
+{
+    <ul class="nav navbar-right">
+        <li>@Html.ActionLink("Logout", "Logout", "Authen")</li>
+    </ul>
+    if (User.IsInRole("Student"))
+    {
+        @Html.Partial("_Student");
+    }
+    else if (User.IsInRole("MarketingCoordinator"))
+    {
+        @Html.Partial("_MarketingCoordinator");
+    }
+    else if (User.IsInRole("Admin"))
+    {
+        @Html.Partial("_Admin");
+    }
+    else if (User.IsInRole("ManagerMarketing"))
+    {
+        @Html.Partial("_MarketingManager");
+    }
+}
+else
+{
+    <ul class="nav navbar-right">
+        <li>@Html.ActionLink("Login", "Login", "Authen")</li>
+    </ul>
+
+}
+
