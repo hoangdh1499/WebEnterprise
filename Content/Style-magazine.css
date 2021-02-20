@@ -6,15 +6,13 @@
     overflow-x: hidden;
 }
 
-.home-img-container {
-    background-image: url('images/tm-home-img.jpg');
-    background-position: center;
+.container body-content {
     height: 400px;
     width: 100%;
 }
 
 .contentleft {
-    width: 700px;
+    width: 1000px;
     float: left;
     margin: 0 0 100px 0;
 }
@@ -72,7 +70,7 @@
 }
 
 .contentright {
-    width: 418px;
+    width: 500px;
     float: right;
     margin: 20px 0 100px 0;
     background-color: #f2f2f2;
