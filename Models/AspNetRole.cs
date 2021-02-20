@@ -12,24 +12,18 @@ namespace WebEnterprise.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ConTent
+    public partial class AspNetRole
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ConTent()
+        public AspNetRole()
         {
-            this.MarketingCoordinators = new HashSet<MarketingCoordinator>();
+            this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
-        public string CTID { get; set; }
-        public string CTName { get; set; }
-        public string CTDescription { get; set; }
-        public string CTTag { get; set; }
-        public string StudentID { get; set; }
-        public string CommentID { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
-        public virtual Student Student { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MarketingCoordinator> MarketingCoordinators { get; set; }
-        public virtual Comment Comment { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

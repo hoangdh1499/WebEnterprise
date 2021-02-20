@@ -6,13 +6,29 @@
     <edmx:Diagrams>
       <Diagram DiagramId="beb4c8e79ca64bfd858f20c25302e740" Name="Diagram1">
         <EntityTypeShape EntityType="G5EnterpriseDBModel.ConTent" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.CTTag" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.CTTag" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="G5EnterpriseDBModel.MarketingCoordinator" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="G5EnterpriseDBModel.Student" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="G5EnterpriseDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_Content_Student" ManuallyRouted="false" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_MarketingCoordinator_Content" ManuallyRouted="false" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_MarketingCoordinator_CTTag" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Comment" Width="1.5" PointX="7.5" PointY="1.125" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Reply" Width="1.5" PointX="9.75" PointY="1.125" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_Comment_MarketingCoordinator" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_Comment_Student" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_ConTent_Comment" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_Reply_Comment" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_Reply_MarketingCoordinator" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_Reply_Student" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.AspNetRole" Width="1.5" PointX="5.75" PointY="9.5" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="10.625" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="8" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.AspNetUser" Width="1.5" PointX="8" PointY="8.375" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="G5EnterpriseDBModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,6 +14,13 @@ namespace WebEnterprise.Models
     
     public partial class MarketingCoordinator
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MarketingCoordinator()
+        {
+            this.Comments = new HashSet<Comment>();
+            this.Replies = new HashSet<Reply>();
+        }
+    
         public string MCID { get; set; }
         public string MCName { get; set; }
         public string MCAddress { get; set; }
@@ -22,5 +29,9 @@ namespace WebEnterprise.Models
     
         public virtual ConTent ConTent { get; set; }
         public virtual CTTag CTTag1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reply> Replies { get; set; }
     }
 }
