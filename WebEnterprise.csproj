@@ -173,6 +173,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\AuthenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarketingCoordinatorsController.cs" />
@@ -246,6 +247,7 @@
     <Content Include="Views\Shared\_Student.cshtml" />
     <Content Include="Views\Shared\_MarketingCoordinator.cshtml" />
     <Content Include="Views\Shared\_MarketingManager.cshtml" />
+    <Content Include="Views\Article\SubmitArticle.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
