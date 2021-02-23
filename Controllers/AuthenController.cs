@@ -51,5 +51,13 @@ namespace WebEnterprise.Controllers
             manager.Create(user, Password);
             manager.AddToRole(user.Id, role);
         }
+        public static void DeleteAccount(string Username)
+        {
+            var userStore = new UserStore<IdentityUser>();
+            var manager = new UserManager<IdentityUser>(userStore);
+
+            var user = manager.FindByName(Username);
+            manager.Delete(user);
+        }
     }
 }

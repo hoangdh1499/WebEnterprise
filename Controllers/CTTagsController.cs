@@ -10,117 +10,108 @@ using WebEnterprise.Models;
 
 namespace WebEnterprise.Controllers
 {
-    public class StudentsController : Controller
+    public class CTTagsController : Controller
     {
         private G5EnterpriseDBEntities3 db = new G5EnterpriseDBEntities3();
 
-        // GET: Students
+        // GET: CTTags
         public ActionResult Index()
         {
-            return View(db.Students.ToList());
+            return View(db.CTTags.ToList());
         }
 
-        // GET: Students/Details/5
+        // GET: CTTags/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            CTTag cTTag = db.CTTags.Find(id);
+            if (cTTag == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(cTTag);
         }
-        [Authorize(Roles = "Admin")]
-        // GET: Students/Create
+
+        // GET: CTTags/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Students/Create
+        // POST: CTTags/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "StudentID,StudentName,StudentAddress,DOB,UserName")] Student student)
+        public ActionResult Create([Bind(Include = "CTTagID,CTTag1,CTTagDescription")] CTTag cTTag)
         {
             if (ModelState.IsValid)
             {
-                db.Students.Add(student);
+                db.CTTags.Add(cTTag);
                 db.SaveChanges();
-
-                AuthenController.CreateAccount(student.StudentID, "123456", "Student");
-
                 return RedirectToAction("Index");
             }
 
-            return View(student);
+            return View(cTTag);
         }
 
-        // GET: Students/Edit/5
-        [Authorize(Roles = "Student")]
+        // GET: CTTags/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            CTTag cTTag = db.CTTags.Find(id);
+            if (cTTag == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(cTTag);
         }
 
-        // POST: Students/Edit/5
+        // POST: CTTags/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Student")]
-        public ActionResult Edit([Bind(Include = "StudentID,StudentName,StudentAddress,DOB,UserName")] Student student)
+        public ActionResult Edit([Bind(Include = "CTTagID,CTTag1,CTTagDescription")] CTTag cTTag)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(student).State = EntityState.Modified;
+                db.Entry(cTTag).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(student);
+            return View(cTTag);
         }
 
-        // GET: Students/Delete/5
-        [Authorize(Roles = "Admin")]
+        // GET: CTTags/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            CTTag cTTag = db.CTTags.Find(id);
+            if (cTTag == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(cTTag);
         }
 
-        // POST: Students/Delete/5
+        // POST: CTTags/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(string id)
         {
-            Student student = db.Students.Find(id);
-            db.Students.Remove(student);
+            CTTag cTTag = db.CTTags.Find(id);
+            db.CTTags.Remove(cTTag);
             db.SaveChanges();
-            AuthenController.DeleteAccount(student.StudentID);
             return RedirectToAction("Index");
         }
 

@@ -129,6 +129,7 @@ namespace WebEnterprise.Controllers
             MarketingCoordinator marketingCoordinator = db.MarketingCoordinators.Find(id);
             db.MarketingCoordinators.Remove(marketingCoordinator);
             db.SaveChanges();
+            AuthenController.DeleteAccount(marketingCoordinator.MCID);
             return RedirectToAction("Index");
         }
 
