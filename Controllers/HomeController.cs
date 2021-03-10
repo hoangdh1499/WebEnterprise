@@ -9,10 +9,10 @@ namespace WebEnterprise.Controllers
 {
     public class HomeController : Controller
     {
-        private G5EnterpriseDBEntities3 db = new G5EnterpriseDBEntities3();
+        private G5EnterpriseDBEntities db = new G5EnterpriseDBEntities();
         public ActionResult Index(string searchString)
         {
-            var ct = from m in db.ConTents select m;
+            var ct = from m in db.Contents select m;
             if (!String.IsNullOrEmpty(searchString))
             {
                 ct = ct.Where(s => s.CTName.Contains(searchString));

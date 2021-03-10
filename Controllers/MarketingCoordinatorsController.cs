@@ -12,12 +12,12 @@ namespace WebEnterprise.Controllers
 {
     public class MarketingCoordinatorsController : Controller
     {
-        private G5EnterpriseDBEntities3 db = new G5EnterpriseDBEntities3();
+        private G5EnterpriseDBEntities db = new G5EnterpriseDBEntities();
 
         // GET: MarketingCoordinators
         public ActionResult Index()
         {
-            var marketingCoordinators = db.MarketingCoordinators.Include(m => m.ConTent).Include(m => m.CTTag1);
+            var marketingCoordinators = db.MarketingCoordinators.Include(m => m.Content).Include(m => m.CTTag1);
             return View(marketingCoordinators.ToList());
         }
 
@@ -39,7 +39,7 @@ namespace WebEnterprise.Controllers
         // GET: MarketingCoordinators/Create
         public ActionResult Create()
         {
-            ViewBag.CTTag = new SelectList(db.ConTents, "CTID", "CTName");
+            ViewBag.CTTag = new SelectList(db.Contents, "CTID", "CTName");
             ViewBag.CTTag = new SelectList(db.CTTags, "CTTagID", "CTTag1");
             return View();
         }
@@ -62,7 +62,7 @@ namespace WebEnterprise.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CTTag = new SelectList(db.ConTents, "CTID", "CTName", marketingCoordinator.CTTag);
+            ViewBag.CTTag = new SelectList(db.Contents, "CTID", "CTName", marketingCoordinator.CTTag);
             ViewBag.CTTag = new SelectList(db.CTTags, "CTTagID", "CTTag1", marketingCoordinator.CTTag);
             return View(marketingCoordinator);
         }
@@ -80,7 +80,7 @@ namespace WebEnterprise.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CTTag = new SelectList(db.ConTents, "CTID", "CTName", marketingCoordinator.CTTag);
+            ViewBag.CTTag = new SelectList(db.Contents, "CTID", "CTName", marketingCoordinator.CTTag);
             ViewBag.CTTag = new SelectList(db.CTTags, "CTTagID", "CTTag1", marketingCoordinator.CTTag);
             return View(marketingCoordinator);
         }
@@ -99,7 +99,7 @@ namespace WebEnterprise.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CTTag = new SelectList(db.ConTents, "CTID", "CTName", marketingCoordinator.CTTag);
+            ViewBag.CTTag = new SelectList(db.Contents, "CTID", "CTName", marketingCoordinator.CTTag);
             ViewBag.CTTag = new SelectList(db.CTTags, "CTTagID", "CTTag1", marketingCoordinator.CTTag);
             return View(marketingCoordinator);
         }

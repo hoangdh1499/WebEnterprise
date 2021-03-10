@@ -1,0 +1,51 @@
+﻿@model WebEnterprise.Models.Content
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Content</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CTName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CTName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CTDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CTDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CTTag1.CTTag1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CTTag1.CTTag1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.StudentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.StudentName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CTID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

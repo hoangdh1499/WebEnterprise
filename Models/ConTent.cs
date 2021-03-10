@@ -12,10 +12,10 @@ namespace WebEnterprise.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ConTent
+    public partial class Content
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ConTent()
+        public Content()
         {
             this.MarketingCoordinators = new HashSet<MarketingCoordinator>();
         }
@@ -29,5 +29,6 @@ namespace WebEnterprise.Models
         public virtual Student Student { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MarketingCoordinator> MarketingCoordinators { get; set; }
+        public virtual CTTag CTTag1 { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace WebEnterprise.Controllers
 {
     public class StudentsController : Controller
     {
-        private G5EnterpriseDBEntities3 db = new G5EnterpriseDBEntities3();
+        private G5EnterpriseDBEntities db = new G5EnterpriseDBEntities();
 
         // GET: Students
         public ActionResult Index()

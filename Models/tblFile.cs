@@ -12,16 +12,11 @@ namespace WebEnterprise.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Reply
+    public partial class tblFile
     {
-        public string ReplyID { get; set; }
-        public string StudentID { get; set; }
-        public string MCID { get; set; }
-        public string CommentID { get; set; }
-        public string Reply1 { get; set; }
-    
-        public virtual Comment Comment { get; set; }
-        public virtual MarketingCoordinator MarketingCoordinator { get; set; }
-        public virtual Student Student { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string ContentType { get; set; }
+        public byte[] Data { get; set; }
     }
 }

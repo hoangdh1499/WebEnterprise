@@ -17,7 +17,8 @@ namespace WebEnterprise.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
-            this.ConTents = new HashSet<ConTent>();
+            this.Comments = new HashSet<Comment>();
+            this.Contents = new HashSet<Content>();
         }
     
         public string StudentID { get; set; }
@@ -27,6 +28,8 @@ namespace WebEnterprise.Models
         public string UserName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConTent> ConTents { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Content> Contents { get; set; }
     }
 }
