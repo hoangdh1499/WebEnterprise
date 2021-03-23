@@ -25,12 +25,14 @@
             @Html.DisplayNameFor(model => model.MCPhone)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Content.CTName)
+            @Html.DisplayNameFor(model => model.MCEmail)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CTTag1.CTTag1)
+            @Html.DisplayNameFor(model => model.CTTag)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -48,10 +50,13 @@
         @Html.DisplayFor(modelItem => item.MCPhone)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Content.CTName)
+        @Html.DisplayFor(modelItem => item.MCEmail)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.CTTag1.CTTag1)
+        @Html.DisplayFor(modelItem => item.CTTag.CTTagName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserName)
     </td>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.MCID }) |

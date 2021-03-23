@@ -26,6 +26,7 @@ namespace WebEnterprise.Models
         public string StudentAddress { get; set; }
         public System.DateTime DOB { get; set; }
         public string UserName { get; set; }
+        public string StudentEmail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }

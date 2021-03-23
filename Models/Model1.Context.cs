@@ -27,9 +27,12 @@ namespace WebEnterprise.Models
     
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Content> Contents { get; set; }
-        public virtual DbSet<MarketingCoordinator> MarketingCoordinators { get; set; }
-        public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<tblFile> tblFiles { get; set; }
+        public virtual DbSet<ContentAssign> ContentAssigns { get; set; }
         public virtual DbSet<CTTag> CTTags { get; set; }
+        public virtual DbSet<Guest> Guests { get; set; }
+        public virtual DbSet<MarketingCoordinator> MarketingCoordinators { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<Topic> Topics { get; set; }
     }
 }

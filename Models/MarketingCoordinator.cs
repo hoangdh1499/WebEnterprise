@@ -18,18 +18,21 @@ namespace WebEnterprise.Models
         public MarketingCoordinator()
         {
             this.Comments = new HashSet<Comment>();
+            this.ContentAssigns = new HashSet<ContentAssign>();
         }
     
         public string MCID { get; set; }
         public string MCName { get; set; }
         public string MCAddress { get; set; }
         public string MCPhone { get; set; }
-        public string CTTag { get; set; }
+        public Nullable<int> CTTagID { get; set; }
         public string UserName { get; set; }
+        public string MCEmail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
-        public virtual Content Content { get; set; }
-        public virtual CTTag CTTag1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContentAssign> ContentAssigns { get; set; }
+        public virtual CTTag CTTag { get; set; }
     }
 }

@@ -12,6 +12,26 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+
+            @if (Model.Data != null)
+            {
+                var base64 = Convert.ToBase64String(Model.Data);
+                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                <img src="@imgsrc" width="150" height="200" />
+            }
+            else
+            {
+                <img src="~/images/default.jpg"
+                     style="max-width:100px;max-height:100px" />
+            }
+
+
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.CTName)
         </dt>
 
@@ -28,11 +48,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CTTag1.CTTag1)
+            @Html.DisplayNameFor(model => model.CTTag.CTTagName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CTTag1.CTTag1)
+            @Html.DisplayFor(model => model.CTTag.CTTagName)
         </dd>
 
         <dt>

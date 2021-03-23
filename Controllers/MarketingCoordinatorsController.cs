@@ -13,15 +13,16 @@ namespace WebEnterprise.Controllers
     public class MarketingCoordinatorsController : Controller
     {
         private G5EnterpriseDBEntities db = new G5EnterpriseDBEntities();
-
+        [Authorize(Roles = "Admin,MarketingCoordinator")]
         // GET: MarketingCoordinators
         public ActionResult Index()
         {
-            var marketingCoordinators = db.MarketingCoordinators.Include(m => m.Content).Include(m => m.CTTag1);
+            var marketingCoordinators = db.MarketingCoordinators.Include(m => m.CTTag).Include(m => m.CTTag);
             return View(marketingCoordinators.ToList());
         }
 
         // GET: MarketingCoordinators/Details/5
+        [Authorize(Roles = "Admin,MarketingCoordinator")]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -37,10 +38,11 @@ namespace WebEnterprise.Controllers
         }
 
         // GET: MarketingCoordinators/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            ViewBag.CTTag = new SelectList(db.Contents, "CTID", "CTName");
-            ViewBag.CTTag = new SelectList(db.CTTags, "CTTagID", "CTTag1");
+
+            ViewBag.CTTagID = new SelectList(db.CTTags, "CTTagID", "CTTagName");
             return View();
         }
 
@@ -49,26 +51,25 @@ namespace WebEnterprise.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "MCID,MCName,MCAddress,MCPhone,CTTag")] MarketingCoordinator marketingCoordinator)
+       
+        public ActionResult Create([Bind(Include = "MCEmail,MCID,MCName,MCAddress,MCPhone,CTTagID,UserName")] MarketingCoordinator marketingCoordinator)
         {
             if (ModelState.IsValid)
             {
                 db.MarketingCoordinators.Add(marketingCoordinator);
                 db.SaveChanges();
 
-                AuthenController.CreateAccount(marketingCoordinator.MCID, "123456", "MarketingCoordinator");
+                AuthenController.CreateAccount(marketingCoordinator.UserName, "123456", "MarketingCoordinator");
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CTTag = new SelectList(db.Contents, "CTID", "CTName", marketingCoordinator.CTTag);
-            ViewBag.CTTag = new SelectList(db.CTTags, "CTTagID", "CTTag1", marketingCoordinator.CTTag);
+            ViewBag.CTTagID = new SelectList(db.CTTags, "CTTagID", "CTTagName", marketingCoordinator.CTTagID);
             return View(marketingCoordinator);
         }
 
         // GET: MarketingCoordinators/Edit/5
-        [Authorize(Roles = "MarketingCoordinator")]
+        [Authorize(Roles = "Admin,MarketingCoordinator")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -80,8 +81,8 @@ namespace WebEnterprise.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CTTag = new SelectList(db.Contents, "CTID", "CTName", marketingCoordinator.CTTag);
-            ViewBag.CTTag = new SelectList(db.CTTags, "CTTagID", "CTTag1", marketingCoordinator.CTTag);
+
+            ViewBag.CTTagID = new SelectList(db.CTTags, "CTTagID", "CTTagName", marketingCoordinator.CTTagID);
             return View(marketingCoordinator);
         }
 
@@ -90,8 +91,8 @@ namespace WebEnterprise.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "MarketingCoordinator")]
-        public ActionResult Edit([Bind(Include = "MCID,MCName,MCAddress,MCPhone,CTTag")] MarketingCoordinator marketingCoordinator)
+       
+        public ActionResult Edit([Bind(Include = "MCEmail,MCID,MCName,MCAddress,MCPhone,CTTagID,UserName")] MarketingCoordinator marketingCoordinator)
         {
             if (ModelState.IsValid)
             {
@@ -99,13 +100,13 @@ namespace WebEnterprise.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CTTag = new SelectList(db.Contents, "CTID", "CTName", marketingCoordinator.CTTag);
-            ViewBag.CTTag = new SelectList(db.CTTags, "CTTagID", "CTTag1", marketingCoordinator.CTTag);
+
+            ViewBag.CTTagID = new SelectList(db.CTTags, "CTTagID", "CTTagName", marketingCoordinator.CTTagID);
             return View(marketingCoordinator);
         }
 
         // GET: MarketingCoordinators/Delete/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,MarketingCoordinator")]
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -123,7 +124,7 @@ namespace WebEnterprise.Controllers
         // POST: MarketingCoordinators/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+       
         public ActionResult DeleteConfirmed(string id)
         {
             MarketingCoordinator marketingCoordinator = db.MarketingCoordinators.Find(id);

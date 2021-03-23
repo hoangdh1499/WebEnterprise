@@ -56,9 +56,13 @@ namespace WebEnterprise.Controllers
                     return "Text Document";
                 case ".jpg":
                 case ".png":
+               
                     return "Image";
+             
+                    
                 default:
                     return "Unknown";
+
             }
         }
         [HttpPost]

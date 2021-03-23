@@ -4,18 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b2fa0037e3fc43bab5025051a9f3d1e4" Name="Diagram1">
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.Comment" Width="1.5" PointX="8.5" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.Content" Width="1.5" PointX="5.5" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.MarketingCoordinator" Width="1.5" PointX="4.125" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.Student" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.tblFile" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="G5EnterpriseDBModel.FK_Comment_MarketingCoordinator" ManuallyRouted="false" />
-        <AssociationConnector Association="G5EnterpriseDBModel.FK_Comment_Student1" ManuallyRouted="false" />
-        <AssociationConnector Association="G5EnterpriseDBModel.FK_Content_Student" ManuallyRouted="false" />
-        <AssociationConnector Association="G5EnterpriseDBModel.FK_MarketingCoordinator_Content" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.CTTag" Width="1.5" PointX="0.75" PointY="6.875" />
+      <Diagram DiagramId="3479995769d54ed1ab43fdc31413f854" Name="Diagram1" ZoomLevel="96">
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Comment" Width="1.5" PointX="5.25" PointY="9.25" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Content" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.ContentAssign" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.CTTag" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Guest" Width="1.5" PointX="7.75" PointY="1.25" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.MarketingCoordinator" Width="1.5" PointX="3" PointY="9" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Status" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Student" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Topic" Width="1.5" PointX="0.75" PointY="8" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_Comment_MarketingCoordinator" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_Comment_Student1" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_Content_CTTag" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_Content_Student" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_Content_Topic" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_ContentAssign_Content" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_ContentAssign_MarketingCoordinator" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_ContentAssign_Status" />
+        <AssociationConnector Association="G5EnterpriseDBModel.FK_ContentAssign_Topic" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_MarketingCoordinator_CTTag" />
       </Diagram>
     </edmx:Diagrams>

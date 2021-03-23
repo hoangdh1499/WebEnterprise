@@ -12,22 +12,24 @@ namespace WebEnterprise.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CTTag
+    public partial class Topic
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CTTag()
+        public Topic()
         {
             this.Contents = new HashSet<Content>();
-            this.MarketingCoordinators = new HashSet<MarketingCoordinator>();
+            this.ContentAssigns = new HashSet<ContentAssign>();
         }
     
-        public int CTTagID { get; set; }
-        public string CTTagName { get; set; }
-        public string CTTagDescription { get; set; }
+        public string TopicID { get; set; }
+        public string TopicName { get; set; }
+        public string TopicDescription { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Content> Contents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MarketingCoordinator> MarketingCoordinators { get; set; }
+        public virtual ICollection<ContentAssign> ContentAssigns { get; set; }
     }
 }

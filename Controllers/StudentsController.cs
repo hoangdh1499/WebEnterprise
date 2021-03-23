@@ -13,7 +13,7 @@ namespace WebEnterprise.Controllers
     public class StudentsController : Controller
     {
         private G5EnterpriseDBEntities db = new G5EnterpriseDBEntities();
-
+        [Authorize(Roles = "Admin")]
         // GET: Students
         public ActionResult Index()
         {
@@ -21,6 +21,7 @@ namespace WebEnterprise.Controllers
         }
 
         // GET: Students/Details/5
+        [Authorize(Roles = "Admin,Student")]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -46,15 +47,15 @@ namespace WebEnterprise.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "StudentID,StudentName,StudentAddress,DOB,UserName")] Student student)
+        
+        public ActionResult Create([Bind(Include = "StudentEmail,StudentID,StudentName,StudentAddress,DOB,UserName")] Student student)
         {
             if (ModelState.IsValid)
             {
                 db.Students.Add(student);
                 db.SaveChanges();
 
-                AuthenController.CreateAccount(student.StudentID, "123456", "Student");
+                AuthenController.CreateAccount(student.UserName, "123456", "Student");
 
                 return RedirectToAction("Index");
             }
@@ -63,7 +64,7 @@ namespace WebEnterprise.Controllers
         }
 
         // GET: Students/Edit/5
-        [Authorize(Roles = "Student")]
+        [Authorize(Roles = "Student,Admin")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -83,8 +84,8 @@ namespace WebEnterprise.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Student")]
-        public ActionResult Edit([Bind(Include = "StudentID,StudentName,StudentAddress,DOB,UserName")] Student student)
+       
+        public ActionResult Edit([Bind(Include = "StudentEmail,StudentID,StudentName,StudentAddress,DOB,UserName")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -114,7 +115,7 @@ namespace WebEnterprise.Controllers
         // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        
         public ActionResult DeleteConfirmed(string id)
         {
             Student student = db.Students.Find(id);

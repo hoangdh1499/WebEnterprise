@@ -12,12 +12,12 @@ namespace WebEnterprise.Controllers
         private G5EnterpriseDBEntities db = new G5EnterpriseDBEntities();
         public ActionResult Index(string searchString)
         {
-            var ct = from m in db.Contents select m;
+            var tp = from m in db.Topics select m;
             if (!String.IsNullOrEmpty(searchString))
             {
-                ct = ct.Where(s => s.CTName.Contains(searchString));
+                tp = tp.Where(s => s.TopicID.Contains(searchString));
             }
-            return View(ct);
+            return View(tp);
         }
 
         public ActionResult About()

@@ -17,18 +17,26 @@ namespace WebEnterprise.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Content()
         {
-            this.MarketingCoordinators = new HashSet<MarketingCoordinator>();
+            this.ContentAssigns = new HashSet<ContentAssign>();
         }
     
-        public string CTID { get; set; }
+        public int CTID { get; set; }
         public string CTName { get; set; }
         public string CTDescription { get; set; }
-        public string CTTag { get; set; }
+        public Nullable<int> CTTagID { get; set; }
         public string StudentID { get; set; }
+        public string Name { get; set; }
+        public string ContentType { get; set; }
+        public byte[] Data { get; set; }
+        public string Name2 { get; set; }
+        public string ContentType2 { get; set; }
+        public byte[] Data2 { get; set; }
+        public string TopicID { get; set; }
     
+        public virtual CTTag CTTag { get; set; }
         public virtual Student Student { get; set; }
+        public virtual Topic Topic { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MarketingCoordinator> MarketingCoordinators { get; set; }
-        public virtual CTTag CTTag1 { get; set; }
+        public virtual ICollection<ContentAssign> ContentAssigns { get; set; }
     }
 }

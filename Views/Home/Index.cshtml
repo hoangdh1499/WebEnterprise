@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebEnterprise.Models.Content>
+﻿@model IEnumerable<WebEnterprise.Models.Topic>
 
 @{
     ViewBag.Title = "Home Page";
@@ -6,25 +6,52 @@
 
 <div class="jumbotron">
     <h1>GREENWICH VIET NAM MAGAZINE</h1>
+    
+   
     <p class="lead">Here we allow all students to post content that students love to share with everyone and together contribute and evaluate the content.</p>
     <p><a href="https://cms.greenwich.edu.vn/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
-
-@*
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.CTName)</th>
-        <th>@Html.DisplayNameFor(model => model.CTDescription)</th>
-        <th>@Html.DisplayNameFor(model => model.CTTag)</th>
+        <th>
+            @Html.DisplayNameFor(model => model.TopicID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TopicName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TopicDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th></th>
     </tr>
+
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.CTName)</td>
-            <td>@Html.DisplayFor(modelItem => item.CTDescription)</td>
-            <td>@Html.DisplayFor(modelItem => item.CTTag)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TopicID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TopicName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TopicDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
         </tr>
     }
-</table> *@
-</body>
-</html>
+
+</table>
+
+            
