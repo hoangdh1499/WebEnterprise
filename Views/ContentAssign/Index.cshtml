@@ -7,9 +7,6 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 @using (Html.BeginForm("DownloadFile", "Content", FormMethod.Post))
 {
     <input type="hidden" id="hfFileId" name="FileId" />
@@ -21,13 +18,13 @@
             @Html.DisplayNameFor(model => model.Topic.TopicName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Content.Data)
+            @Html.DisplayNameFor(model => model.Content.Data2)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Content.CTName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Content.Name2)
+            @Html.DisplayNameFor(model => model.Content.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MarketingCoordinator.MCName)
@@ -36,7 +33,7 @@
             @Html.DisplayNameFor(model => model.Status.GiveStatus)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Comment)
+            @Html.DisplayNameFor(model => model.CommentA)
         </th>
         <th style="width:80px">Download</th>
     </tr>
@@ -48,9 +45,9 @@
         @Html.DisplayFor(modelItem => item.Topic.TopicName)
     </td>
     <td>
-        @if (item.Content.Data != null)
+        @if (item.Content.Data2 != null)
         {
-            var base64 = Convert.ToBase64String(item.Content.Data);
+            var base64 = Convert.ToBase64String(item.Content.Data2);
             var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
             <img src="@imgsrc" width="150" height="200" />
         }
@@ -65,7 +62,7 @@
         @Html.DisplayFor(modelItem => item.Content.CTName)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Content.Name2)
+        @Html.DisplayFor(modelItem => item.Content.Name)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.MarketingCoordinator.MCName)
@@ -74,14 +71,14 @@
         @Html.DisplayFor(modelItem => item.Status.GiveStatus)
     </th>
     <th>
-        @Html.DisplayFor(modelItem => item.Comment)
+        @Html.DisplayFor(modelItem => item.CommentA)
     </th>
 
     <td>
         <a href="javascript:;" onclick="DownloadFile(@item.CTID)">Download</a>
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.CTassignID }) |
+        @Html.ActionLink("Grade", "ehee", new { id = item.CTassignID }) |
         @Html.ActionLink("Details", "Details", new { id = item.CTassignID }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.CTassignID })
     </td>

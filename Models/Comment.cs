@@ -14,13 +14,12 @@ namespace WebEnterprise.Models
     
     public partial class Comment
     {
-        public string CommentID { get; set; }
+        public int CommentID { get; set; }
         public string CommentText { get; set; }
-        public string UserName { get; set; }
+        public string AuthorName { get; set; }
         public System.DateTime CommentDate { get; set; }
-        public string ParentID { get; set; }
+        public int CTassignID { get; set; }
     
-        public virtual MarketingCoordinator MarketingCoordinator { get; set; }
-        public virtual Student Student { get; set; }
+        public virtual ContentAssign ContentAssign { get; set; }
     }
 }

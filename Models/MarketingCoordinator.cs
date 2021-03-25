@@ -17,7 +17,6 @@ namespace WebEnterprise.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MarketingCoordinator()
         {
-            this.Comments = new HashSet<Comment>();
             this.ContentAssigns = new HashSet<ContentAssign>();
         }
     
@@ -25,14 +24,12 @@ namespace WebEnterprise.Models
         public string MCName { get; set; }
         public string MCAddress { get; set; }
         public string MCPhone { get; set; }
-        public Nullable<int> CTTagID { get; set; }
+        public Nullable<int> FacultyID { get; set; }
         public string UserName { get; set; }
         public string MCEmail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContentAssign> ContentAssigns { get; set; }
-        public virtual CTTag CTTag { get; set; }
+        public virtual Faculty Faculty { get; set; }
     }
 }

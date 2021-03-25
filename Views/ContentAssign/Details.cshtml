@@ -1,4 +1,5 @@
-﻿@model WebEnterprise.Models.ContentAssign
+﻿@using WebEnterprise.Models;
+@model WebEnterprise.Models.ContentAssign
 
 @{
     ViewBag.Title = "Details";
@@ -19,14 +20,12 @@
             @Html.DisplayFor(model => model.Topic.TopicName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Content.Data)
+            @*@Html.DisplayNameFor(model => model.Content.Data)*@
         </dt>
-
         <dd>
-
-            @if (Model.Content.Data != null)
+            @if (Model.Content.Data2 != null)
             {
-                var base64 = Convert.ToBase64String(Model.Content.Data);
+                var base64 = Convert.ToBase64String(Model.Content.Data2);
                 var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
                 <img src="@imgsrc" width="150" height="200" />
             }
@@ -46,11 +45,11 @@
             @Html.DisplayFor(model => model.Content.CTName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Content.Name2)
+            @Html.DisplayNameFor(model => model.Content.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Content.Name2)
+            @Html.DisplayFor(model => model.Content.Name)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.MarketingCoordinator.MCName)
@@ -67,16 +66,38 @@
             @Html.DisplayFor(model => model.Status.GiveStatus)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Comment)
+            @Html.DisplayNameFor(model => model.CommentA)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Comment)
+            @Html.DisplayFor(model => model.CommentA)
         </dd>
 
+        <dd>
+            @ViewBag.cmt
+        </dd>
+
+
     </dl>
+
+    <table class="table">
+        @foreach (var item in ViewBag.Comments)
+        {
+        <tr>
+            <th width="20%">@item.AuthorName  ( @item.CommentDate ) </th> 
+            <td>@item.CommentText </td>
+        </tr>
+        }
+    </table>
+
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CTassignID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Comment", "WriteCMT", new { id = Model.CTassignID }) |
+    @if(User.IsInRole("Student")){
+        @Html.ActionLink("Back to list","ViewALL")
+    }
+    @if (User.IsInRole("MarketingCoordinator"))
+    {
+        @Html.ActionLink("Back to list","Index")
+    }
 </p>

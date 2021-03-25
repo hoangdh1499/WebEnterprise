@@ -25,13 +25,14 @@ namespace WebEnterprise.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Topic tp)
         {
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", tp.FacultyID);
             if (ModelState.IsValid)
             {
                 try
@@ -42,6 +43,7 @@ namespace WebEnterprise.Controllers
                 }
                 catch (Exception ex)
                 {
+                    ModelState.AddModelError("", ex);
                     ModelState.AddModelError("", "Error inserting Content. ID is already existed");
                     return View(tp);
                 }
@@ -98,6 +100,7 @@ namespace WebEnterprise.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(string id)
         {
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -113,7 +116,8 @@ namespace WebEnterprise.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Topic tp)
-        {        
+        {
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", tp.FacultyID);
             if (ModelState.IsValid)
             {
                 db.Entry(tp).State = EntityState.Modified;

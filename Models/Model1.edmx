@@ -9,11 +9,11 @@
           <Key>
             <PropertyRef Name="CommentID" />
           </Key>
-          <Property Name="CommentID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CommentText" Type="text" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CommentDate" Type="date" Nullable="false" />
-          <Property Name="ParentID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommentText" Type="text" Nullable="false" />
+          <Property Name="AuthorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CommentDate" Type="datetime" Nullable="false" />
+          <Property Name="CTassignID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Content">
           <Key>
@@ -22,7 +22,7 @@
           <Property Name="CTID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CTName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CTDescription" Type="text" />
-          <Property Name="CTTagID" Type="int" />
+          <Property Name="FacultyID" Type="int" />
           <Property Name="StudentID" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="ContentType" Type="varchar" MaxLength="50" />
@@ -40,21 +40,16 @@
           <Property Name="CTID" Type="int" />
           <Property Name="MCID" Type="nvarchar" MaxLength="50" />
           <Property Name="StatusID" Type="int" />
-          <Property Name="Comment" Type="text" />
+          <Property Name="CommentA" Type="text" />
           <Property Name="TopicID" Type="nvarchar" MaxLength="50" />
-          <Property Name="To" Type="nvarchar(max)" />
-          <Property Name="Subject" Type="nvarchar(max)" />
-          <Property Name="Body" Type="text" />
-          <Property Name="Email" Type="nvarchar(max)" />
-          <Property Name="Password" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="CTTag">
+        <EntityType Name="Faculty">
           <Key>
-            <PropertyRef Name="CTTagID" />
+            <PropertyRef Name="FacultyID" />
           </Key>
-          <Property Name="CTTagID" Type="int" Nullable="false" />
-          <Property Name="CTTagName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CTTagDescription" Type="text" />
+          <Property Name="FacultyID" Type="int" Nullable="false" />
+          <Property Name="FacultyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FacultyDescription" Type="text" />
         </EntityType>
         <EntityType Name="Guest">
           <Key>
@@ -64,7 +59,7 @@
           <Property Name="GuestName" Type="nvarchar" MaxLength="50" />
           <Property Name="GuestAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="GuestPhone" Type="nvarchar" MaxLength="50" />
-          <Property Name="CTTagID" Type="int" />
+          <Property Name="FacultyID" Type="int" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="GuestEmail" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -76,7 +71,7 @@
           <Property Name="MCName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MCAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MCPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CTTagID" Type="int" />
+          <Property Name="FacultyID" Type="int" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MCEmail" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -97,6 +92,7 @@
           <Property Name="DOB" Type="date" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="StudentEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="FacultyID" Type="int" />
         </EntityType>
         <EntityType Name="Topic">
           <Key>
@@ -107,40 +103,29 @@
           <Property Name="TopicDescription" Type="text" />
           <Property Name="StartDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
+          <Property Name="FacultyID" Type="int" />
         </EntityType>
-        <Association Name="FK_Comment_MarketingCoordinator">
-          <End Role="MarketingCoordinator" Type="Self.MarketingCoordinator" Multiplicity="1" />
+        <Association Name="FK_Comment_ContentAssign">
+          <End Role="ContentAssign" Type="Self.ContentAssign" Multiplicity="1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MarketingCoordinator">
-              <PropertyRef Name="MCID" />
+            <Principal Role="ContentAssign">
+              <PropertyRef Name="CTassignID" />
             </Principal>
             <Dependent Role="Comment">
-              <PropertyRef Name="UserName" />
+              <PropertyRef Name="CTassignID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Comment_Student1">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="Comment">
-              <PropertyRef Name="UserName" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Content_CTTag">
-          <End Role="CTTag" Type="Self.CTTag" Multiplicity="0..1" />
+        <Association Name="FK_Content_Faculty">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
           <End Role="Content" Type="Self.Content" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CTTag">
-              <PropertyRef Name="CTTagID" />
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
             </Principal>
             <Dependent Role="Content">
-              <PropertyRef Name="CTTagID" />
+              <PropertyRef Name="FacultyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -216,15 +201,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MarketingCoordinator_CTTag">
-          <End Role="CTTag" Type="Self.CTTag" Multiplicity="0..1" />
+        <Association Name="FK_Guest_Faculty">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Guest">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarketingCoordinator_Faculty">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
           <End Role="MarketingCoordinator" Type="Self.MarketingCoordinator" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CTTag">
-              <PropertyRef Name="CTTagID" />
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
             </Principal>
             <Dependent Role="MarketingCoordinator">
-              <PropertyRef Name="CTTagID" />
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Faculty">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_Faculty">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Topic" Type="Self.Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="FacultyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -232,22 +253,18 @@
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContentAssign" EntityType="Self.ContentAssign" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CTTag" EntityType="Self.CTTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Guest" EntityType="Self.Guest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MarketingCoordinator" EntityType="Self.MarketingCoordinator" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Comment_MarketingCoordinator" Association="Self.FK_Comment_MarketingCoordinator">
-            <End Role="MarketingCoordinator" EntitySet="MarketingCoordinator" />
+          <AssociationSet Name="FK_Comment_ContentAssign" Association="Self.FK_Comment_ContentAssign">
+            <End Role="ContentAssign" EntitySet="ContentAssign" />
             <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comment_Student1" Association="Self.FK_Comment_Student1">
-            <End Role="Student" EntitySet="Student" />
-            <End Role="Comment" EntitySet="Comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Content_CTTag" Association="Self.FK_Content_CTTag">
-            <End Role="CTTag" EntitySet="CTTag" />
+          <AssociationSet Name="FK_Content_Faculty" Association="Self.FK_Content_Faculty">
+            <End Role="Faculty" EntitySet="Faculty" />
             <End Role="Content" EntitySet="Content" />
           </AssociationSet>
           <AssociationSet Name="FK_Content_Student" Association="Self.FK_Content_Student">
@@ -274,9 +291,21 @@
             <End Role="Topic" EntitySet="Topic" />
             <End Role="ContentAssign" EntitySet="ContentAssign" />
           </AssociationSet>
-          <AssociationSet Name="FK_MarketingCoordinator_CTTag" Association="Self.FK_MarketingCoordinator_CTTag">
-            <End Role="CTTag" EntitySet="CTTag" />
+          <AssociationSet Name="FK_Guest_Faculty" Association="Self.FK_Guest_Faculty">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Guest" EntitySet="Guest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarketingCoordinator_Faculty" Association="Self.FK_MarketingCoordinator_Faculty">
+            <End Role="Faculty" EntitySet="Faculty" />
             <End Role="MarketingCoordinator" EntitySet="MarketingCoordinator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Faculty" Association="Self.FK_Student_Faculty">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_Faculty" Association="Self.FK_Topic_Faculty">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Topic" EntitySet="Topic" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -287,22 +316,18 @@
           <EntitySet Name="Comments" EntityType="G5EnterpriseDBModel.Comment" />
           <EntitySet Name="Contents" EntityType="G5EnterpriseDBModel.Content" />
           <EntitySet Name="ContentAssigns" EntityType="G5EnterpriseDBModel.ContentAssign" />
-          <EntitySet Name="CTTags" EntityType="G5EnterpriseDBModel.CTTag" />
+          <EntitySet Name="Faculties" EntityType="G5EnterpriseDBModel.Faculty" />
           <EntitySet Name="Guests" EntityType="G5EnterpriseDBModel.Guest" />
           <EntitySet Name="MarketingCoordinators" EntityType="G5EnterpriseDBModel.MarketingCoordinator" />
           <EntitySet Name="Status" EntityType="G5EnterpriseDBModel.Status" />
           <EntitySet Name="Students" EntityType="G5EnterpriseDBModel.Student" />
           <EntitySet Name="Topics" EntityType="G5EnterpriseDBModel.Topic" />
-          <AssociationSet Name="FK_Comment_MarketingCoordinator" Association="G5EnterpriseDBModel.FK_Comment_MarketingCoordinator">
-            <End Role="MarketingCoordinator" EntitySet="MarketingCoordinators" />
+          <AssociationSet Name="FK_Comment_ContentAssign" Association="G5EnterpriseDBModel.FK_Comment_ContentAssign">
+            <End Role="ContentAssign" EntitySet="ContentAssigns" />
             <End Role="Comment" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comment_Student1" Association="G5EnterpriseDBModel.FK_Comment_Student1">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="Comment" EntitySet="Comments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Content_CTTag" Association="G5EnterpriseDBModel.FK_Content_CTTag">
-            <End Role="CTTag" EntitySet="CTTags" />
+          <AssociationSet Name="FK_Content_Faculty" Association="G5EnterpriseDBModel.FK_Content_Faculty">
+            <End Role="Faculty" EntitySet="Faculties" />
             <End Role="Content" EntitySet="Contents" />
           </AssociationSet>
           <AssociationSet Name="FK_Content_Student" Association="G5EnterpriseDBModel.FK_Content_Student">
@@ -329,22 +354,33 @@
             <End Role="Topic" EntitySet="Topics" />
             <End Role="ContentAssign" EntitySet="ContentAssigns" />
           </AssociationSet>
-          <AssociationSet Name="FK_MarketingCoordinator_CTTag" Association="G5EnterpriseDBModel.FK_MarketingCoordinator_CTTag">
-            <End Role="CTTag" EntitySet="CTTags" />
+          <AssociationSet Name="FK_Guest_Faculty" Association="G5EnterpriseDBModel.FK_Guest_Faculty">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Guest" EntitySet="Guests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarketingCoordinator_Faculty" Association="G5EnterpriseDBModel.FK_MarketingCoordinator_Faculty">
+            <End Role="Faculty" EntitySet="Faculties" />
             <End Role="MarketingCoordinator" EntitySet="MarketingCoordinators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Faculty" Association="G5EnterpriseDBModel.FK_Student_Faculty">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Topic_Faculty" Association="G5EnterpriseDBModel.FK_Topic_Faculty">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Topic" EntitySet="Topics" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="CommentID" />
           </Key>
-          <Property Name="CommentID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CommentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CommentDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ParentID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MarketingCoordinator" Relationship="G5EnterpriseDBModel.FK_Comment_MarketingCoordinator" FromRole="Comment" ToRole="MarketingCoordinator" />
-          <NavigationProperty Name="Student" Relationship="G5EnterpriseDBModel.FK_Comment_Student1" FromRole="Comment" ToRole="Student" />
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommentText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AuthorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CommentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CTassignID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ContentAssign" Relationship="G5EnterpriseDBModel.FK_Comment_ContentAssign" FromRole="Comment" ToRole="ContentAssign" />
         </EntityType>
         <EntityType Name="Content">
           <Key>
@@ -353,7 +389,7 @@
           <Property Name="CTID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CTName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CTDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CTTagID" Type="Int32" />
+          <Property Name="FacultyID" Type="Int32" />
           <Property Name="StudentID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ContentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -362,7 +398,7 @@
           <Property Name="ContentType2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Data2" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="TopicID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CTTag" Relationship="G5EnterpriseDBModel.FK_Content_CTTag" FromRole="Content" ToRole="CTTag" />
+          <NavigationProperty Name="Faculty" Relationship="G5EnterpriseDBModel.FK_Content_Faculty" FromRole="Content" ToRole="Faculty" />
           <NavigationProperty Name="Student" Relationship="G5EnterpriseDBModel.FK_Content_Student" FromRole="Content" ToRole="Student" />
           <NavigationProperty Name="Topic" Relationship="G5EnterpriseDBModel.FK_Content_Topic" FromRole="Content" ToRole="Topic" />
           <NavigationProperty Name="ContentAssigns" Relationship="G5EnterpriseDBModel.FK_ContentAssign_Content" FromRole="Content" ToRole="ContentAssign" />
@@ -375,27 +411,26 @@
           <Property Name="CTID" Type="Int32" />
           <Property Name="MCID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StatusID" Type="Int32" />
-          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CommentA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TopicID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="To" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comments" Relationship="G5EnterpriseDBModel.FK_Comment_ContentAssign" FromRole="ContentAssign" ToRole="Comment" />
           <NavigationProperty Name="Content" Relationship="G5EnterpriseDBModel.FK_ContentAssign_Content" FromRole="ContentAssign" ToRole="Content" />
           <NavigationProperty Name="MarketingCoordinator" Relationship="G5EnterpriseDBModel.FK_ContentAssign_MarketingCoordinator" FromRole="ContentAssign" ToRole="MarketingCoordinator" />
           <NavigationProperty Name="Status" Relationship="G5EnterpriseDBModel.FK_ContentAssign_Status" FromRole="ContentAssign" ToRole="Status" />
           <NavigationProperty Name="Topic" Relationship="G5EnterpriseDBModel.FK_ContentAssign_Topic" FromRole="ContentAssign" ToRole="Topic" />
         </EntityType>
-        <EntityType Name="CTTag">
+        <EntityType Name="Faculty">
           <Key>
-            <PropertyRef Name="CTTagID" />
+            <PropertyRef Name="FacultyID" />
           </Key>
-          <Property Name="CTTagID" Type="Int32" Nullable="false" />
-          <Property Name="CTTagName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CTTagDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Contents" Relationship="G5EnterpriseDBModel.FK_Content_CTTag" FromRole="CTTag" ToRole="Content" />
-          <NavigationProperty Name="MarketingCoordinators" Relationship="G5EnterpriseDBModel.FK_MarketingCoordinator_CTTag" FromRole="CTTag" ToRole="MarketingCoordinator" />
+          <Property Name="FacultyID" Type="Int32" Nullable="false" />
+          <Property Name="FacultyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FacultyDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Contents" Relationship="G5EnterpriseDBModel.FK_Content_Faculty" FromRole="Faculty" ToRole="Content" />
+          <NavigationProperty Name="Guests" Relationship="G5EnterpriseDBModel.FK_Guest_Faculty" FromRole="Faculty" ToRole="Guest" />
+          <NavigationProperty Name="MarketingCoordinators" Relationship="G5EnterpriseDBModel.FK_MarketingCoordinator_Faculty" FromRole="Faculty" ToRole="MarketingCoordinator" />
+          <NavigationProperty Name="Students" Relationship="G5EnterpriseDBModel.FK_Student_Faculty" FromRole="Faculty" ToRole="Student" />
+          <NavigationProperty Name="Topics" Relationship="G5EnterpriseDBModel.FK_Topic_Faculty" FromRole="Faculty" ToRole="Topic" />
         </EntityType>
         <EntityType Name="Guest">
           <Key>
@@ -405,9 +440,10 @@
           <Property Name="GuestName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GuestAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GuestPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CTTagID" Type="Int32" />
+          <Property Name="FacultyID" Type="Int32" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GuestEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Faculty" Relationship="G5EnterpriseDBModel.FK_Guest_Faculty" FromRole="Guest" ToRole="Faculty" />
         </EntityType>
         <EntityType Name="MarketingCoordinator">
           <Key>
@@ -417,12 +453,11 @@
           <Property Name="MCName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MCAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MCPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CTTagID" Type="Int32" />
+          <Property Name="FacultyID" Type="Int32" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MCEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Comments" Relationship="G5EnterpriseDBModel.FK_Comment_MarketingCoordinator" FromRole="MarketingCoordinator" ToRole="Comment" />
           <NavigationProperty Name="ContentAssigns" Relationship="G5EnterpriseDBModel.FK_ContentAssign_MarketingCoordinator" FromRole="MarketingCoordinator" ToRole="ContentAssign" />
-          <NavigationProperty Name="CTTag" Relationship="G5EnterpriseDBModel.FK_MarketingCoordinator_CTTag" FromRole="MarketingCoordinator" ToRole="CTTag" />
+          <NavigationProperty Name="Faculty" Relationship="G5EnterpriseDBModel.FK_MarketingCoordinator_Faculty" FromRole="MarketingCoordinator" ToRole="Faculty" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -442,8 +477,9 @@
           <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StudentEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Comments" Relationship="G5EnterpriseDBModel.FK_Comment_Student1" FromRole="Student" ToRole="Comment" />
+          <Property Name="FacultyID" Type="Int32" />
           <NavigationProperty Name="Contents" Relationship="G5EnterpriseDBModel.FK_Content_Student" FromRole="Student" ToRole="Content" />
+          <NavigationProperty Name="Faculty" Relationship="G5EnterpriseDBModel.FK_Student_Faculty" FromRole="Student" ToRole="Faculty" />
         </EntityType>
         <EntityType Name="Topic">
           <Key>
@@ -454,42 +490,32 @@
           <Property Name="TopicDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="FacultyID" Type="Int32" />
           <NavigationProperty Name="Contents" Relationship="G5EnterpriseDBModel.FK_Content_Topic" FromRole="Topic" ToRole="Content" />
           <NavigationProperty Name="ContentAssigns" Relationship="G5EnterpriseDBModel.FK_ContentAssign_Topic" FromRole="Topic" ToRole="ContentAssign" />
+          <NavigationProperty Name="Faculty" Relationship="G5EnterpriseDBModel.FK_Topic_Faculty" FromRole="Topic" ToRole="Faculty" />
         </EntityType>
-        <Association Name="FK_Comment_MarketingCoordinator">
-          <End Type="G5EnterpriseDBModel.MarketingCoordinator" Role="MarketingCoordinator" Multiplicity="1" />
+        <Association Name="FK_Comment_ContentAssign">
+          <End Type="G5EnterpriseDBModel.ContentAssign" Role="ContentAssign" Multiplicity="1" />
           <End Type="G5EnterpriseDBModel.Comment" Role="Comment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MarketingCoordinator">
-              <PropertyRef Name="MCID" />
+            <Principal Role="ContentAssign">
+              <PropertyRef Name="CTassignID" />
             </Principal>
             <Dependent Role="Comment">
-              <PropertyRef Name="UserName" />
+              <PropertyRef Name="CTassignID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Comment_Student1">
-          <End Type="G5EnterpriseDBModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="G5EnterpriseDBModel.Comment" Role="Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="Comment">
-              <PropertyRef Name="UserName" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Content_CTTag">
-          <End Type="G5EnterpriseDBModel.CTTag" Role="CTTag" Multiplicity="0..1" />
+        <Association Name="FK_Content_Faculty">
+          <End Type="G5EnterpriseDBModel.Faculty" Role="Faculty" Multiplicity="0..1" />
           <End Type="G5EnterpriseDBModel.Content" Role="Content" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CTTag">
-              <PropertyRef Name="CTTagID" />
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
             </Principal>
             <Dependent Role="Content">
-              <PropertyRef Name="CTTagID" />
+              <PropertyRef Name="FacultyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -565,15 +591,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MarketingCoordinator_CTTag">
-          <End Type="G5EnterpriseDBModel.CTTag" Role="CTTag" Multiplicity="0..1" />
+        <Association Name="FK_Guest_Faculty">
+          <End Type="G5EnterpriseDBModel.Faculty" Role="Faculty" Multiplicity="0..1" />
+          <End Type="G5EnterpriseDBModel.Guest" Role="Guest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Guest">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarketingCoordinator_Faculty">
+          <End Type="G5EnterpriseDBModel.Faculty" Role="Faculty" Multiplicity="0..1" />
           <End Type="G5EnterpriseDBModel.MarketingCoordinator" Role="MarketingCoordinator" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CTTag">
-              <PropertyRef Name="CTTagID" />
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
             </Principal>
             <Dependent Role="MarketingCoordinator">
-              <PropertyRef Name="CTTagID" />
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Faculty">
+          <End Type="G5EnterpriseDBModel.Faculty" Role="Faculty" Multiplicity="0..1" />
+          <End Type="G5EnterpriseDBModel.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Topic_Faculty">
+          <End Type="G5EnterpriseDBModel.Faculty" Role="Faculty" Multiplicity="0..1" />
+          <End Type="G5EnterpriseDBModel.Topic" Role="Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Topic">
+              <PropertyRef Name="FacultyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -586,9 +648,9 @@
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="G5EnterpriseDBModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="CTassignID" ColumnName="CTassignID" />
                 <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
                 <ScalarProperty Name="CommentText" ColumnName="CommentText" />
                 <ScalarProperty Name="CommentID" ColumnName="CommentID" />
               </MappingFragment>
@@ -605,7 +667,7 @@
                 <ScalarProperty Name="ContentType" ColumnName="ContentType" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="CTTagID" ColumnName="CTTagID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
                 <ScalarProperty Name="CTDescription" ColumnName="CTDescription" />
                 <ScalarProperty Name="CTName" ColumnName="CTName" />
                 <ScalarProperty Name="CTID" ColumnName="CTID" />
@@ -615,13 +677,8 @@
           <EntitySetMapping Name="ContentAssigns">
             <EntityTypeMapping TypeName="G5EnterpriseDBModel.ContentAssign">
               <MappingFragment StoreEntitySet="ContentAssign">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Body" ColumnName="Body" />
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="To" ColumnName="To" />
                 <ScalarProperty Name="TopicID" ColumnName="TopicID" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CommentA" ColumnName="CommentA" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="MCID" ColumnName="MCID" />
                 <ScalarProperty Name="CTID" ColumnName="CTID" />
@@ -629,12 +686,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CTTags">
-            <EntityTypeMapping TypeName="G5EnterpriseDBModel.CTTag">
-              <MappingFragment StoreEntitySet="CTTag">
-                <ScalarProperty Name="CTTagDescription" ColumnName="CTTagDescription" />
-                <ScalarProperty Name="CTTagName" ColumnName="CTTagName" />
-                <ScalarProperty Name="CTTagID" ColumnName="CTTagID" />
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="G5EnterpriseDBModel.Faculty">
+              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="FacultyDescription" ColumnName="FacultyDescription" />
+                <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -643,7 +700,7 @@
               <MappingFragment StoreEntitySet="Guest">
                 <ScalarProperty Name="GuestEmail" ColumnName="GuestEmail" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="CTTagID" ColumnName="CTTagID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
                 <ScalarProperty Name="GuestPhone" ColumnName="GuestPhone" />
                 <ScalarProperty Name="GuestAddress" ColumnName="GuestAddress" />
                 <ScalarProperty Name="GuestName" ColumnName="GuestName" />
@@ -656,7 +713,7 @@
               <MappingFragment StoreEntitySet="MarketingCoordinator">
                 <ScalarProperty Name="MCEmail" ColumnName="MCEmail" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="CTTagID" ColumnName="CTTagID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
                 <ScalarProperty Name="MCPhone" ColumnName="MCPhone" />
                 <ScalarProperty Name="MCAddress" ColumnName="MCAddress" />
                 <ScalarProperty Name="MCName" ColumnName="MCName" />
@@ -675,6 +732,7 @@
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="G5EnterpriseDBModel.Student">
               <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
                 <ScalarProperty Name="StudentEmail" ColumnName="StudentEmail" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
@@ -687,6 +745,7 @@
           <EntitySetMapping Name="Topics">
             <EntityTypeMapping TypeName="G5EnterpriseDBModel.Topic">
               <MappingFragment StoreEntitySet="Topic">
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="TopicDescription" ColumnName="TopicDescription" />

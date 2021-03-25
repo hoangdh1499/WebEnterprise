@@ -19,6 +19,9 @@
             @Html.DisplayNameFor(model => model.StudentName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Faculty.FacultyName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.StudentAddress)
         </th>
         <th>
@@ -40,6 +43,9 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.StudentName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Faculty.FacultyName)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.StudentAddress)

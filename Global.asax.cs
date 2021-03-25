@@ -20,7 +20,15 @@ namespace WebEnterprise
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-           
+
+
+        }
+
+        public static void Grade(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("Scripts/{*pathInfo}");
+
         }
     }
 }

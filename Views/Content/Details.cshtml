@@ -12,14 +12,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Name2)
         </dt>
 
         <dd>
 
-            @if (Model.Data != null)
+            @if (Model.Data2 != null)
             {
-                var base64 = Convert.ToBase64String(Model.Data);
+                var base64 = Convert.ToBase64String(Model.Data2);
                 var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
                 <img src="@imgsrc" width="150" height="200" />
             }
@@ -48,11 +48,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CTTag.CTTagName)
+            @Html.DisplayNameFor(model => model.Faculty.FacultyName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CTTag.CTTagName)
+            @Html.DisplayFor(model => model.Faculty.FacultyName)
         </dd>
 
         <dt>

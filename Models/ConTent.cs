@@ -23,7 +23,7 @@ namespace WebEnterprise.Models
         public int CTID { get; set; }
         public string CTName { get; set; }
         public string CTDescription { get; set; }
-        public Nullable<int> CTTagID { get; set; }
+        public Nullable<int> FacultyID { get; set; }
         public string StudentID { get; set; }
         public string Name { get; set; }
         public string ContentType { get; set; }
@@ -33,7 +33,7 @@ namespace WebEnterprise.Models
         public byte[] Data2 { get; set; }
         public string TopicID { get; set; }
     
-        public virtual CTTag CTTag { get; set; }
+        public virtual Faculty Faculty { get; set; }
         public virtual Student Student { get; set; }
         public virtual Topic Topic { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

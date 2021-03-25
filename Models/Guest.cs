@@ -18,8 +18,10 @@ namespace WebEnterprise.Models
         public string GuestName { get; set; }
         public string GuestAddress { get; set; }
         public string GuestPhone { get; set; }
-        public Nullable<int> CTTagID { get; set; }
+        public Nullable<int> FacultyID { get; set; }
         public string UserName { get; set; }
         public string GuestEmail { get; set; }
+    
+        public virtual Faculty Faculty { get; set; }
     }
 }

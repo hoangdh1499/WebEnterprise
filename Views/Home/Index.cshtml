@@ -49,6 +49,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EndDate)
             </td>
+            <td>
+                @Html.ActionLink("More. . .", "ViewTopic", "ContentAssign", new {id = item.TopicID }, null)
+            </td>
         </tr>
     }
 

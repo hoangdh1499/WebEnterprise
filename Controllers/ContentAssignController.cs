@@ -14,7 +14,7 @@ namespace WebEnterprise.Controllers
     public class ContentAssignController : Controller
     {
         private G5EnterpriseDBEntities db = new G5EnterpriseDBEntities();
-        [Authorize(Roles = "MarketingCoordinator,Student")]
+        [Authorize(Roles = "MarketingCoordinator")]
         public ActionResult Index()
         {
             var contentAssign = db.ContentAssigns.Include(t => t.Content).Include(t => t.MarketingCoordinator).Include(t => t.Topic);
@@ -22,66 +22,7 @@ namespace WebEnterprise.Controllers
         }
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ContentAssign contentAssign = db.ContentAssigns.Find(id);
-            if (contentAssign == null)
-            {
-                return HttpNotFound();
-            }
-            return View(contentAssign);
-        }
-        [Authorize(Roles = "Student")]
-        public ActionResult Create()
-        {
-            
-            ViewBag.TopicID = new SelectList(db.Topics, "TopicID", "TopicName");
-            ViewBag.CTID = new SelectList(db.Contents, "CTID", "CTName");
-           
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create( ContentAssign contentAssign)
-        {
-            using (MailMessage mm = new MailMessage(contentAssign.Email, contentAssign.To))
-            {
-                mm.Subject = contentAssign.Subject;
-                mm.Body = contentAssign.Body;
-                mm.IsBodyHtml = false;
-                using (SmtpClient smtp = new SmtpClient())
-                {
-                    smtp.Host = "smtp.gmail.com";
-                    smtp.EnableSsl = true;
-                    NetworkCredential NetworkCred = new NetworkCredential(contentAssign.Email, contentAssign.Password);
-                    smtp.UseDefaultCredentials = true;
-                    smtp.Credentials = NetworkCred;
-                    smtp.Port = 587;
-                    smtp.Send(mm);
-                    ViewBag.Message = "Email sent.";
-                }
-            }
-            if (ModelState.IsValid)
-                {
-                    db.ContentAssigns.Add(contentAssign);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-            
-            ViewBag.TopicID = new SelectList(db.Topics, "TopicID", "TopicName", contentAssign.TopicID);
-            ViewBag.CTID = new SelectList(db.Contents, "CTID", "CTName", contentAssign.CTID);
-            
-            return View(contentAssign);
-        }
-        [Authorize(Roles = "MarketingCoordinator,Admin")]
-        public ActionResult Edit(int id)
-        {
-            ViewBag.TopicID = new SelectList(db.Topics, "TopicID", "TopicName");
-            ViewBag.StatusID = new SelectList(db.Status, "StatusID", "GiveStatus");
-            ViewBag.CTID = new SelectList(db.Contents, "CTID", "CTName");
-            ViewBag.MCID = new SelectList(db.MarketingCoordinators, "MCID", "MCName");
+            ViewBag.Comments = (from c in db.Comments where c.CTassignID == id select c).ToList();
 
             if (id == null)
             {
@@ -92,19 +33,26 @@ namespace WebEnterprise.Controllers
             {
                 return HttpNotFound();
             }
-            
             return View(contentAssign);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TopicID,Comment,CTID,MCID,StatusID,CTassignID")] ContentAssign contentAssign)
+        public ActionResult ehee([Bind(Include = "TopicID,CommentA,CTID,MCID,StatusID,CTassignID")] ContentAssign contentAssign, int id)
         {
             contentAssign.CTassignID = contentAssign.CTassignID;
-            ViewBag.TopicID = new SelectList(db.Topics, "TopicID", "TopicName");
             ViewBag.StatusID = new SelectList(db.Status, "StatusID", "GiveStatus");
-            ViewBag.CTID = new SelectList(db.Contents, "CTID", "CTName");
-            ViewBag.MCID = new SelectList(db.MarketingCoordinators, "MCID", "MCName");
+
+            var tpid = (from tp in db.Topics join t in db.ContentAssigns on tp.TopicID equals t.TopicID where t.CTassignID == id select new { Name = tp.TopicID }).FirstOrDefault();
+            contentAssign.TopicID = tpid.Name;
+
+            var cid = (from c in db.Contents join t in db.ContentAssigns on c.CTID equals t.CTID where t.CTassignID == id select new { ID = c.CTID }).FirstOrDefault();
+            contentAssign.CTID = cid.ID;
+
+            var m = (from s in db.MarketingCoordinators
+                     where s.UserName.Equals(User.Identity.Name)
+                     select s).FirstOrDefault();
+            contentAssign.MCID = m.MCID;
             if (ModelState.IsValid)
             {
                 db.Entry(contentAssign).State = EntityState.Modified;
@@ -141,10 +89,69 @@ namespace WebEnterprise.Controllers
         public ActionResult ViewALL()
         {
             var AcceptContent = db.ContentAssigns
-                .Where(s => s.Status.GiveStatus.Contains("Accept"))
+                .Where(s => s.Content.Student.UserName == User.Identity.Name)
                 .ToList();
-            
+
             return View(AcceptContent.ToList());
+        }
+        
+
+        [Authorize(Roles = "MarketingCoordinator,Admin")]
+        public ActionResult ehee(int? id)
+        {
+            var tpid = (from tp in db.Topics join t in db.ContentAssigns on tp.TopicID equals t.TopicID where t.CTassignID == id select new { Name = tp.TopicName }).FirstOrDefault();
+            ViewBag.TName = tpid.Name;
+            ViewBag.StatusID = new SelectList(db.Status, "StatusID", "GiveStatus");
+
+            var cid = (from c in db.Contents join t in db.ContentAssigns on c.CTID equals t.CTID where t.CTassignID == id select new { Name = c.CTName }).FirstOrDefault();
+            ViewBag.CName = cid.Name;
+
+            var m = (from s in db.MarketingCoordinators
+                     where s.UserName.Equals(User.Identity.Name)
+                     select s).FirstOrDefault();
+            ViewBag.MCName = m.MCName; //LINQ+ ENtityframework
+
+            ContentAssign contentAssign = db.ContentAssigns.Find(id);
+
+            return View(contentAssign);
+        }
+
+        public ActionResult WriteCMT(int id)
+        {
+            var cmt = (from c in db.ContentAssigns where c.CTassignID == id select c).FirstOrDefault();
+            ViewBag.wrtc = cmt.Content.CTName;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult WriteCMT(Comment cmt, int id)
+        {
+
+            var cmmt = (from c in db.ContentAssigns where c.CTassignID == id select c).FirstOrDefault();
+            
+            if (ModelState.IsValid)
+            {
+                db.Comments.Add(new Comment
+                {
+                    CommentText = cmt.CommentText,
+                    CommentDate = DateTime.Now,
+                    AuthorName = User.Identity.Name,
+                    CTassignID = cmmt.CTassignID,
+                });
+                db.SaveChanges();
+
+                return RedirectToAction("Details/" + id);
+            }
+
+            return RedirectToAction("Details/" + id);
+        }
+        public ActionResult ViewTopic(string id)
+        {
+            var TopicContent = db.ContentAssigns
+                .Where(s => s.Status.GiveStatus.Contains("Accept") && s.Topic.TopicID == id)
+                .ToList();
+
+            return View(TopicContent.ToList());
         }
         protected override void Dispose(bool disposing)
         {

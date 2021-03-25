@@ -33,22 +33,21 @@ namespace WebEnterprise.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
             return View(student);
         }
         [Authorize(Roles = "Admin")]
         // GET: Students/Create
         public ActionResult Create()
         {
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
             return View();
         }
 
-        // POST: Students/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         
-        public ActionResult Create([Bind(Include = "StudentEmail,StudentID,StudentName,StudentAddress,DOB,UserName")] Student student)
+        public ActionResult Create([Bind(Include = "StudentEmail,StudentID,StudentName,StudentAddress,DOB,UserName,FacultyID")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -59,6 +58,8 @@ namespace WebEnterprise.Controllers
 
                 return RedirectToAction("Index");
             }
+
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", student.FacultyID);
 
             return View(student);
         }
@@ -76,6 +77,7 @@ namespace WebEnterprise.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
             return View(student);
         }
 
@@ -85,14 +87,16 @@ namespace WebEnterprise.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
        
-        public ActionResult Edit([Bind(Include = "StudentEmail,StudentID,StudentName,StudentAddress,DOB,UserName")] Student student)
+        public ActionResult Edit([Bind(Include = "StudentEmail,StudentID,StudentName,StudentAddress,DOB,UserName,FacultyID")] Student student)
         {
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", student.FacultyID);
             if (ModelState.IsValid)
             {
                 db.Entry(student).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            
             return View(student);
         }
 
@@ -121,7 +125,7 @@ namespace WebEnterprise.Controllers
             Student student = db.Students.Find(id);
             db.Students.Remove(student);
             db.SaveChanges();
-            AuthenController.DeleteAccount(student.StudentID);
+            AuthenController.DeleteAccount(student.UserName);
             return RedirectToAction("Index");
         }
 

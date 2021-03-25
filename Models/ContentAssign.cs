@@ -14,18 +14,21 @@ namespace WebEnterprise.Models
     
     public partial class ContentAssign
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ContentAssign()
+        {
+            this.Comments = new HashSet<Comment>();
+        }
+    
         public int CTassignID { get; set; }
         public Nullable<int> CTID { get; set; }
         public string MCID { get; set; }
         public Nullable<int> StatusID { get; set; }
-        public string Comment { get; set; }
+        public string CommentA { get; set; }
         public string TopicID { get; set; }
-        public string To { get; set; }
-        public string Subject { get; set; }
-        public string Body { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
         public virtual Content Content { get; set; }
         public virtual MarketingCoordinator MarketingCoordinator { get; set; }
         public virtual Status Status { get; set; }

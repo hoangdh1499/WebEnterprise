@@ -541,9 +541,11 @@
     <Compile Include="Controllers\AuthenController.cs" />
     <Compile Include="Controllers\ContentAssignController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
-    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MarketingCoordinatorActionController.cs" />
     <Compile Include="Controllers\MarketingCoordinatorsController.cs" />
+    <Compile Include="Controllers\StudentActionController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Global.asax.cs">
@@ -559,7 +561,7 @@
     <Compile Include="Models\ContentAssign.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CTTag.cs">
+    <Compile Include="Models\Faculty.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Guest.cs">
@@ -624,21 +626,33 @@
     <Content Include="Views\Shared\_MarketingCoordinator.cshtml" />
     <Content Include="Views\Shared\_MarketingManager.cshtml" />
     <Content Include="Views\Content\Create.cshtml" />
-    <Content Include="Views\Content\Index.cshtml" />
+    <Content Include="Views\Content\Uploaded.cshtml" />
     <Content Include="Views\Content\Edit.cshtml" />
     <Content Include="Views\Content\Details.cshtml" />
     <Content Include="Views\Content\Delete.cshtml" />
-    <Content Include="Views\ContentAssign\Create.cshtml" />
     <Content Include="Views\ContentAssign\Index.cshtml" />
     <Content Include="Views\ContentAssign\Details.cshtml" />
     <Content Include="Views\ContentAssign\Delete.cshtml" />
-    <Content Include="Views\ContentAssign\Edit.cshtml" />
+    <Content Include="Views\ContentAssign\Grade.cshtml" />
     <Content Include="Views\ContentAssign\ViewALL.cshtml" />
     <Content Include="Views\Topic\Create.cshtml" />
     <Content Include="Views\Topic\Index.cshtml" />
     <Content Include="Views\Topic\Edit.cshtml" />
     <Content Include="Views\Topic\Details.cshtml" />
     <Content Include="Views\Topic\Delete.cshtml" />
+    <Content Include="Views\ContentAssign\ViewTopic.cshtml" />
+    <Content Include="Views\Content\Topic.cshtml" />
+    <Content Include="Views\Guest\Create.cshtml" />
+    <Content Include="Views\Guest\Delete.cshtml" />
+    <Content Include="Views\Guest\Details.cshtml" />
+    <Content Include="Views\Guest\Edit.cshtml" />
+    <Content Include="Views\Guest\Index.cshtml" />
+    <Content Include="Views\MarketingCoordinatorAction\Edit.cshtml" />
+    <Content Include="Views\MarketingCoordinatorAction\MCProfile.cshtml" />
+    <Content Include="Views\StudentAction\Edit.cshtml" />
+    <Content Include="Views\StudentAction\StdProfile.cshtml" />
+    <Content Include="Views\ContentAssign\ehee.cshtml" />
+    <Content Include="Views\ContentAssign\WriteCMT.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

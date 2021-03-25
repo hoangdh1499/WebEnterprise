@@ -17,7 +17,7 @@ namespace WebEnterprise.Controllers
         // GET: MarketingCoordinators
         public ActionResult Index()
         {
-            var marketingCoordinators = db.MarketingCoordinators.Include(m => m.CTTag).Include(m => m.CTTag);
+            var marketingCoordinators = db.MarketingCoordinators.Include(m => m.Faculty).Include(m => m.Faculty);
             return View(marketingCoordinators.ToList());
         }
 
@@ -42,7 +42,7 @@ namespace WebEnterprise.Controllers
         public ActionResult Create()
         {
 
-            ViewBag.CTTagID = new SelectList(db.CTTags, "CTTagID", "CTTagName");
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
             return View();
         }
 
@@ -52,7 +52,7 @@ namespace WebEnterprise.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
        
-        public ActionResult Create([Bind(Include = "MCEmail,MCID,MCName,MCAddress,MCPhone,CTTagID,UserName")] MarketingCoordinator marketingCoordinator)
+        public ActionResult Create([Bind(Include = "MCEmail,MCID,MCName,MCAddress,MCPhone,FacultyID,UserName")] MarketingCoordinator marketingCoordinator)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace WebEnterprise.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CTTagID = new SelectList(db.CTTags, "CTTagID", "CTTagName", marketingCoordinator.CTTagID);
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", marketingCoordinator.FacultyID);
             return View(marketingCoordinator);
         }
 
@@ -82,7 +82,7 @@ namespace WebEnterprise.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.CTTagID = new SelectList(db.CTTags, "CTTagID", "CTTagName", marketingCoordinator.CTTagID);
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", marketingCoordinator.FacultyID);
             return View(marketingCoordinator);
         }
 
@@ -92,7 +92,7 @@ namespace WebEnterprise.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
        
-        public ActionResult Edit([Bind(Include = "MCEmail,MCID,MCName,MCAddress,MCPhone,CTTagID,UserName")] MarketingCoordinator marketingCoordinator)
+        public ActionResult Edit([Bind(Include = "MCEmail,MCID,MCName,MCAddress,MCPhone,FacultyID,UserName")] MarketingCoordinator marketingCoordinator)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +101,7 @@ namespace WebEnterprise.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CTTagID = new SelectList(db.CTTags, "CTTagID", "CTTagName", marketingCoordinator.CTTagID);
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", marketingCoordinator.FacultyID);
             return View(marketingCoordinator);
         }
 
@@ -130,7 +130,7 @@ namespace WebEnterprise.Controllers
             MarketingCoordinator marketingCoordinator = db.MarketingCoordinators.Find(id);
             db.MarketingCoordinators.Remove(marketingCoordinator);
             db.SaveChanges();
-            AuthenController.DeleteAccount(marketingCoordinator.MCID);
+            AuthenController.DeleteAccount(marketingCoordinator.UserName);
             return RedirectToAction("Index");
         }
 
