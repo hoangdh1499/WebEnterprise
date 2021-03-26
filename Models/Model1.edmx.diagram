@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3479995769d54ed1ab43fdc31413f854" Name="Diagram1" ZoomLevel="72">
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.Comment" Width="1.5" PointX="9.75" PointY="16.25" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.Content" Width="1.5" PointX="5.25" PointY="12.75" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.ContentAssign" Width="1.5" PointX="7.5" PointY="15.75" />
+      <Diagram DiagramId="3479995769d54ed1ab43fdc31413f854" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Comment" Width="1.5" PointX="9.75" PointY="14.625" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Content" Width="1.5" PointX="5.25" PointY="9.25" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.ContentAssign" Width="1.5" PointX="7.5" PointY="14.125" />
         <EntityTypeShape EntityType="G5EnterpriseDBModel.Faculty" Width="1.5" PointX="0.75" PointY="9.375" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.Guest" Width="1.5" PointX="3" PointY="4.125" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.MarketingCoordinator" Width="1.5" PointX="3" PointY="15.75" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.Status" Width="1.5" PointX="5.25" PointY="17.625" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.Student" Width="1.5" PointX="3" PointY="7.5" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.Topic" Width="1.5" PointX="3" PointY="19.25" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Guest" Width="1.5" PointX="3" PointY="7.625" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.MarketingCoordinator" Width="1.5" PointX="3" PointY="19.25" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Status" Width="1.5" PointX="5.25" PointY="14.875" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Student" Width="1.5" PointX="3" PointY="4.125" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Topic" Width="1.5" PointX="3" PointY="15.75" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_Comment_ContentAssign" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_Content_Faculty" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_Content_Student" />
