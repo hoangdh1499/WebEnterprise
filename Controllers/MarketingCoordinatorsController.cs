@@ -72,6 +72,9 @@ namespace WebEnterprise.Controllers
         [Authorize(Roles = "Admin,MarketingCoordinator")]
         public ActionResult Edit(string id)
         {
+            var mID = (from i in db.MarketingCoordinators where i.UserName == User.Identity.Name select i.MCID).FirstOrDefault();
+            var uName = (from m in db.MarketingCoordinators where m.UserName == User.Identity.Name select m.UserName).FirstOrDefault();
+            var facID = (from c in db.MarketingCoordinators where c.UserName == User.Identity.Name select c.FacultyID).FirstOrDefault();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -94,6 +97,9 @@ namespace WebEnterprise.Controllers
 
         public ActionResult Edit([Bind(Include = "MCEmail,MCID,MCName,MCAddress,MCPhone,FacultyID,UserName")] MarketingCoordinator marketingCoordinator)
         {
+            var mID = (from i in db.MarketingCoordinators where i.UserName == User.Identity.Name select i.MCID).FirstOrDefault();
+            var uName = (from m in db.MarketingCoordinators where m.UserName == User.Identity.Name select m.UserName).FirstOrDefault();
+            var facID = (from c in db.MarketingCoordinators where c.UserName == User.Identity.Name select c.FacultyID).FirstOrDefault();
             if (ModelState.IsValid)
             {
                 db.Entry(marketingCoordinator).State = EntityState.Modified;

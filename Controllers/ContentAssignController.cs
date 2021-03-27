@@ -72,6 +72,7 @@ namespace WebEnterprise.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ContentAssign contentAssign = db.ContentAssigns.Find(id);
+            Content ct = db.Contents.Find(id);
             if (contentAssign == null)
             {
                 return HttpNotFound();
@@ -84,6 +85,8 @@ namespace WebEnterprise.Controllers
         public ActionResult DeleteConfirmed(int? id)
         {
             ContentAssign contentAssign = db.ContentAssigns.Find(id);
+            Content ct = db.Contents.Find(id);
+            db.Contents.Remove(ct);
             db.ContentAssigns.Remove(contentAssign);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -96,7 +99,14 @@ namespace WebEnterprise.Controllers
 
             return View(AcceptContent.ToList());
         }
-        
+        public ActionResult UrAccepted()
+        {
+            var AcceptContent = db.ContentAssigns
+                .Where(s => s.Status.GiveStatus.Contains("Accept") && s.Content.Student.UserName == User.Identity.Name)
+                .ToList();
+
+            return View(AcceptContent.ToList());
+        }
 
         [Authorize(Roles = "MarketingCoordinator,Admin")]
         public ActionResult ehee(int? id)

@@ -1,7 +1,15 @@
 ﻿<ul class="nav navbar-nav">
     <li>@Html.ActionLink("Your Content", "Uploaded", "Content")</li>
-    <li>@Html.ActionLink("Upload Content","Topic", "Content")</li>
+    <li>@Html.ActionLink("Upload Content", "Topic", "Content")</li>
     <li>@Html.ActionLink("Profile", "StdProfile", "StudentAction")</li>
-    <li>@Html.ActionLink("Your Assigned list", "ViewALL", "ContentAssign")</li>
+
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Assign <span class="caret"></span></a>
+
+        <ul class="dropdown-menu" role="menu">
+            <li>@Html.ActionLink("Your Accepted Content","UrAccepted","ContentAssign")</li>
+            <li>@Html.ActionLink("Your Assigned list", "ViewALL", "ContentAssign")</li>
+        </ul>
+    </li>
 </ul>
 

@@ -22,7 +22,7 @@ namespace WebEnterprise.Controllers
         }
 
         // GET: MarketingCoordinators/Details/5
-        [Authorize(Roles = "ManagerMarketing")]
+        [Authorize(Roles = "ManagerMarketing,Admin")]
         public ActionResult Details(string id)
         {
             if (id == null)

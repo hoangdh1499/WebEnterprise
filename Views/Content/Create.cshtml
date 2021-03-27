@@ -29,7 +29,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CTDescription, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CTDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.CTDescription, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CTDescription, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -83,11 +83,18 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
 
-                <input type="submit" value="Create" value="Upload" class="btn btn-default" onclick="javascript:return AcceptTermAndcondition();" />
+                <input type="submit" value="Create" value="Upload" class="btn btn-default" onclick="javascript: return AcceptTermAndcondition() " ; />
             </div>
         </div>
     </div>
-    @Html.Raw(TempData["msg"]);
+    {
+        if (TempData["message"] != null)
+        {
+            <script type="text/javascript">
+        alert(@Html.Raw(Json.Encode(TempData["message"])));
+            </script>
+        }
+    }
 }
 
 <div>

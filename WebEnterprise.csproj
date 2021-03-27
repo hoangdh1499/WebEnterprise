@@ -732,6 +732,7 @@
     <Content Include="Views\MarketingManager\ExceptionalReports.cshtml" />
     <Content Include="Views\MarketingManager\MMProfile.cshtml" />
     <Content Include="Views\Content\Term_And_Conditions.cshtml" />
+    <Content Include="Views\ContentAssign\UrAccepted.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

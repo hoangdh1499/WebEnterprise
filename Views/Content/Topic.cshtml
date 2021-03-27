@@ -56,7 +56,15 @@
                         @Html.DisplayFor(modelItem => item.EndDate)
                     </td>
                     <td>
-                        @Html.ActionLink("Add. . .", "Create", new { id = item.TopicID }) |
+                        @if (DateTime.Now < item.EndDate)
+                        {
+                            @Html.ActionLink("Add. . .", "Create", new { id = item.TopicID })
+                        }
+                        else
+                        {
+                           <p> Expired </p>
+                        }
+                        
                     </td>
                 </tr>
             }

@@ -33,21 +33,32 @@ namespace WebEnterprise.Controllers
         public ActionResult Create(Topic tp)
         {
             ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", tp.FacultyID);
-            if (ModelState.IsValid)
+            if (tp.EndDate > tp.StartDate)
             {
-                try
+
+
+                if (ModelState.IsValid)
                 {
-                    db.Topics.Add(tp);
-                    db.SaveChanges();
-                    return RedirectToAction("index");
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", ex);
-                    ModelState.AddModelError("", "Error inserting Content. ID is already existed");
-                    return View(tp);
+
+                    try
+                    {
+                        db.Topics.Add(tp);
+                        db.SaveChanges();
+                        return RedirectToAction("index");
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("", ex);
+                        ModelState.AddModelError("", "Error inserting Content. ID is already existed");
+                        return View(tp);
+                    }
                 }
 
+            }
+            else
+            {
+                TempData["message"] = "The End Date must come after the Start Date";
+                return View();
             }
             return RedirectToAction("index");
         }
@@ -101,6 +112,8 @@ namespace WebEnterprise.Controllers
         public ActionResult Edit(string id)
         {
             ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -110,7 +123,7 @@ namespace WebEnterprise.Controllers
             {
                 return HttpNotFound();
             }
-           
+
             return View(tp);
         }
         [HttpPost]
@@ -118,11 +131,20 @@ namespace WebEnterprise.Controllers
         public ActionResult Edit(Topic tp)
         {
             ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", tp.FacultyID);
-            if (ModelState.IsValid)
+            if (tp.EndDate > tp.StartDate)
             {
-                db.Entry(tp).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (ModelState.IsValid)
+                {
+                    db.Entry(tp).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                TempData["message"] = "The End Date must come after the Start Date";
+                return View();
             }
             return View(tp);
         }

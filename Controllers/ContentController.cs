@@ -44,19 +44,18 @@ namespace WebEnterprise.Controllers
             var student = (from s in db.Students
                            where s.UserName.Equals(User.Identity.Name)
                            select s).FirstOrDefault();
-            ViewBag.StudentName = student.StudentName; //LINQ+ ENtityframework
-            ViewBag.StudentID = student.StudentID;
-            ViewBag.Faculty = student.Faculty.FacultyName;
-
             var tpid = (from t in db.Topics
                         where t.TopicID == id
                         select t).FirstOrDefault();
+            ViewBag.StudentName = student.StudentName; //LINQ+ ENtityframework
+            ViewBag.StudentID = student.StudentID;
+            ViewBag.Faculty = student.Faculty.FacultyName;
             ViewBag.TName = tpid.TopicName;
 
             return View();
 
-        }
 
+        }
         [HttpPost]
         public ActionResult Create(Content ct, HttpPostedFileBase postedImg, HttpPostedFileBase postedPDF, string id, ContentAssign contentAssign)
         {
@@ -64,7 +63,7 @@ namespace WebEnterprise.Controllers
                            where s.UserName.Equals(User.Identity.Name)
                            select s).FirstOrDefault();
             ct.StudentID = student.StudentID; //LINQ+ ENtityframework
-            //var stdName = student.StudentName;
+
 
             var tpid = (from t in db.Topics
                         where t.TopicID == id
@@ -81,54 +80,59 @@ namespace WebEnterprise.Controllers
             {
                 byte2s = br2.ReadBytes(postedPDF.ContentLength);
             }
-            if (postedPDF.ContentLength > 0)
-            {
-                var fileName = Path.GetFileName(postedPDF.FileName);
-                var filePath = Path.Combine(Server.MapPath("~/Files"), fileName);
-                postedPDF.SaveAs(filePath);
-            }
-            db.Contents.Add(new Content
-            {
-                Name2 = Path.GetFileName(postedImg.FileName),
-                ContentType2 = postedImg.ContentType,
-                Data2 = bytes,
-                CTName = ct.CTName,
-                CTDescription = ct.CTDescription,
-                FacultyID = ct.FacultyID,
-                StudentID = ct.StudentID,
-                Name = Path.GetFileName(postedPDF.FileName),
-                ContentType = postedPDF.ContentType,
-                Data = byte2s,
-                TopicID = id
-            });
 
-            var mcmail = (from m in db.MarketingCoordinators where m.FacultyID == ct.FacultyID select m.MCEmail).FirstOrDefault();
-            var mcid = (from m in db.MarketingCoordinators where m.FacultyID == ct.FacultyID select m.MCID).FirstOrDefault();
-            using (MailMessage mm = new MailMessage("sysgwww@gmail.com", mcmail))
+            if (DateTime.Now < tpid.EndDate)
             {
-                //ct.To = ViewBag.McMail;
-                mm.Subject = "Grade content";
-                mm.Body = "You have a new content from student: " + student.StudentName + "--- Stduent ID: " + student.StudentID;
-                mm.IsBodyHtml = false;
-                using (SmtpClient smtp = new SmtpClient())
+                db.Contents.Add(new Content
                 {
-                    smtp.Host = "smtp.gmail.com";
-                    smtp.EnableSsl = true;
-                    NetworkCredential NetworkCred = new NetworkCredential("sysgww@gmail.com", "tsuna2000");
-                    smtp.UseDefaultCredentials = true;
-                    smtp.Credentials = NetworkCred;
-                    smtp.Port = 587;
-                    smtp.Send(mm);
-                    ViewBag.Message = "Email sent.";
+                    Name2 = Path.GetFileName(postedImg.FileName),
+                    ContentType2 = postedImg.ContentType,
+                    Data2 = bytes,
+                    CTName = ct.CTName,
+                    CTDescription = ct.CTDescription,
+                    FacultyID = ct.FacultyID,
+                    StudentID = ct.StudentID,
+                    Name = Path.GetFileName(postedPDF.FileName),
+                    ContentType = postedPDF.ContentType,
+                    Data = byte2s,
+                    TopicID = id
+                });
+
+                var mcmail = (from m in db.MarketingCoordinators where m.FacultyID == ct.FacultyID select m.MCEmail).FirstOrDefault();
+                var mcid = (from m in db.MarketingCoordinators where m.FacultyID == ct.FacultyID select m.MCID).FirstOrDefault();
+                using (MailMessage mm = new MailMessage("sysgwww@gmail.com", mcmail))
+                {
+                    //ct.To = ViewBag.McMail;
+                    mm.Subject = "Grade content";
+                    mm.Body = "You have a new content from student: " + student.StudentName + "--- Stduent ID: " + student.StudentID;
+                    mm.IsBodyHtml = false;
+                    using (SmtpClient smtp = new SmtpClient())
+                    {
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.EnableSsl = true;
+                        NetworkCredential NetworkCred = new NetworkCredential("sysgww@gmail.com", "tsuna2000");
+                        smtp.UseDefaultCredentials = true;
+                        smtp.Credentials = NetworkCred;
+                        smtp.Port = 587;
+                        smtp.Send(mm);
+                        ViewBag.Message = "Email sent.";
+                    }
+
+
+                    db.ContentAssigns.Add(new ContentAssign
+                    {
+                        CTID = ct.CTID,
+                        TopicID = id,
+                        MCID = mcid
+                    });
+
                 }
             }
-
-            db.ContentAssigns.Add(new ContentAssign
+            else
             {
-                CTID = ct.CTID,
-                TopicID = id,
-                MCID = mcid
-            });
+                TempData["message"] = "this topic is expired, Try another or wait for the next topic  ";
+                return View();
+            }
             db.SaveChanges();
             return RedirectToAction("Uploaded");
 
@@ -142,32 +146,72 @@ namespace WebEnterprise.Controllers
             return File(file.Data, file.ContentType, file.Name);
         }
         [Authorize(Roles = "Student")]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, string id1)
         {
+
             Content ct = db.Contents.Find(id);
-            ViewBag.CTTagID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
-            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "StudentName");
+            var student = (from s in db.Students
+                           where s.UserName.Equals(User.Identity.Name)
+                           select s).FirstOrDefault();
+            
+            ViewBag.StudentName = student.StudentName; //LINQ+ ENtityframework
+            ViewBag.StudentID = student.StudentID;
+            ViewBag.Faculty = student.Faculty.FacultyName;
+            
             return View(ct);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Content ct, HttpPostedFileBase postedFile, HttpPostedFileBase postedPDF)
+        public ActionResult Edit(string id1, HttpPostedFileBase postedImg, HttpPostedFileBase postedPDF, Content ct)
         {
-            ViewBag.CTTagID = new SelectList(db.Faculties, "FacultyID", "FacultyName", ct.FacultyID);
-            ViewBag.StudentID = new SelectList(db.Students, "StudentID", "StudentName", ct.StudentID);
-            if (ModelState.IsValid)
+            byte[] bytes;
+            byte[] byte2s;
+            using (BinaryReader br = new BinaryReader(postedImg.InputStream))
             {
-                db.Entry(postedFile).State = EntityState.Modified;
-                db.Entry(postedPDF).State = EntityState.Modified;
-                db.Entry(ct).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                bytes = br.ReadBytes(postedImg.ContentLength);
             }
+            using (BinaryReader br2 = new BinaryReader(postedPDF.InputStream))
+            {
+                byte2s = br2.ReadBytes(postedPDF.ContentLength);
+            }
+            var student = (from s in db.Students
+                           where s.UserName.Equals(User.Identity.Name)
+                           select s).FirstOrDefault();
+            var tpid = (from t in db.Topics
+                        where t.TopicID == id1  
+                        select t).FirstOrDefault();
+            ViewBag.StudentName = student.StudentName;
+            ViewBag.StudentID = student.StudentID;
+            ViewBag.Faculty = student.Faculty.FacultyID;
+            
+            
+                if (ModelState.IsValid)
+                {
+                ct.StudentID = ViewBag.StudentID;
+                ct.FacultyID = ViewBag.Faculty;
+                ct.Name2 = Path.GetFileName(postedImg.FileName);
+                ct.ContentType2 = postedImg.ContentType;
+                ct.Data2 = bytes;
+                ct.Name = Path.GetFileName(postedPDF.FileName);
+                ct.Data = byte2s;
+                ct.ContentType = postedPDF.ContentType;
+                    db.Entry(ct).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Uploaded");
+                }
+           // }
+            //else
+            //{
+            //    TempData["message"] = "You can't edit because this topic is expired ";
+            //    return View();
+
+            //}
             return View(ct);
         }
         [Authorize(Roles = "Student")]
         public ActionResult Delete(int id)
         {
+            ContentAssign ctas = db.ContentAssigns.Find(id);
             Content ct = db.Contents.Find(id);
             return View(ct);
         }
@@ -176,6 +220,8 @@ namespace WebEnterprise.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Content ct = db.Contents.Find(id);
+            ContentAssign ctas = db.ContentAssigns.Find(id);
+            db.ContentAssigns.Remove(ctas);
             db.Contents.Remove(ct);
             db.SaveChanges();
             return RedirectToAction("Uploaded");

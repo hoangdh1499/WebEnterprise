@@ -68,6 +68,11 @@ namespace WebEnterprise.Controllers
         [Authorize(Roles = "Student,Admin")]
         public ActionResult Edit(string id)
         {
+            ViewBag.StdID = (from i in db.Students where i.UserName == User.Identity.Name select i.StudentID).FirstOrDefault();
+            ViewBag.Fac = (from i in db.Students where i.UserName == User.Identity.Name select i.Faculty.FacultyName).FirstOrDefault();
+            ViewBag.UName = (from s in db.Students
+                             where s.UserName == User.Identity.Name
+                             select s.UserName).FirstOrDefault();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -89,6 +94,8 @@ namespace WebEnterprise.Controllers
        
         public ActionResult Edit([Bind(Include = "StudentEmail,StudentID,StudentName,StudentAddress,DOB,UserName,FacultyID")] Student student)
         {
+            ViewBag.StdID = (from i in db.Students where i.UserName == User.Identity.Name select i.StudentID).FirstOrDefault();
+            ViewBag.Fac = (from i in db.Students where i.UserName == User.Identity.Name select i.Faculty.FacultyName).FirstOrDefault();
             ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", student.FacultyID);
             if (ModelState.IsValid)
             {

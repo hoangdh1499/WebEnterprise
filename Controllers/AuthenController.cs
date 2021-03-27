@@ -75,12 +75,20 @@ namespace WebEnterprise.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ChangePass(String current, String newPass)
+        public ActionResult ChangePass(String current, String newPass, String ConfirmNewPass)
         {
             var userStore = new UserStore<IdentityUser>();
             var userManager = new UserManager<IdentityUser>(userStore);
             var user = userManager.FindByName(User.Identity.Name);
+            if(newPass == ConfirmNewPass) 
+            {
             userManager.ChangePassword(user.Id, current, newPass);
+            }else
+            {
+                TempData["message"] = " Confirm Fail , try again! ";
+                return View();
+            }    
+            
 
             return RedirectToAction("Index", "Home");
 
