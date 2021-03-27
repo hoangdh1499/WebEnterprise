@@ -34,5 +34,6 @@ namespace WebEnterprise.Models
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
+        public virtual DbSet<MarketingManager> MarketingManagers { get; set; }
     }
 }

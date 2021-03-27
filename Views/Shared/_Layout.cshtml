@@ -17,10 +17,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("UoG Magazine", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <li>@Html.ActionLink("UoG Magazine", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
             </div>
             <div class="navbar-collapse collapse">
-                @Html.Partial("_Login")
+                <ul class="nav navbar-nav">
+                    <li> @Html.Partial("_Login")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "Authen")</li>
+                        <li>@Html.ActionLink("Change Password", "ChangePass", "Authen")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Authen")</li>
+                    }
+
+
+                </ul>
             </div>
         </div>
     </div>

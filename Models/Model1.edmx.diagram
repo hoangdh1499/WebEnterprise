@@ -26,6 +26,7 @@
         <AssociationConnector Association="G5EnterpriseDBModel.FK_MarketingCoordinator_Faculty" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_Student_Faculty" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_Topic_Faculty" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.MarketingManager" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

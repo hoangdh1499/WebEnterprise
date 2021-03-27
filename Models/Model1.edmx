@@ -75,6 +75,17 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MCEmail" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="MarketingManager">
+          <Key>
+            <PropertyRef Name="MMID" />
+          </Key>
+          <Property Name="MMID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MMName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MMAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="MMEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="MMPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="StatusID" />
@@ -256,6 +267,7 @@
           <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Guest" EntityType="Self.Guest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MarketingCoordinator" EntityType="Self.MarketingCoordinator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarketingManager" EntityType="Self.MarketingManager" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
@@ -370,6 +382,7 @@
             <End Role="Faculty" EntitySet="Faculties" />
             <End Role="Topic" EntitySet="Topics" />
           </AssociationSet>
+          <EntitySet Name="MarketingManagers" EntityType="G5EnterpriseDBModel.MarketingManager" />
         </EntityContainer>
         <EntityType Name="Comment">
           <Key>
@@ -639,6 +652,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="MarketingManager">
+          <Key>
+            <PropertyRef Name="MMID" />
+          </Key>
+          <Property Name="MMID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MMName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MMAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MMEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MMPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -751,6 +775,18 @@
                 <ScalarProperty Name="TopicDescription" ColumnName="TopicDescription" />
                 <ScalarProperty Name="TopicName" ColumnName="TopicName" />
                 <ScalarProperty Name="TopicID" ColumnName="TopicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarketingManagers">
+            <EntityTypeMapping TypeName="G5EnterpriseDBModel.MarketingManager">
+              <MappingFragment StoreEntitySet="MarketingManager">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="MMPhone" ColumnName="MMPhone" />
+                <ScalarProperty Name="MMEmail" ColumnName="MMEmail" />
+                <ScalarProperty Name="MMAddress" ColumnName="MMAddress" />
+                <ScalarProperty Name="MMName" ColumnName="MMName" />
+                <ScalarProperty Name="MMID" ColumnName="MMID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

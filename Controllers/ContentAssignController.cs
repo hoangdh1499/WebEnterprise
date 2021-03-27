@@ -17,7 +17,9 @@ namespace WebEnterprise.Controllers
         [Authorize(Roles = "MarketingCoordinator")]
         public ActionResult Index()
         {
-            var contentAssign = db.ContentAssigns.Include(t => t.Content).Include(t => t.MarketingCoordinator).Include(t => t.Topic);
+            var contentAssign = db.ContentAssigns
+                .Where(s => s.MarketingCoordinator.FacultyID == s.Content.FacultyID && s.MarketingCoordinator.UserName == User.Identity.Name)
+                .ToList();
             return View(contentAssign.ToList());
         }
         public ActionResult Details(int? id)

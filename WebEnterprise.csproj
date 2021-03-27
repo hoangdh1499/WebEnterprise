@@ -34,6 +34,11 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LegacyPublishPropertiesPageEnabled>true</LegacyPublishPropertiesPageEnabled>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+    <PublishDatabases>true</PublishDatabases>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -527,6 +532,9 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\apihost20210228001532 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\GWmagazine - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -545,6 +553,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarketingCoordinatorActionController.cs" />
     <Compile Include="Controllers\MarketingCoordinatorsController.cs" />
+    <Compile Include="Controllers\MarketingManagerController.cs" />
     <Compile Include="Controllers\StudentActionController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
@@ -568,6 +577,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MarketingCoordinator.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MarketingManager.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
@@ -653,6 +665,17 @@
     <Content Include="Views\StudentAction\StdProfile.cshtml" />
     <Content Include="Views\ContentAssign\ehee.cshtml" />
     <Content Include="Views\ContentAssign\WriteCMT.cshtml" />
+    <Content Include="Views\MarketingManager\Create.cshtml" />
+    <Content Include="Views\MarketingManager\Index.cshtml" />
+    <Content Include="Views\MarketingManager\Edit.cshtml" />
+    <Content Include="Views\MarketingManager\Details.cshtml" />
+    <Content Include="Views\MarketingManager\Delete.cshtml" />
+    <Content Include="Views\Authen\ChangePass.cshtml" />
+    <Content Include="Views\MarketingManager\ViewStatic.cshtml" />
+    <Content Include="Views\MarketingManager\SelectedCT.cshtml" />
+    <Content Include="Views\MarketingManager\ExceptionalReports.cshtml" />
+    <Content Include="Views\MarketingManager\MMProfile.cshtml" />
+    <Content Include="Views\Content\Term_And_Conditions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,12 +1,10 @@
 ﻿@model IEnumerable<WebEnterprise.Models.ContentAssign>
-
 @{
-    ViewBag.Title = "ViewALL";
+    ViewBag.Title = "SelectedCT";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
+<h2>SelectedCT</h2>
 
 @using (Html.BeginForm("DownloadFile", "Content", FormMethod.Post))
 {
@@ -32,9 +30,9 @@
             @Html.DisplayNameFor(model => model.Content.Student)
         </td>
         <th>
+
             @Html.DisplayNameFor(model => model.MarketingCoordinator.MCName)
         </th>
-        <th></th>
 
 
         <th style="width:80px">Download</th>
@@ -71,19 +69,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.MarketingCoordinator.MCName)
             </td>
-            <th>
-                @Html.DisplayFor(modelItem => item.Status.GiveStatus)
-            </th>
 
 
             <td>
                 <a href="javascript:;" onclick="DownloadFile(@item.CTID)">Download</a>
             </td>
-            <td>
 
-                @Html.ActionLink("Details", "Details", new { id = item.CTassignID }) |
-
-            </td>
         </tr>
     }
 
