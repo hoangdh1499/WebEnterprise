@@ -24,6 +24,11 @@ namespace WebEnterprise.Controllers
         [Authorize(Roles = "Student,Admin")]
         public ActionResult Edit(string id)
         {
+            ViewBag.StdID = (from i in db.Students where i.UserName == User.Identity.Name select i.StudentID).FirstOrDefault();
+            ViewBag.Fac = (from i in db.Students where i.UserName == User.Identity.Name select i.Faculty.FacultyName).FirstOrDefault();
+
+            var Name = (from m in db.Students where m.UserName == User.Identity.Name select m).FirstOrDefault();
+            ViewBag.uName = Name.UserName;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -42,14 +47,21 @@ namespace WebEnterprise.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Edit([Bind(Include = "StudentEmail,StudentID,StudentName,StudentAddress,DOB,UserName")] Student student)
+        public ActionResult Edit([Bind(Include = "StudentEmail,StudentName,StudentID,StudentAddress,FacultyID,DOB,UserName")] Student student)
         {
+            var stdID = (from i in db.Students where i.UserName == User.Identity.Name select i.StudentID).FirstOrDefault();
+            var uName = (from m in db.Students where m.UserName == User.Identity.Name select m.UserName).FirstOrDefault();
+            var facID = (from c in db.Students where c.UserName == User.Identity.Name select c.FacultyID).FirstOrDefault();
             if (ModelState.IsValid)
             {
+                student.StudentID = stdID;
+                student.FacultyID = facID;
+                student.UserName = uName;
                 db.Entry(student).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Profile");
+                return RedirectToAction("StdProfile");
             }
+
             return View(student);
         }
 

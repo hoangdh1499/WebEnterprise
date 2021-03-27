@@ -24,6 +24,9 @@ namespace WebEnterprise.Controllers
         public ActionResult Topic()
         {
             var tp = from m in db.Topics select m;
+            //var tp = db.Topics
+            //    .Where(s => s.C)
+            //    .ToList();
             return View(tp);
         }
 
@@ -38,10 +41,6 @@ namespace WebEnterprise.Controllers
         [Authorize(Roles = "Student")]
         public ActionResult Create(string id)
         {
-
-            //ViewBag.CTTagID = new SelectList(db.CTTags, "CTTagID", "CTTagName");
-            //ViewBag.TopicID = new SelectList(db.Topics, "TopicID", "TopicName");
-            //ViewBag.StudentID = new SelectList(db.Students, "StudentID", "StudentName");
             var student = (from s in db.Students
                            where s.UserName.Equals(User.Identity.Name)
                            select s).FirstOrDefault();
@@ -57,7 +56,7 @@ namespace WebEnterprise.Controllers
             return View();
 
         }
-        
+
         [HttpPost]
         public ActionResult Create(Content ct, HttpPostedFileBase postedImg, HttpPostedFileBase postedPDF, string id, ContentAssign contentAssign)
         {
@@ -65,7 +64,7 @@ namespace WebEnterprise.Controllers
                            where s.UserName.Equals(User.Identity.Name)
                            select s).FirstOrDefault();
             ct.StudentID = student.StudentID; //LINQ+ ENtityframework
-            //ct.StudentID = ViewBag.StudentID;
+            //var stdName = student.StudentName;
 
             var tpid = (from t in db.Topics
                         where t.TopicID == id
@@ -77,7 +76,6 @@ namespace WebEnterprise.Controllers
             using (BinaryReader br = new BinaryReader(postedImg.InputStream))
             {
                 bytes = br.ReadBytes(postedImg.ContentLength);
-               
             }
             using (BinaryReader br2 = new BinaryReader(postedPDF.InputStream))
             {
@@ -101,13 +99,16 @@ namespace WebEnterprise.Controllers
                 Name = Path.GetFileName(postedPDF.FileName),
                 ContentType = postedPDF.ContentType,
                 Data = byte2s,
+                TopicID = id
             });
 
-            using (MailMessage mm = new MailMessage("sysgwww@gmail.com", "daipngch18721@fpt.edu.vn"))
+            var mcmail = (from m in db.MarketingCoordinators where m.FacultyID == ct.FacultyID select m.MCEmail).FirstOrDefault();
+            var mcid = (from m in db.MarketingCoordinators where m.FacultyID == ct.FacultyID select m.MCID).FirstOrDefault();
+            using (MailMessage mm = new MailMessage("sysgwww@gmail.com", mcmail))
             {
                 //ct.To = ViewBag.McMail;
                 mm.Subject = "Grade content";
-                mm.Body = "You have a new content from student: ";
+                mm.Body = "You have a new content from student: " + student.StudentName + "--- Stduent ID: " + student.StudentID;
                 mm.IsBodyHtml = false;
                 using (SmtpClient smtp = new SmtpClient())
                 {
@@ -122,16 +123,14 @@ namespace WebEnterprise.Controllers
                 }
             }
 
-            //ViewBag.CTTagID = new SelectList(db.CTTags, "CTTagID", "CTTagName", ct.CTTagID);
-            //ViewBag.TopicID = new SelectList(db.Topics, "TopicID", "TopicName", ct.TopicID);
-            //ViewBag.StudentID = new SelectList(db.Students, "StudentID", "StudentName", ct.StudentID);
-            db.ContentAssigns.Add(new ContentAssign 
+            db.ContentAssigns.Add(new ContentAssign
             {
                 CTID = ct.CTID,
-                TopicID = tpid.TopicID
+                TopicID = id,
+                MCID = mcid
             });
             db.SaveChanges();
-            return RedirectToAction("Create");
+            return RedirectToAction("Uploaded");
 
         }
         [Authorize(Roles = "Student,MarketingCoordinator,ManagerMarketing,Guest")]
@@ -146,7 +145,7 @@ namespace WebEnterprise.Controllers
         public ActionResult Edit(int id)
         {
             Content ct = db.Contents.Find(id);
-            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
+            ViewBag.CTTagID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
             ViewBag.StudentID = new SelectList(db.Students, "StudentID", "StudentName");
             return View(ct);
         }
@@ -154,7 +153,7 @@ namespace WebEnterprise.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Content ct, HttpPostedFileBase postedFile, HttpPostedFileBase postedPDF)
         {
-            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", ct.FacultyID);
+            ViewBag.CTTagID = new SelectList(db.Faculties, "FacultyID", "FacultyName", ct.FacultyID);
             ViewBag.StudentID = new SelectList(db.Students, "StudentID", "StudentName", ct.StudentID);
             if (ModelState.IsValid)
             {
@@ -180,6 +179,12 @@ namespace WebEnterprise.Controllers
             db.Contents.Remove(ct);
             db.SaveChanges();
             return RedirectToAction("Uploaded");
+        }
+
+        public ActionResult Term_And_Conditions()
+        {
+            //Response.Write("<script>alert('wrong password or user dosent exist');</script>");
+            return View();
         }
         protected override void Dispose(bool disposing)
         {

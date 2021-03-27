@@ -23,17 +23,28 @@ namespace WebEnterprise.Controllers
         {
             var userStore = new UserStore<IdentityUser>();
             var manager = new UserManager<IdentityUser>(userStore);
-
-            var user = manager.Find(acc.Username, acc.Password);
-
-            if (user != null)
+            if (acc.Username == null || acc.Password == null)
             {
-                var authenticationManager = HttpContext.GetOwinContext().Authentication;
-                var userIdentity = manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-
-                authenticationManager.SignIn(new AuthenticationProperties { }, userIdentity);
-                return RedirectToAction("Index", "Home");
+                //Response.Write("<script>alert('username or password is null or wrong');</script>");
             }
+            else
+            {
+                var user = manager.Find(acc.Username, acc.Password);
+                if (user != null)
+                {
+                    var authenticationManager = HttpContext.GetOwinContext().Authentication;
+                    var userIdentity = manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+
+                    authenticationManager.SignIn(new AuthenticationProperties { }, userIdentity);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    Response.Write("<script>alert('wrong password or user dosent exist');</script>");
+                }
+            }
+
+
             return View(acc);
         }
         public ActionResult LogOut()
@@ -58,6 +69,21 @@ namespace WebEnterprise.Controllers
 
             var user = manager.FindByName(Username);
             manager.Delete(user);
+        }
+        public ActionResult ChangePass()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ChangePass(String current, String newPass)
+        {
+            var userStore = new UserStore<IdentityUser>();
+            var userManager = new UserManager<IdentityUser>(userStore);
+            var user = userManager.FindByName(User.Identity.Name);
+            userManager.ChangePassword(user.Id, current, newPass);
+
+            return RedirectToAction("Index", "Home");
+
         }
     }
 }

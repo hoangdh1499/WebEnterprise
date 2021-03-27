@@ -51,7 +51,7 @@ namespace WebEnterprise.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-       
+
         public ActionResult Create([Bind(Include = "MCEmail,MCID,MCName,MCAddress,MCPhone,FacultyID,UserName")] MarketingCoordinator marketingCoordinator)
         {
             if (ModelState.IsValid)
@@ -64,7 +64,7 @@ namespace WebEnterprise.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", marketingCoordinator.FacultyID);
+            ViewBag.CTTagID = new SelectList(db.Faculties, "FacultyID", "FacultyName", marketingCoordinator.FacultyID);
             return View(marketingCoordinator);
         }
 
@@ -91,7 +91,7 @@ namespace WebEnterprise.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-       
+
         public ActionResult Edit([Bind(Include = "MCEmail,MCID,MCName,MCAddress,MCPhone,FacultyID,UserName")] MarketingCoordinator marketingCoordinator)
         {
             if (ModelState.IsValid)
@@ -124,7 +124,7 @@ namespace WebEnterprise.Controllers
         // POST: MarketingCoordinators/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-       
+
         public ActionResult DeleteConfirmed(string id)
         {
             MarketingCoordinator marketingCoordinator = db.MarketingCoordinators.Find(id);

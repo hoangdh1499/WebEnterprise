@@ -33,8 +33,10 @@ namespace WebEnterprise.Controllers
             {
                 return HttpNotFound();
             }
-
-            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", marketingCoordinator.FacultyID);
+            ViewBag.MCID = (from i in db.MarketingCoordinators where i.UserName == User.Identity.Name select i.MCID).FirstOrDefault();
+            ViewBag.uName = (from m in db.MarketingCoordinators where m.UserName == User.Identity.Name select m.UserName).FirstOrDefault();
+            ViewBag.FacName = (from c in db.MarketingCoordinators where c.UserName == User.Identity.Name select c.Faculty.FacultyName).FirstOrDefault();
+            //ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", marketingCoordinator.FacultyID);
             return View(marketingCoordinator);
         }
 
@@ -44,14 +46,20 @@ namespace WebEnterprise.Controllers
 
         public ActionResult Edit([Bind(Include = "MCEmail,MCID,MCName,MCAddress,MCPhone,FacultyID,UserName")] MarketingCoordinator marketingCoordinator)
         {
+            var mID = (from i in db.MarketingCoordinators where i.UserName == User.Identity.Name select i.MCID).FirstOrDefault();
+            var uName = (from m in db.MarketingCoordinators where m.UserName == User.Identity.Name select m.UserName).FirstOrDefault();
+            var facID = (from c in db.MarketingCoordinators where c.UserName == User.Identity.Name select c.FacultyID).FirstOrDefault();
             if (ModelState.IsValid)
             {
+                marketingCoordinator.MCID = mID;
+                marketingCoordinator.FacultyID = facID;
+                marketingCoordinator.UserName = uName;
                 db.Entry(marketingCoordinator).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Profile");
+                return RedirectToAction("MCProfile");
             }
 
-            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", marketingCoordinator.FacultyID);
+            //ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", marketingCoordinator.FacultyID);
             return View(marketingCoordinator);
         }
     }
