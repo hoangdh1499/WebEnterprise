@@ -91,13 +91,20 @@ namespace WebEnterprise.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        public ActionResult ViewALL()
+        public ActionResult UrRejected()
         {
-            var AcceptContent = db.ContentAssigns
-                .Where(s => s.Content.Student.UserName == User.Identity.Name)
+            var RejectContent = db.ContentAssigns
+                .Where(s => s.Status.GiveStatus.Contains("Reject") && s.Content.Student.UserName == User.Identity.Name)
                 .ToList();
 
-            return View(AcceptContent.ToList());
+            return View(RejectContent.ToList());
+        }
+        public ActionResult UrChecking()
+        {
+            var checkContent = db.ContentAssigns
+                .Where(s => s.StatusID.Equals(null) && s.Content.Student.UserName == User.Identity.Name || s.Status.GiveStatus.Contains("Checking") && s.Content.Student.UserName == User.Identity.Name)
+                .ToList();
+            return View(checkContent.ToList());
         }
         public ActionResult UrAccepted()
         {
@@ -164,6 +171,19 @@ namespace WebEnterprise.Controllers
                 .ToList();
 
             return View(TopicContent.ToList());
+        }
+        public ActionResult Search(string searchString)
+        {
+            var ctasearch = from m in db.ContentAssigns select m;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                ctasearch = ctasearch.Where(s => s.Content.CTName.Contains(searchString) );
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            return View(ctasearch);
         }
         protected override void Dispose(bool disposing)
         {

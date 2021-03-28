@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<WebEnterprise.Models.ContentAssign>
 
 @{
-    ViewBag.Title = "ViewTopic";
+    ViewBag.Title = "UrRejected";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <head>
     <meta charset="utf-8">
@@ -12,9 +13,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+    <link rel="stylesheet" href="~/Content/magazine-style.css">
     <link rel="stylesheet" href="~/Content/table.css">
 </head>
-
 
 <body>
     @using (Html.BeginForm("DownloadFile", "Content", FormMethod.Post))
@@ -25,31 +26,34 @@
     <div class="table-wrapper">
         <table class="fl-table">
             <thead>
-            <th>
-                @Html.DisplayNameFor(model => model.Content.Data2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content.CTName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content.CTDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content.Student)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MarketingCoordinator.MCName)
-            </th>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Content.Data2)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Content.CTName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Content.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Content.CTDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Content.Student)
+                    </th>
+                    <th>
 
-            <th style="width:80px">Download</th>
-            </tr>
+                        @Html.DisplayNameFor(model => model.MarketingCoordinator.MCName)
+                    </th>
+
+
+                    <th style="width:80px">Download</th>
+                </tr>
             </thead>
-
             @foreach (var item in Model)
             {
+                
                 <tr>
                     <td>
                         @if (item.Content.Data2 != null)
@@ -82,16 +86,11 @@
 
 
                     <td>
-                        <a href="javascript:;" onclick="DownloadFile(@item.CTID)">Download</a>
-                    </td>
-                    <td>
 
-                        @Html.ActionLink("Details", "Details", new { id = item.CTassignID }) |
-
+                        <a href="javascript:;" onclick="DownloadFile(@item.CTID)">Download</a> | @Html.ActionLink("Details", "Details", new { id = item.CTassignID })
                     </td>
                 </tr>
             }
-
         </table>
     </div>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -102,3 +101,4 @@
         };
     </script>
 </body>
+

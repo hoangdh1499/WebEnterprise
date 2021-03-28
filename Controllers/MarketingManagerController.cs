@@ -225,8 +225,22 @@ namespace WebEnterprise.Controllers
             var AcceptContent = db.ContentAssigns
                 .Where(s => s.Status.GiveStatus.Contains("Accept"))
                 .ToList();
-
+            
             return View(AcceptContent.ToList());
+        }
+        public ActionResult Search(string searchString)
+        {
+            var ctsearch = from m in db.ContentAssigns select m;
+            if(!String.IsNullOrEmpty(searchString))
+            {
+                ctsearch = ctsearch.Where(s => s.Content.CTName.Contains(searchString) && s.Status.GiveStatus.Contains("Accept"));
+            }
+            else
+            {
+                return RedirectToAction("SelectedCT");
+            }
+            return View(ctsearch);
+            
         }
         public ActionResult MMProfile()
         {

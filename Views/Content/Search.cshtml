@@ -1,10 +1,18 @@
-﻿@model IEnumerable<WebEnterprise.Models.ContentAssign>
-
+﻿@model IEnumerable<WebEnterprise.Models.Content>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Search</h2>
+
+@using (Html.BeginForm("Search", "Content", FormMethod.Post))
+{
+    <p>
+        Find by name: @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2" })
+        <input type="submit" value="Search" class="btn btn-light" />
+    </p>
+}
 <head>
     <meta charset="utf-8">
     <title>university magazine</title>
@@ -12,20 +20,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+    <link rel="stylesheet" href="~/Content/magazine-style.css">
     <link rel="stylesheet" href="~/Content/table.css">
 </head>
-@using (Html.BeginForm("Search", "ContentAssign", FormMethod.Post))
-{
-    
-    <p>
-        Find by name: @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2" })
-        <input type="submit" value="Search" class="btn btn-light" />
-    </p>
-   
-}
-<body>
-    <h2>Index</h2>
 
+<body>
     @using (Html.BeginForm("DownloadFile", "Content", FormMethod.Post))
     {
         <input type="hidden" id="hfFileId" name="FileId" />
@@ -36,40 +35,45 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Topic.TopicName)
+                        @Html.DisplayNameFor(model => model.Data2)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.CTName)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Content.Data2)
+                        @Html.DisplayNameFor(model => model.CTDescription)
                     </th>
+
                     <th>
-                        @Html.DisplayNameFor(model => model.Content.CTName)
+                        @Html.DisplayNameFor(model => model.Student.StudentName)
                     </th>
+
                     <th>
-                        @Html.DisplayNameFor(model => model.Content.Name)
+                        @Html.DisplayNameFor(model => model.Faculty.FacultyName)
                     </th>
+
                     <th>
-                        @Html.DisplayNameFor(model => model.MarketingCoordinator.MCName)
+                        @Html.DisplayNameFor(model => model.TopicID)
                     </th>
+
                     <th>
-                        @Html.DisplayNameFor(model => model.Status.GiveStatus)
+                        @Html.DisplayNameFor(model => model.Name)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CommentA)
-                    </th>
-                    <th></th>
-                    <th style="width:80px">Download</th>
+
+
+
                 </tr>
             </thead>
+
             @foreach (var item in Model)
             {
+
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Topic.TopicName)
-                    </td>
-                    <td>
-                        @if (item.Content.Data2 != null)
+                        @if (item.Data2 != null)
                         {
-                            var base64 = Convert.ToBase64String(item.Content.Data2);
+                            var base64 = Convert.ToBase64String(item.Data2);
                             var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
                             <img src="@imgsrc" width="150" height="200" />
                         }
@@ -78,35 +82,48 @@
                             <img src="~/images/default.jpg"
                                  style="max-width:100px;max-height:100px" />
                         }
+
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.Content.CTName)
+                        @Html.DisplayFor(modelItem => item.CTName)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Content.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MarketingCoordinator.MCName)
-                    </td>
-                    <th>
-                        @Html.DisplayFor(modelItem => item.Status.GiveStatus)
-                    </th>
-                    <th>
-                        @Html.DisplayFor(modelItem => item.CommentA)
-                    </th>
 
                     <td>
+                        @Html.DisplayFor(modelItem => item.CTDescription)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student.StudentName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Faculty.FacultyName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Topic.TopicName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+
+
+
+                    <td class="sorting">
                         <a href="javascript:;" onclick="DownloadFile(@item.CTID)">Download</a>
                     </td>
+
+
                     <td>
-                        @Html.ActionLink("Grade", "ehee", new { id = item.CTassignID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.CTassignID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.CTassignID })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CTID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.CTID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CTID })
                     </td>
                 </tr>
-            }
 
+            }
         </table>
     </div>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

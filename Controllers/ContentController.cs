@@ -38,6 +38,19 @@ namespace WebEnterprise.Controllers
 
             return View(ct);
         }
+        public ActionResult Search(string searchString)
+        {
+            var ctsearch = from m in db.Contents select m;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                ctsearch = ctsearch.Where(s => s.CTName.Contains(searchString) && s.Student.UserName == User.Identity.Name && s.FacultyID == s.Student.FacultyID);
+            }
+            else
+            {
+                return RedirectToAction("Uploaded");
+            }
+            return View(ctsearch);
+        }
         [Authorize(Roles = "Student")]
         public ActionResult Create(string id)
         {
@@ -145,6 +158,8 @@ namespace WebEnterprise.Controllers
             Content file = entities.Contents.ToList().Find(p => p.CTID == fileId.Value);
             return File(file.Data, file.ContentType, file.Name);
         }
+        
+
         [Authorize(Roles = "Student")]
         public ActionResult Edit(int id, string id1)
         {
@@ -153,11 +168,11 @@ namespace WebEnterprise.Controllers
             var student = (from s in db.Students
                            where s.UserName.Equals(User.Identity.Name)
                            select s).FirstOrDefault();
-            
+
             ViewBag.StudentName = student.StudentName; //LINQ+ ENtityframework
             ViewBag.StudentID = student.StudentID;
-            ViewBag.Faculty = student.Faculty.FacultyName;
-            
+            ViewBag.FacultyID = student.Faculty.FacultyName;
+            ViewBag.TopicID = new SelectList(db.Topics.Where(g => g.FacultyID == student.Faculty.FacultyID).ToList(), "TopicID", "TopicName");
             return View(ct);
         }
         [HttpPost]
@@ -174,38 +189,43 @@ namespace WebEnterprise.Controllers
             {
                 byte2s = br2.ReadBytes(postedPDF.ContentLength);
             }
+
             var student = (from s in db.Students
                            where s.UserName.Equals(User.Identity.Name)
                            select s).FirstOrDefault();
+            
             var tpid = (from t in db.Topics
-                        where t.TopicID == id1  
+                        where t.TopicID.Equals(ct.TopicID)
                         select t).FirstOrDefault();
+
             ViewBag.StudentName = student.StudentName;
             ViewBag.StudentID = student.StudentID;
-            ViewBag.Faculty = student.Faculty.FacultyID;
+            ViewBag.FacultyID = student.Faculty.FacultyID;
+            ViewBag.TopicID = new SelectList(db.Topics.Where(g => g.FacultyID == student.Faculty.FacultyID).ToList(), "TopicID", "TopicName");
             
-            
+            if (DateTime.Now < (DateTime)tpid.EndDate)
+            {
                 if (ModelState.IsValid)
                 {
-                ct.StudentID = ViewBag.StudentID;
-                ct.FacultyID = ViewBag.Faculty;
-                ct.Name2 = Path.GetFileName(postedImg.FileName);
-                ct.ContentType2 = postedImg.ContentType;
-                ct.Data2 = bytes;
-                ct.Name = Path.GetFileName(postedPDF.FileName);
-                ct.Data = byte2s;
-                ct.ContentType = postedPDF.ContentType;
+                    ct.StudentID = ViewBag.StudentID;
+                    ct.FacultyID = ViewBag.FacultyID;
+                    ct.Name2 = Path.GetFileName(postedImg.FileName);
+                    ct.ContentType2 = postedImg.ContentType;
+                    ct.Data2 = bytes;
+                    ct.Name = Path.GetFileName(postedPDF.FileName);
+                    ct.Data = byte2s;
+                    ct.ContentType = postedPDF.ContentType;
                     db.Entry(ct).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Uploaded");
                 }
-           // }
-            //else
-            //{
-            //    TempData["message"] = "You can't edit because this topic is expired ";
-            //    return View();
+            }
+            else
+            {
+                TempData["message"] = "You can't edit because this topic is expired ";
+                return View();
 
-            //}
+            }
             return View(ct);
         }
         [Authorize(Roles = "Student")]

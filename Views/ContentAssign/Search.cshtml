@@ -1,10 +1,17 @@
-﻿@model IEnumerable<WebEnterprise.Models.ContentAssign>
+﻿
+@model IEnumerable<WebEnterprise.Models.ContentAssign>
 
 @{
-    ViewBag.Title = "ViewTopic";
+    ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@using (Html.BeginForm("Search", "ContentAssign", FormMethod.Post))
+{
+    <p>
+        Find by name: @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2" })
+        <input type="submit" value="Search" class="btn btn-light" />
+    </p>
+}
 <head>
     <meta charset="utf-8">
     <title>university magazine</title>
@@ -15,8 +22,9 @@
     <link rel="stylesheet" href="~/Content/table.css">
 </head>
 
-
 <body>
+
+
     @using (Html.BeginForm("DownloadFile", "Content", FormMethod.Post))
     {
         <input type="hidden" id="hfFileId" name="FileId" />
@@ -25,32 +33,38 @@
     <div class="table-wrapper">
         <table class="fl-table">
             <thead>
-            <th>
-                @Html.DisplayNameFor(model => model.Content.Data2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content.CTName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content.CTDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content.Student)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MarketingCoordinator.MCName)
-            </th>
-
-            <th style="width:80px">Download</th>
-            </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Topic.TopicName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Content.Data2)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Content.CTName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Content.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MarketingCoordinator.MCName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status.GiveStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CommentA)
+                    </th>
+                    <th></th>
+                    <th style="width:80px">Download</th>
+                </tr>
             </thead>
-
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Topic.TopicName)
+                    </td>
                     <td>
                         @if (item.Content.Data2 != null)
                         {
@@ -64,6 +78,7 @@
                                  style="max-width:100px;max-height:100px" />
                         }
                     </td>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.Content.CTName)
                     </td>
@@ -71,23 +86,22 @@
                         @Html.DisplayFor(modelItem => item.Content.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Content.CTDescription)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Content.Student.UserName)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.MarketingCoordinator.MCName)
                     </td>
-
+                    <th>
+                        @Html.DisplayFor(modelItem => item.Status.GiveStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.CommentA)
+                    </th>
 
                     <td>
                         <a href="javascript:;" onclick="DownloadFile(@item.CTID)">Download</a>
                     </td>
                     <td>
-
+                        @Html.ActionLink("Grade", "ehee", new { id = item.CTassignID }) |
                         @Html.ActionLink("Details", "Details", new { id = item.CTassignID }) |
-
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CTassignID })
                     </td>
                 </tr>
             }

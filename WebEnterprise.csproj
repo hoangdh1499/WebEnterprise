@@ -702,7 +702,7 @@
     <Content Include="Views\ContentAssign\Details.cshtml" />
     <Content Include="Views\ContentAssign\Delete.cshtml" />
     <Content Include="Views\ContentAssign\Grade.cshtml" />
-    <Content Include="Views\ContentAssign\ViewALL.cshtml" />
+    <Content Include="Views\ContentAssign\UrRejected.cshtml" />
     <Content Include="Views\Topic\Create.cshtml" />
     <Content Include="Views\Topic\Index.cshtml" />
     <Content Include="Views\Topic\Edit.cshtml" />
@@ -733,6 +733,10 @@
     <Content Include="Views\MarketingManager\MMProfile.cshtml" />
     <Content Include="Views\Content\Term_And_Conditions.cshtml" />
     <Content Include="Views\ContentAssign\UrAccepted.cshtml" />
+    <Content Include="Views\MarketingManager\Search.cshtml" />
+    <Content Include="Views\Content\Search.cshtml" />
+    <Content Include="Views\ContentAssign\UrChecking.cshtml" />
+    <Content Include="Views\ContentAssign\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

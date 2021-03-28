@@ -7,7 +7,14 @@
 }
 
 <h2>Details</h2>
-
+<head runat="server">
+    <title></title>
+    <script type="text/javascript">
+        function Navigate() {
+            history.go(-1);
+        }
+    </script>
+</head>
 <div>
     <h4>ContentAssign</h4>
     <hr />
@@ -121,10 +128,15 @@
 
 </div>
 <p>
-    @Html.ActionLink("Comment", "WriteCMT", new { id = Model.CTassignID }) |
+    
     @if (User.IsInRole("Student"))
-    {
-        @Html.ActionLink("Back to list", "ViewALL")
+    {   
+
+    <form id="form1" runat="server">
+        <div>
+            <input action="action" type="button" value="Back" onclick="Navigate();" />
+        </div>
+    </form>
     }
     @if (User.IsInRole("MarketingCoordinator"))
     {

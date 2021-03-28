@@ -4,7 +4,13 @@
     ViewBag.Title = "Uploaded";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@using (Html.BeginForm("Search", "Content", FormMethod.Post))
+{
+    <p>
+        Find by name: @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2" })
+        <input type="submit" value="Search" class="btn btn-light" />
+    </p>
+}
 <head>
     <meta charset="utf-8">
     <title>university magazine</title>
@@ -61,59 +67,59 @@
             @foreach (var item in Model)
             {
 
-        <tr>
-            <td>
-                @if (item.Data2 != null)
-                {
-                    var base64 = Convert.ToBase64String(item.Data2);
-                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
-                    <img src="@imgsrc" width="150" height="200" />
-                }
-                else
-                {
-                    <img src="~/images/default.jpg"
-                         style="max-width:100px;max-height:100px" />
-                }
+                <tr>
+                    <td>
+                        @if (item.Data2 != null)
+                        {
+                            var base64 = Convert.ToBase64String(item.Data2);
+                            var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                            <img src="@imgsrc" width="150" height="200" />
+                        }
+                        else
+                        {
+                            <img src="~/images/default.jpg"
+                                 style="max-width:100px;max-height:100px" />
+                        }
 
-            </td>
+                    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.CTName)
-            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CTName)
+                    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.CTDescription)
-            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CTDescription)
+                    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.StudentName)
-            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student.StudentName)
+                    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Faculty.FacultyName)
-            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Faculty.FacultyName)
+                    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Topic.TopicName)
-            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Topic.TopicName)
+                    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-
-
-
-            <td class="sorting">
-                <a href="javascript:;" onclick="DownloadFile(@item.CTID)">Download</a>
-            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
 
 
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.CTID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.CTID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.CTID })
-            </td>
-        </tr>
+
+                    <td class="sorting">
+                        <a href="javascript:;" onclick="DownloadFile(@item.CTID)">Download</a>
+                    </td>
+
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CTID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.CTID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CTID })
+                    </td>
+                </tr>
 
             }
         </table>

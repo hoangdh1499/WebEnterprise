@@ -7,8 +7,9 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Assign <span class="caret"></span></a>
 
         <ul class="dropdown-menu" role="menu">
-            <li>@Html.ActionLink("Your Accepted Content","UrAccepted","ContentAssign")</li>
-            <li>@Html.ActionLink("Your Assigned list", "ViewALL", "ContentAssign")</li>
+            <li>@Html.ActionLink("Your Accepted Submission","UrAccepted","ContentAssign")</li>
+            <li>@Html.ActionLink("Your Rejected Submission", "UrRejected", "ContentAssign")</li>
+            <li>@Html.ActionLink("Still checking Submission", "UrChecking", "ContentAssign")</li>
         </ul>
     </li>
 </ul>
