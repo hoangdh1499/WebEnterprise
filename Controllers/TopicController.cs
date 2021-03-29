@@ -112,13 +112,15 @@ namespace WebEnterprise.Controllers
         public ActionResult Edit(string id)
         {
             ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
-
-
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Topic tp = db.Topics.Find(id);
+            ViewBag.TopicID = (from i in db.Topics 
+                             where i.TopicID == id 
+                             select i.TopicID).FirstOrDefault();
             if (tp == null)
             {
                 return HttpNotFound();
@@ -128,14 +130,19 @@ namespace WebEnterprise.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Topic tp)
+        public ActionResult Edit(Topic tp,string id)
         {
+
+            ViewBag.TopicID = (from i in db.Topics
+                               where i.TopicID == id
+                               select i.TopicID).FirstOrDefault();
             ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", tp.FacultyID);
             if (tp.EndDate > tp.StartDate)
             {
 
                 if (ModelState.IsValid)
                 {
+                    tp.TopicID = ViewBag.TopicID;
                     db.Entry(tp).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
