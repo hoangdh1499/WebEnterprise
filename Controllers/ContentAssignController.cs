@@ -164,6 +164,7 @@ namespace WebEnterprise.Controllers
 
             return RedirectToAction("Details/" + id);
         }
+        [Authorize(Roles = "MarketingCoordinator, Student, Guest, ManagerMarrketing")]
         public ActionResult ViewTopic(string id)
         {
             var TopicContent = db.ContentAssigns
