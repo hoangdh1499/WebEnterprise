@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebEnterprise.Models.Topic>
+﻿@model IEnumerable<WebEnterprise.Models.Topic>  
 
 @{
     ViewBag.Title = "Home Page";
@@ -78,57 +78,54 @@
         <!-- / container -->
     </section>
 
-    <section class="news">
-        <div class="container">
+    <section>
+        <div class="container-fluid">
             <h2>Latest news</h2>    
-            <table class="table">
+            <table class="table" style="background-color:#337ab7">
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TopicID)
+                    <th scope="col">
+                        Topic ID
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TopicName)
+                    <th scope="col">
+                        Name
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TopicDescription)
+                    <th scope="col">
+                        Description
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.StartDate)
+                    <th scope="col">
+                        Start Date
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.EndDate)
+                    <th scope="col">
+                        End Date
                     </th>
-                    <th></th>
+                    <th scope="col"></th>
                 </tr>
 
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
+                        <td scope="row">
                             @Html.DisplayFor(modelItem => item.TopicID)
                         </td>
-                        <td>
+                        <td scope="row">
                             @Html.DisplayFor(modelItem => item.TopicName)
                         </td>
-                        <td>
+                        <td scope="row">
                             @Html.DisplayFor(modelItem => item.TopicDescription)
                         </td>
-                        <td>
+                        <td scope="row">
                             @Html.DisplayFor(modelItem => item.StartDate)
                         </td>
-                        <td>
+                        <td scope="row">
                             @Html.DisplayFor(modelItem => item.EndDate)
                         </td>
-                        <td>
-                            @Html.ActionLink("More. . .", "ViewTopic", "ContentAssign", new { id = item.TopicID }, null)
+                        <td scope="row">
+                            @Html.ActionLink("More. . .", "ViewTopic", "ContentAssign", new { id = item.TopicID }, new { @style = "color:white" })
                         </td>
                     </tr>
                 }
 
             </table>
-            <div class="btn-holder">
-                <a class="btn" href="#">See archival news</a>
-            </div>
         </div>
  
         <!-- / container -->
@@ -178,7 +175,7 @@
                 </div>
             </article>
             <div class="btn-holder">
-                <a class="btn blue" href="#">See all upcoming events</a>
+                <a class="btn" style="background-color:#337ab7" href="#">See all upcoming events</a>
             </div>
         </div>
         <!-- / container -->

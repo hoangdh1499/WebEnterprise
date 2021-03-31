@@ -28,7 +28,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li style="color:red">Hello @User.Identity.Name!</li>
+                        <li style="color:red; padding:15px;">Hello @User.Identity.Name!</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Authen")</li>
 
                         <li>@Html.ActionLink("Change Password", "ChangePass", "Authen")</li>
