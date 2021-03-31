@@ -45,14 +45,12 @@
 
                         @Html.DisplayNameFor(model => model.MarketingCoordinator.MCName)
                     </th>
-
-
                     <th style="width:80px">Download</th>
                 </tr>
             </thead>
             @foreach (var item in Model)
             {
-           
+
                 <tr>
                     <td>
                         @if (item.Content.Data2 != null)
@@ -92,11 +90,12 @@
             }
         </table>
     </div>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript">
-        function DownloadFile(fileId) {
-            $("#hfFileId").val(fileId);
-            $("#btnDownload")[0].click();
-        };
-    </script>
 </body>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    function DownloadFile(fileId) {
+        $("#hfFileId").val(fileId);
+        $("#btnDownload")[0].click();
+    };
+</script>
