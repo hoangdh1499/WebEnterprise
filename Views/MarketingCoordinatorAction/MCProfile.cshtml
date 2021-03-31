@@ -1,67 +1,79 @@
 ﻿@model WebEnterprise.Models.MarketingCoordinator
 
-<div>
-    <h4>MarketingCoordinator</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MCID)
-        </dt>
+<head>
+    <meta charset="utf-8">
+    <title>university magazine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+    <link rel="stylesheet" href="~/Content/detail.css">
+</head>
+<body>
+    <div class="content">
+        <h1>MarketingCoordinator</h1>
+        <hr />
 
-        <dd>
-            @Html.DisplayFor(model => model.MCID)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MCName)
-        </dt>
+        <div class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.MCID)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MCName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.MCID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MCName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MCAddress)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MCName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MCAddress)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MCAddress)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MCPhone)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MCAddress)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MCPhone)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MCPhone)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MCPhone)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MCEmail)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MCEmail)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MCEmail)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Faculty.FacultyName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MCEmail)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Faculty.FacultyName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Faculty.FacultyName)
+            </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MCID })
-    @Html.ActionLink("Back", "Index", "Home")
-</p>
+            <dd>
+                @Html.DisplayFor(model => model.Faculty.FacultyName)
+            </dd>
+
+        </div>
+
+        <p>
+            <button> @Html.ActionLink("Edit", "Edit", new { id = Model.MCID }) </button>
+            <button> @Html.ActionLink("Back", "Index", "Home") </button>
+        </p>
+    </div>
+</body>
