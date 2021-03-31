@@ -522,11 +522,8 @@
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\slick.css" />
     <Content Include="Content\css\style.css" />
-<<<<<<< HEAD
     <Content Include="Content\edit.css" />
-=======
     <Content Include="Content\detail.css" />
->>>>>>> 90b07bc46c24a1084595c525474d91c431fba6ec
     <Content Include="Content\icon\call.png" />
     <Content Include="Content\icon\email.png" />
     <Content Include="Content\icon\loc.png" />
