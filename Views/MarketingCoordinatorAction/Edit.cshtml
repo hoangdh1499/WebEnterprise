@@ -4,7 +4,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div class="form-style-3">
         <h4>MarketingCoordinator</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -44,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FacultyID, "FacultyID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                
+
                 @ViewBag.FacName
             </div>
         </div>
@@ -52,7 +52,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                
+
                 @ViewBag.uName
             </div>
         </div>
@@ -72,6 +72,75 @@
         </div>
     </div>
 }
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/edit.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form-style-3">
+        <form>
+            <fieldset>
+                <legend>Edit MarketingCoordinator</legend>
+                <label for="field1">
+                    <span>MCID<span class="required">*</span></span>
+                    @ViewBag.MCID
+                </label>
+                <label for="field2">
+                    <span>StudentName<span class="required">*</span></span>
+                    @Html.EditorFor(model => model.MCName, new { htmlAttributes = new { @class = "form-control" } })
+                  
+                </label>
+                <label for="field3">
+                    <span>MCAddress<span class="required">*</span></span>
+                    @Html.EditorFor(model => model.MCAddress, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+                <label for="field3">
+                    <span>MCPhone<span class="required">*</span></span>
+                    @Html.EditorFor(model => model.MCPhone, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+                <label for="field3">
+
+                    <span>FacultyID<span class="required">*</span></span>
+                    <div>
+                        @ViewBag.FacName
+                    </div>
+                    
+                </label>
+                <label for="field3">
+                    <span>UserName <span class="required">*</span></span>
+                     @ViewBag.uName
+                    
+                </label>
+                <label for="field3">
+                    <span>MCEmail<span class="required">*</span></span>
+                    @Html.EditorFor(model => model.MCEmail, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+
+
+
+                </select></label>
+            </fieldset>
+
+            <label><span> </span><input type="submit" value="Submit" /></label>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>
 
 <div>
     @Html.ActionLink("Back to List", "MCProfile")
