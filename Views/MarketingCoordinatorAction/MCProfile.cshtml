@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+    <link rel="stylesheet" href="~/Content/detail.css">
 </head>
 <body>
     <div class="content">
@@ -73,8 +74,8 @@
         </div>
 
         <p>
-            <button> @Html.ActionLink("Edit", "Edit", new { id = Model.MCID }) </button>
-            <button> @Html.ActionLink("Back", "Index", "Home") </button>
+            <input type="button" title="Edit" value="Edit" onclick="location.href='@Url.Action("Edit", "MarketingCoordinatorAction", new { id = Model.MCID })'" />
+            <input type="button" title="Back" value="Back" onclick="location.href='@Url.Action("Index", "Home")'" />
         </p>
     </div>
 </body>
