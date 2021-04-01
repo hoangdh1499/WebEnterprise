@@ -6,67 +6,63 @@
 }
 
 <h2>Edit</h2>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/edit.css">
+</head>
+
+
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>MarketingManager</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.MMID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+<div class="form-style-3">
+    <form>
+        <fieldset>
+            <legend>Edit Marketing Manager</legend>
+            <label for="field1">
+                <span>
+                    MMID<span class="required">*</span>
+                </span>
                 @ViewBag.MMID
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.MMName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            </label>
+            <label for="field2">
+                <span>MMName<span class="required">*</span></span>
                 @Html.EditorFor(model => model.MMName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MMName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MMAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            </label>
+            <label for="field3">
+                <span>MMAddress<span class="required">*</span></span>
                 @Html.EditorFor(model => model.MMAddress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MMAddress, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MMEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MMEmail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MMEmail, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MMPhone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            </label>
+            <label for="field3">
+                <span>MMPhone   <span class="required">*</span></span>
                 @Html.EditorFor(model => model.MMPhone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MMPhone, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+                
+            </label>
+            <label for="field3">
+                <span>UserName<span class="required">*</span></span>
+                
                 @ViewBag.UName
-            </div>
-        </div>
+            </label>
+            <label for="field3">
+                <span>MMGmail <span class="required">*</span></span>
+                @Html.EditorFor(model => model.MMEmail, new { htmlAttributes = new { @class = "form-control" } })
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+            </label>
+           
+        </fieldset>
+    </form>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
+
+</div>
 }
 
 <div>
