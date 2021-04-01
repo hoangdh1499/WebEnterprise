@@ -3,7 +3,6 @@
     ViewBag.Title = "UrAccepted";
 }
 
-<h2>UrAccepted</h2>
 
 <head>
     <meta charset="utf-8">
@@ -17,6 +16,8 @@
 </head>
 
 <body>
+
+    <h2>UrAccepted</h2>
     @using (Html.BeginForm("DownloadFile", "Content", FormMethod.Post))
     {
         <input type="hidden" id="hfFileId" name="FileId" />

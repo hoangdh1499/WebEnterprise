@@ -5,54 +5,68 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<head>
+    <meta charset="utf-8">
+    <title>university magazine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MMName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MMAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MMEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MMPhone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th></th>
-    </tr>
+</head>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MMName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MMAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MMEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MMPhone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-           
-            @Html.ActionLink("Details", "Details", new { id=item.MMID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MMID })
-        </td>
-    </tr>
-}
+<body>
+    <h2>Index</h2>
 
-</table>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MMName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MMAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MMEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MMPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MMName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MMAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MMEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MMPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Details", "Details", new { id = item.MMID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MMID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>

@@ -1,58 +1,72 @@
 ﻿@model WebEnterprise.Models.Topic
 
-<div>
-    <h4>Topic</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Faculty.FacultyName)
-        </dt>
+<head>
+    <meta charset="utf-8">
+    <title>university magazine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
 
-        <dd>
-            @Html.DisplayFor(model => model.Faculty.FacultyName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TopicID)
-        </dt>
+</head>
 
-        <dd>
-            @Html.DisplayFor(model => model.TopicID)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TopicName)
-        </dt>
+<body>
 
-        <dd>
-            @Html.DisplayFor(model => model.TopicName)
-        </dd>
+    <div>
+        <h4>Topic</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Faculty.FacultyName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TopicDescription)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Faculty.FacultyName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TopicID)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TopicDescription)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.TopicID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TopicName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TopicName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TopicDescription)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TopicDescription)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TopicID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.TopicID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>

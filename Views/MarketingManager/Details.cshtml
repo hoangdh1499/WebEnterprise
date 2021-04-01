@@ -5,62 +5,76 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<head>
+    <meta charset="utf-8">
+    <title>university magazine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
 
-<div>
-    <h4>MarketingManager</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MMName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MMName)
-        </dd>
+</head>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MMAddress)
-        </dt>
+<body>
+    <h2>Details</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.MMAddress)
-        </dd>
+    <div>
+        <h4>MarketingManager</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.MMName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MMEmail)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MMName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MMEmail)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MMAddress)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MMPhone)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MMAddress)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MMPhone)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MMEmail)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MMEmail)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MMPhone)
+            </dt>
 
-    </dl>
-</div>
-<p>
-    @if(User.IsInRole("ManagerMarketing"))
-    {
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MMID }) 
-                                                              }
-    else
-    {
+            <dd>
+                @Html.DisplayFor(model => model.MMPhone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @if (User.IsInRole("ManagerMarketing"))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.MMID })
+        }
+        else
+        {
         <p></p>
     }
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        @Html.ActionLink("Back to List", "Index")
+        </p>
+    </body>

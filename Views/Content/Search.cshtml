@@ -4,15 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Search</h2>
-
-@using (Html.BeginForm("Search", "Content", FormMethod.Post))
-{
-    <p>
-        Find by name: @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2" })
-        <input type="submit" value="Search" class="btn btn-light" />
-    </p>
-}
 <head>
     <meta charset="utf-8">
     <title>university magazine</title>
@@ -25,6 +16,17 @@
 </head>
 
 <body>
+
+    <h2>Search</h2>
+
+    @using (Html.BeginForm("Search", "Content", FormMethod.Post))
+    {
+        <p>
+            Find by name: @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2" })
+            <input type="submit" value="Search" class="btn btn-light" />
+        </p>
+    }
+
     @using (Html.BeginForm("DownloadFile", "Content", FormMethod.Post))
     {
         <input type="hidden" id="hfFileId" name="FileId" />
