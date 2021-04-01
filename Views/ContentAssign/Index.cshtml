@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <head>
     <meta charset="utf-8">
     <title>university magazine</title>
@@ -14,16 +15,18 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
     <link rel="stylesheet" href="~/Content/table.css">
 </head>
-@using (Html.BeginForm("Search", "ContentAssign", FormMethod.Post))
-{
-    
-    <p>
-        Find by name: @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2" })
-        <input type="submit" value="Search" class="btn btn-light" />
-    </p>
-   
-}
+
 <body>
+    @using (Html.BeginForm("Search", "ContentAssign", FormMethod.Post))
+    {
+
+        <p>
+            Find by name: @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2" })
+            <input type="submit" value="Search" class="btn btn-light" />
+        </p>
+
+    }
+
     <h2>Index</h2>
 
     @using (Html.BeginForm("DownloadFile", "Content", FormMethod.Post))

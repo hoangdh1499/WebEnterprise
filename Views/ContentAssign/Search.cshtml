@@ -5,13 +5,6 @@
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using (Html.BeginForm("Search", "ContentAssign", FormMethod.Post))
-{
-    <p>
-        Find by name: @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2" })
-        <input type="submit" value="Search" class="btn btn-light" />
-    </p>
-}
 <head>
     <meta charset="utf-8">
     <title>university magazine</title>
@@ -23,6 +16,14 @@
 </head>
 
 <body>
+    @using (Html.BeginForm("Search", "ContentAssign", FormMethod.Post))
+    {
+        <p>
+            Find by name: @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2" })
+            <input type="submit" value="Search" class="btn btn-light" />
+        </p>
+    }
+
 
 
     @using (Html.BeginForm("DownloadFile", "Content", FormMethod.Post))

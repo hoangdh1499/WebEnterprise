@@ -4,7 +4,7 @@
     ViewBag.Title = "UrChecking";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>UrChecking</h2>
+
 
 <head>
     <meta charset="utf-8">
@@ -18,6 +18,7 @@
 </head>
 
 <body>
+    <h2>UrChecking</h2>
     @using (Html.BeginForm("DownloadFile", "Content", FormMethod.Post))
     {
         <input type="hidden" id="hfFileId" name="FileId" />
