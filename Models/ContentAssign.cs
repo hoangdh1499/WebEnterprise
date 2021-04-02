@@ -11,7 +11,8 @@ namespace WebEnterprise.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class ContentAssign
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +23,12 @@ namespace WebEnterprise.Models
     
         public int CTassignID { get; set; }
         public Nullable<int> CTID { get; set; }
+        [DisplayName("MC")]
         public string MCID { get; set; }
         public Nullable<int> StatusID { get; set; }
+        [DisplayName("Feedback")]
         public string CommentA { get; set; }
+        [DisplayName("Topic")]
         public string TopicID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

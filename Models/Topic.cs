@@ -11,7 +11,8 @@ namespace WebEnterprise.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Topic
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,8 +21,9 @@ namespace WebEnterprise.Models
             this.Contents = new HashSet<Content>();
             this.ContentAssigns = new HashSet<ContentAssign>();
         }
-    
+        [DisplayName("Term")]
         public string TopicID { get; set; }
+        [DisplayName("Topic")]
         public string TopicName { get; set; }
         public string TopicDescription { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }

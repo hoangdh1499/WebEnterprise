@@ -11,7 +11,8 @@ namespace WebEnterprise.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Faculty
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,6 +26,7 @@ namespace WebEnterprise.Models
         }
     
         public int FacultyID { get; set; }
+        [DisplayName("Faculty")]
         public string FacultyName { get; set; }
         public string FacultyDescription { get; set; }
     

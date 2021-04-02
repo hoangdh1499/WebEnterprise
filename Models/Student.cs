@@ -11,7 +11,9 @@ namespace WebEnterprise.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Student
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +23,14 @@ namespace WebEnterprise.Models
         }
     
         public string StudentID { get; set; }
+        [DisplayName("Student")]
         public string StudentName { get; set; }
         public string StudentAddress { get; set; }
         public System.DateTime DOB { get; set; }
         public string UserName { get; set; }
+       
         public string StudentEmail { get; set; }
+        [DisplayName("Faculty")]
         public Nullable<int> FacultyID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

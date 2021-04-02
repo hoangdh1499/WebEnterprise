@@ -51,7 +51,7 @@
         <EntityTypeShape EntityType="G5EnterpriseDBModel.MarketingCoordinator" Width="1.5" PointX="2.1445846046063046" PointY="20.136812845308711" />
         <EntityTypeShape EntityType="G5EnterpriseDBModel.Status" Width="1.5" PointX="6.7652777036490281" PointY="21.735657269943346" />
         <EntityTypeShape EntityType="G5EnterpriseDBModel.Student" Width="1.5" PointX="1.6758729823286984" PointY="25.768781495172895" />
-        <EntityTypeShape EntityType="G5EnterpriseDBModel.Topic" Width="1.5" PointX="6.9364817752207077" PointY="3.4232064054455638" />
+        <EntityTypeShape EntityType="G5EnterpriseDBModel.Topic" Width="1.5" PointX="10.625" PointY="3.625" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_Comment_ContentAssign" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_Content_Faculty" />
         <AssociationConnector Association="G5EnterpriseDBModel.FK_Content_Student" />

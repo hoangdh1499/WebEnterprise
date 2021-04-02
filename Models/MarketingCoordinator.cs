@@ -11,7 +11,9 @@ namespace WebEnterprise.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class MarketingCoordinator
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +23,14 @@ namespace WebEnterprise.Models
         }
     
         public string MCID { get; set; }
+        [DisplayName("MC")]
         public string MCName { get; set; }
         public string MCAddress { get; set; }
         public string MCPhone { get; set; }
+        [DisplayName("Faculty")]
         public Nullable<int> FacultyID { get; set; }
         public string UserName { get; set; }
+       
         public string MCEmail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
