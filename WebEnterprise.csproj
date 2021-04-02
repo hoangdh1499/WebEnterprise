@@ -593,6 +593,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\apihost20210228001532 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\GWmaga5 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\GWmagazine - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -613,6 +614,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarketingCoordinatorActionController.cs" />
     <Compile Include="Controllers\MarketingCoordinatorsController.cs" />
+    <Compile Include="Controllers\MarketingManagerActionController.cs" />
     <Compile Include="Controllers\MarketingManagerController.cs" />
     <Compile Include="Controllers\StudentActionController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
@@ -741,6 +743,8 @@
     <Content Include="Views\Content\Search.cshtml" />
     <Content Include="Views\ContentAssign\UrChecking.cshtml" />
     <Content Include="Views\ContentAssign\Search.cshtml" />
+    <Content Include="Views\MarketingManagerAction\MMprofile.cshtml" />
+    <Content Include="Views\MarketingManagerAction\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

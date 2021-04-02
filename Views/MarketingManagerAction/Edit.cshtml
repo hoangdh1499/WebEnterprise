@@ -1,0 +1,74 @@
+﻿@model WebEnterprise.Models.MarketingManager
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/edit.css">
+</head>
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-style-3">
+    <form>
+        <fieldset>
+            <legend>Edit Marketing Manager</legend>
+            <label for="field1">
+                <span>
+                    MMID<span class="required">*</span>
+                </span>
+                @ViewBag.MMID
+            </label>
+            <label for="field2">
+                <span>MMName<span class="required">*</span></span>
+                @Html.EditorFor(model => model.MMName, new { htmlAttributes = new { @class = "form-control" } })
+            </label>
+            <label for="field3">
+                <span>MMAddress<span class="required">*</span></span>
+                @Html.EditorFor(model => model.MMAddress, new { htmlAttributes = new { @class = "form-control" } })
+            </label>
+            <label for="field3">
+                <span>MMPhone   <span class="required">*</span></span>
+                @Html.EditorFor(model => model.MMPhone, new { htmlAttributes = new { @class = "form-control" } })
+
+                
+            </label>
+            <label for="field3">
+                <span>UserName<span class="required">*</span></span>
+                
+                @ViewBag.UName
+            </label>
+            <label for="field3">
+                <span>MMGmail <span class="required">*</span></span>
+                @Html.EditorFor(model => model.MMEmail, new { htmlAttributes = new { @class = "form-control" } })
+
+            </label>
+           
+        </fieldset>
+    </form>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
