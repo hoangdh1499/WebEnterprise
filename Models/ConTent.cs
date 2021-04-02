@@ -24,17 +24,18 @@ namespace WebEnterprise.Models
         public int CTID { get; set; }
         [DisplayName("Title")]
         public string CTName { get; set; }
+        [DisplayName("Description")]
         public string CTDescription { get; set; }
         public Nullable<int> FacultyID { get; set; }
         [DisplayName("Student")]
         public string StudentID { get; set; }
-        [DisplayName("File")]
+        [DisplayName(" ")]
         public string Name { get; set; }
         public string ContentType { get; set; }
         public byte[] Data { get; set; }
         public string Name2 { get; set; }
         public string ContentType2 { get; set; }
-        [DisplayName("Picture")]
+        [DisplayName(" ")]
         public byte[] Data2 { get; set; }
         [DisplayName("Topic")]
         public string TopicID { get; set; }

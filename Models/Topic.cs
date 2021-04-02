@@ -25,6 +25,7 @@ namespace WebEnterprise.Models
         public string TopicID { get; set; }
         [DisplayName("Topic")]
         public string TopicName { get; set; }
+        [DisplayName("Description")]
         public string TopicDescription { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }

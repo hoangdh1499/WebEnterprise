@@ -11,15 +11,21 @@ namespace WebEnterprise.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class MarketingManager
     {
+        [DisplayName("ID")]
         public string MMID { get; set; }
+        [DisplayName("Name")]
         public string MMName { get; set; }
+        [DisplayName("Address")]
         public string MMAddress { get; set; }
-        
+        [DisplayName("Email")]
+
         public string MMEmail { get; set; }
+        [DisplayName("Phone")]
         public string MMPhone { get; set; }
         public string UserName { get; set; }
     }

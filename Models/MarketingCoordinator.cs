@@ -21,16 +21,19 @@ namespace WebEnterprise.Models
         {
             this.ContentAssigns = new HashSet<ContentAssign>();
         }
-    
+        [DisplayName("ID")]
         public string MCID { get; set; }
         [DisplayName("MC")]
         public string MCName { get; set; }
+        [DisplayName("Address")]
         public string MCAddress { get; set; }
+        [DisplayName("Phone")]
         public string MCPhone { get; set; }
         [DisplayName("Faculty")]
         public Nullable<int> FacultyID { get; set; }
         public string UserName { get; set; }
-       
+        [DisplayName("Email")]
+
         public string MCEmail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

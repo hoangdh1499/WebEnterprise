@@ -21,14 +21,16 @@ namespace WebEnterprise.Models
         {
             this.Contents = new HashSet<Content>();
         }
-    
+        [DisplayName("ID")]
         public string StudentID { get; set; }
         [DisplayName("Student")]
         public string StudentName { get; set; }
+        [DisplayName("Address")]
         public string StudentAddress { get; set; }
+        [DisplayName("Birthday")]
         public System.DateTime DOB { get; set; }
         public string UserName { get; set; }
-       
+        [DisplayName("Email")]
         public string StudentEmail { get; set; }
         [DisplayName("Faculty")]
         public Nullable<int> FacultyID { get; set; }

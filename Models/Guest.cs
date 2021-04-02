@@ -15,13 +15,18 @@ namespace WebEnterprise.Models
 
     public partial class Guest
     {
+        [DisplayName("ID")]
         public int GuestID { get; set; }
+        [DisplayName("Name")]
         public string GuestName { get; set; }
+        [DisplayName("Address")]
         public string GuestAddress { get; set; }
+        [DisplayName("Phone")]
         public string GuestPhone { get; set; }
         [DisplayName("Faculty")]
         public Nullable<int> FacultyID { get; set; }
         public string UserName { get; set; }
+        [DisplayName("Email")]
         public string GuestEmail { get; set; }
         
         public virtual Faculty Faculty { get; set; }

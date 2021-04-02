@@ -20,7 +20,7 @@ namespace WebEnterprise.Models
         {
             this.ContentAssigns = new HashSet<ContentAssign>();
         }
-    
+        
         public int StatusID { get; set; }
         [DisplayName("Status")]
         public string GiveStatus { get; set; }
