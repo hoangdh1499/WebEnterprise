@@ -10,25 +10,25 @@
 .form-style-3 label > span{
 	float: left;
 	width: 100px;
-	color: #F072A9;
+	color: black;
 	font-weight: bold;
 	font-size: 13px;
 	text-shadow: 1px 1px 1px #fff;
 }
-.form-style-3 fieldset{
+.form-style-3 fieldset {
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	margin: 0px 0px 10px 0px;
-	border: 1px solid #FFD2D2;
+	border: 1px solid #3399ff;
 	padding: 20px;
-	background: #008bc4;
+	background-color: white;
 	box-shadow: inset 0px 0px 15px #FFE5E5;
 	-moz-box-shadow: inset 0px 0px 15px #FFE5E5;
 	-webkit-box-shadow: inset 0px 0px 15px #FFE5E5;
 }
 .form-style-3 fieldset legend{
-	color: #FFA0C9;
+	color: black;
 	border-top: 1px solid #FFD2D2;
 	border-left: 1px solid #FFD2D2;
 	border-right: 1px solid #FFD2D2;
@@ -62,12 +62,12 @@
 	-moz-border-radius: 3px;
 	border: 1px solid #0b3f8f;
 	outline: none;
-	color: #361cca;
+	color: black;
 	padding: 5px 8px 5px 8px;
 	box-shadow: inset 1px 1px 4px #FFD5E7;
 	-moz-box-shadow: inset 1px 1px 4px #FFD5E7;
 	-webkit-box-shadow: inset 1px 1px 4px #FFD5E7;
-	background: #FFEFF6;
+	background: white;
 	width:50%;
 }
 .form-style-3  input[type=submit],
