@@ -1,0 +1,70 @@
+﻿@model WebEnterprise.Models.MarketingCoordinator
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/edit.css">
+
+</head>
+<head>
+    <meta charset="utf-8">
+    <title>university magazine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+
+</head>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-style-3">
+        <form>
+            <fieldset>
+                <legend>Edit Marketing Coordinator</legend>
+                <label for="field1">
+                    <span>
+                        MCID<span class="required">*</span>
+                    </span>
+                    @ViewBag.MCID
+                </label>
+                <label for="field2">
+                    <span>MCName<span class="required">*</span></span>
+                    @Html.EditorFor(model => model.MCName, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+                <label for="field3">
+                    <span>MCAddress<span class="required">*</span></span>
+                    @Html.EditorFor(model => model.MCAddress, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+                <label for="field3">
+                    <span>MCPhone   <span class="required">*</span></span>
+
+                    @Html.EditorFor(model => model.MCPhone, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+                <label for="field3">
+                    <span>FacultyID<span class="required">*</span></span>
+                    @ViewBag.FacName
+                </label>
+                <label for="field3">
+                    <span>UserName <span class="required">*</span></span>
+
+                    @ViewBag.uName
+                </label>
+                <label for="field3">
+                    <span>MCEmail<span class="required">*</span></span>
+                    @Html.EditorFor(model => model.MCEmail, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+            </fieldset>
+        </form>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "MCProfile")
+</div>

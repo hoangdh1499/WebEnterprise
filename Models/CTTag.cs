@@ -17,13 +17,16 @@ namespace WebEnterprise.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CTTag()
         {
+            this.Contents = new HashSet<Content>();
             this.MarketingCoordinators = new HashSet<MarketingCoordinator>();
         }
     
-        public string CTTagID { get; set; }
-        public string CTTag1 { get; set; }
+        public int CTTagID { get; set; }
+        public string CTTagName { get; set; }
         public string CTTagDescription { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Content> Contents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MarketingCoordinator> MarketingCoordinators { get; set; }
     }

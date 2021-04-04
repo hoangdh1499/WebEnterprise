@@ -1,0 +1,96 @@
+﻿@model WebEnterprise.Models.Content
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/edit.css">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+
+</head>
+<body>
+    @using (Html.BeginForm("Edit", "Content", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-style-3">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.CTID)
+            <form>
+                <fieldset style="background-color:white; border-color:aqua">
+                    <legend>Edit Your Content</legend>
+                    <label for="field1">
+                        <span>
+                            CTName<span class="required">*</span>
+                        </span>
+                        @Html.EditorFor(model => model.CTName, new { htmlAttributes = new { @class = "form-control" } })
+                    </label>
+                    <label for="field2">
+                        <span>CTDescription<span class="required">*</span></span>
+                        @Html.TextAreaFor(model => model.CTDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    </label>
+                    <label for="field3">
+                        <span>TopicID<span class="required">*</span></span>
+                        @Html.DropDownList("TopicID", null, htmlAttributes: new { @class = "form-control" })
+                    </label>
+
+                    <label for="field3">
+                        <span>FacultyID<span class="required">*</span></span>
+                        @ViewBag.FacultyID
+                    </label>
+                    <label for="field3">
+                        <span>StudentName <span class="required">*</span></span>
+
+                        @ViewBag.StudentName
+                    </label>
+                    <label for="field3">
+                        <span>StudentID<span class="required">*</span></span>
+                        @ViewBag.StudentID
+                    </label>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="file" name="postedImg" value="Choose File" /> IMAGE ONLY
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="file" name="postedPDF" value="Choose File" /> PDF ONLY
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div>
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+    </body>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

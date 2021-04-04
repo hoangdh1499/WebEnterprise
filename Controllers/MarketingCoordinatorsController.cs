@@ -12,16 +12,17 @@ namespace WebEnterprise.Controllers
 {
     public class MarketingCoordinatorsController : Controller
     {
-        private G5EnterpriseDBEntities3 db = new G5EnterpriseDBEntities3();
-
+        private G5EnterpriseDBEntities db = new G5EnterpriseDBEntities();
+        [Authorize(Roles = "Admin,MarketingCoordinator")]
         // GET: MarketingCoordinators
         public ActionResult Index()
         {
-            var marketingCoordinators = db.MarketingCoordinators.Include(m => m.ConTent).Include(m => m.CTTag1);
+            var marketingCoordinators = db.MarketingCoordinators.Include(m => m.Faculty).Include(m => m.Faculty);
             return View(marketingCoordinators.ToList());
         }
 
         // GET: MarketingCoordinators/Details/5
+        [Authorize(Roles = "Admin,MarketingCoordinator")]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -37,10 +38,11 @@ namespace WebEnterprise.Controllers
         }
 
         // GET: MarketingCoordinators/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            ViewBag.CTTag = new SelectList(db.ConTents, "CTID", "CTName");
-            ViewBag.CTTag = new SelectList(db.CTTags, "CTTagID", "CTTag1");
+
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
             return View();
         }
 
@@ -49,28 +51,30 @@ namespace WebEnterprise.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "MCID,MCName,MCAddress,MCPhone,CTTag")] MarketingCoordinator marketingCoordinator)
+
+        public ActionResult Create([Bind(Include = "MCEmail,MCID,MCName,MCAddress,MCPhone,FacultyID,UserName")] MarketingCoordinator marketingCoordinator)
         {
             if (ModelState.IsValid)
             {
                 db.MarketingCoordinators.Add(marketingCoordinator);
                 db.SaveChanges();
 
-                AuthenController.CreateAccount(marketingCoordinator.MCID, "123456", "MarketingCoordinator");
+                AuthenController.CreateAccount(marketingCoordinator.UserName, "123456", "MarketingCoordinator");
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CTTag = new SelectList(db.ConTents, "CTID", "CTName", marketingCoordinator.CTTag);
-            ViewBag.CTTag = new SelectList(db.CTTags, "CTTagID", "CTTag1", marketingCoordinator.CTTag);
+            ViewBag.CTTagID = new SelectList(db.Faculties, "FacultyID", "FacultyName", marketingCoordinator.FacultyID);
             return View(marketingCoordinator);
         }
 
         // GET: MarketingCoordinators/Edit/5
-        [Authorize(Roles = "MarketingCoordinator")]
+        [Authorize(Roles = "Admin,MarketingCoordinator")]
         public ActionResult Edit(string id)
         {
+            var mID = (from i in db.MarketingCoordinators where i.UserName == User.Identity.Name select i.MCID).FirstOrDefault();
+            var uName = (from m in db.MarketingCoordinators where m.UserName == User.Identity.Name select m.UserName).FirstOrDefault();
+            var facID = (from c in db.MarketingCoordinators where c.UserName == User.Identity.Name select c.FacultyID).FirstOrDefault();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,8 +84,8 @@ namespace WebEnterprise.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CTTag = new SelectList(db.ConTents, "CTID", "CTName", marketingCoordinator.CTTag);
-            ViewBag.CTTag = new SelectList(db.CTTags, "CTTagID", "CTTag1", marketingCoordinator.CTTag);
+
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", marketingCoordinator.FacultyID);
             return View(marketingCoordinator);
         }
 
@@ -90,22 +94,25 @@ namespace WebEnterprise.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "MarketingCoordinator")]
-        public ActionResult Edit([Bind(Include = "MCID,MCName,MCAddress,MCPhone,CTTag")] MarketingCoordinator marketingCoordinator)
+
+        public ActionResult Edit([Bind(Include = "MCEmail,MCID,MCName,MCAddress,MCPhone,FacultyID,UserName")] MarketingCoordinator marketingCoordinator)
         {
+            var mID = (from i in db.MarketingCoordinators where i.UserName == User.Identity.Name select i.MCID).FirstOrDefault();
+            var uName = (from m in db.MarketingCoordinators where m.UserName == User.Identity.Name select m.UserName).FirstOrDefault();
+            var facID = (from c in db.MarketingCoordinators where c.UserName == User.Identity.Name select c.FacultyID).FirstOrDefault();
             if (ModelState.IsValid)
             {
                 db.Entry(marketingCoordinator).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CTTag = new SelectList(db.ConTents, "CTID", "CTName", marketingCoordinator.CTTag);
-            ViewBag.CTTag = new SelectList(db.CTTags, "CTTagID", "CTTag1", marketingCoordinator.CTTag);
+
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", marketingCoordinator.FacultyID);
             return View(marketingCoordinator);
         }
 
         // GET: MarketingCoordinators/Delete/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,MarketingCoordinator")]
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -123,15 +130,16 @@ namespace WebEnterprise.Controllers
         // POST: MarketingCoordinators/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+
         public ActionResult DeleteConfirmed(string id)
         {
             MarketingCoordinator marketingCoordinator = db.MarketingCoordinators.Find(id);
             db.MarketingCoordinators.Remove(marketingCoordinator);
             db.SaveChanges();
+            AuthenController.DeleteAccount(marketingCoordinator.UserName);
             return RedirectToAction("Index");
         }
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

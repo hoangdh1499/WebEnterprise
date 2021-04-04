@@ -11,16 +11,33 @@ namespace WebEnterprise.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class MarketingCoordinator
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MarketingCoordinator()
+        {
+            this.ContentAssigns = new HashSet<ContentAssign>();
+        }
+        [DisplayName("ID")]
         public string MCID { get; set; }
+        [DisplayName("MC")]
         public string MCName { get; set; }
+        [DisplayName("Address")]
         public string MCAddress { get; set; }
+        [DisplayName("Phone")]
         public string MCPhone { get; set; }
-        public string CTTag { get; set; }
+        [DisplayName("Faculty")]
+        public Nullable<int> FacultyID { get; set; }
+        public string UserName { get; set; }
+        [DisplayName("Email")]
+
+        public string MCEmail { get; set; }
     
-        public virtual ConTent ConTent { get; set; }
-        public virtual CTTag CTTag1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContentAssign> ContentAssigns { get; set; }
+        public virtual Faculty Faculty { get; set; }
     }
 }

@@ -13,10 +13,10 @@ namespace WebEnterprise.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class G5EnterpriseDBEntities3 : DbContext
+    public partial class G5EnterpriseDBEntities : DbContext
     {
-        public G5EnterpriseDBEntities3()
-            : base("name=G5EnterpriseDBEntities3")
+        public G5EnterpriseDBEntities()
+            : base("name=G5EnterpriseDBEntities")
         {
         }
     
@@ -25,10 +25,15 @@ namespace WebEnterprise.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ConTent> ConTents { get; set; }
-        public virtual DbSet<CTTag> CTTags { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Content> Contents { get; set; }
+        public virtual DbSet<ContentAssign> ContentAssigns { get; set; }
+        public virtual DbSet<Faculty> Faculties { get; set; }
+        public virtual DbSet<Guest> Guests { get; set; }
         public virtual DbSet<MarketingCoordinator> MarketingCoordinators { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Topic> Topics { get; set; }
+        public virtual DbSet<MarketingManager> MarketingManagers { get; set; }
     }
 }

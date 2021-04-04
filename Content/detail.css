@@ -1,0 +1,47 @@
+﻿body {
+    color: #000000;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    overflow-x: hidden;
+}
+
+.content {
+    margin: auto;
+    width: 90%;
+    padding: 10px;
+}
+.content h1 {
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
+.dl-horizontal {
+    display:table;
+    margin: auto;
+    width: auto;
+    padding: 25px;
+    border-style: Solid;
+    background-color:whitesmoke;
+
+}
+    .dl-horizontal dt {
+        font-size: 25px;
+        margin-bottom: 5px;
+        width: auto;
+        padding-right: 30px;
+    }
+    .dl-horizontal dd {
+        font-size: 25px;
+        margin-bottom: 5px;
+        padding-left: inherit;
+    }
+.content p{
+   text-align:center;
+   width: 140%;
+   margin: 10px;
+}
+.content button{
+    border-style:solid;
+    margin: 5px;
+}
