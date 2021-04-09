@@ -569,6 +569,7 @@
     <Content Include="Content\magazine-style.css" />
     <Content Include="Content\responsive.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\static.css" />
     <Content Include="Content\table.css" />
     <Content Include="Content\tm-home-img.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
