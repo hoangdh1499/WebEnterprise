@@ -9,7 +9,7 @@ body {
 	position: relative;
 	width: 80%;
 	margin: 0 auto;
-	justify-content:center
+	justify-content:center;
 }
 .content {
 	overflow: hidden;
@@ -86,7 +86,7 @@ body {
 
 h1,
 h2 {
-	color: #7e8798;
+	color: #fff;
 	font-size: 60px;
 	font-family: 'BebasNeue';
 	line-height: 68px;
@@ -241,24 +241,4 @@ a.btn,
     height: 150px;
 	margin: 0 18px 8px 0;
 	width: 150px;
-	}
-	.footer {
-		float:left;
-		width:2000px;
-		display: flex;
-		background-color: #070707;
-		padding: 0 100px;
-	}
-	.footer .infomation {
-		color: white;
-		margin: 0 250px 0 0;
-	}
-	.footer a {
-		text-decoration: none;
-		color: white;
-		display: block;
-		line-height: 1.8;
-	}
-	.footer-bottom {
-		background-color: #717171;
 	}

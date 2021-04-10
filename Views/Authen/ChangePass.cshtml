@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/edit.css">
+
+</head>
+<head>
     <meta charset="utf-8">
     <title>university magazine</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,37 +18,40 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+    <link rel="stylesheet" href="~/Content/edit.css">
 
 </head>
 
 <body>
-    <h2>ChangePass</h2>
+  
     <table class="table">
         <form action="/Authen/ChangePass" method="post">
             <table>
-                <tr>
-                    <td>cureentPasss:</td>
-                    <td><input type="password" name="current" value="" /></td>
-                </tr>
-                <tr>
-                    <td> newPass:</td>
-                    <td> <input type="password" name="newPass" value="" />   </td>
-                </tr>
-                <tr>
-                    <td> Confirm new password</td>
-                    <td> <input type="password" name="ConfirmNewPass" value="" />   </td>
-                </tr>
-                <tr>
-                    <td><input type="submit" name="name" value="submit" /></td>
-                </tr>
+                <fieldset>
+                    <legend>ChangePassWord</legend>
+                   
+                    <label for="field2">
+                        <span>Password<span class="required">*</span>
+                        <input type="password" name="current" value="" />
+                    </label>
+                    <br />
+                    <label for="field3">
+                        <span>New Password<span class="required">*</span>
+                        <input type="password" name="newPass" value="" />
+                    </label>
+                    <br />
+                    <label for="field3">
+                      <span>Confirm NewPassword<span class="required">*</span>
 
-                @if (TempData["message"] != null)
-                {
-                    <script type="text/javascript">
+                      <input type="password" name="ConfirmNewPass" value="" />
+                    </label>
+                    @if (TempData["message"] != null)
+                    {
+                        <script type="text/javascript">
                  alert(@Html.Raw(Json.Encode(TempData["message"])));
-                    </script>
-                }
-
+                        </script>
+                    }
+                </fieldset>
             </table>
         </form>
     </table>
