@@ -12,6 +12,7 @@ namespace WebEnterprise.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class ContentAssign
     {
@@ -22,8 +23,10 @@ namespace WebEnterprise.Models
         }
     
         public int CTassignID { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<int> CTID { get; set; }
         [DisplayName("MC")]
+
         public string MCID { get; set; }
         public Nullable<int> StatusID { get; set; }
         [DisplayName("Feedback")]

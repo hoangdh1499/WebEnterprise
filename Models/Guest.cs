@@ -12,12 +12,15 @@ namespace WebEnterprise.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Guest
     {
         [DisplayName("ID")]
+        [Required(ErrorMessage = "Field can't be empty")]
         public int GuestID { get; set; }
         [DisplayName("Name")]
+        [Required(ErrorMessage = "Field can't be empty")]
         public string GuestName { get; set; }
         [DisplayName("Address")]
         public string GuestAddress { get; set; }
@@ -25,8 +28,11 @@ namespace WebEnterprise.Models
         public string GuestPhone { get; set; }
         [DisplayName("Faculty")]
         public Nullable<int> FacultyID { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
         public string UserName { get; set; }
         [DisplayName("Email")]
+        [Required(ErrorMessage = "Field can't be empty")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string GuestEmail { get; set; }
         
         public virtual Faculty Faculty { get; set; }

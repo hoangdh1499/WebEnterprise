@@ -17,16 +17,20 @@ namespace WebEnterprise.Models
     public partial class MarketingManager
     {
         [DisplayName("ID")]
+        [Required(ErrorMessage = "Field can't be empty")]
         public string MMID { get; set; }
         [DisplayName("Name")]
+        [Required(ErrorMessage = "Field can't be empty")]
         public string MMName { get; set; }
         [DisplayName("Address")]
         public string MMAddress { get; set; }
         [DisplayName("Email")]
-
+        [Required(ErrorMessage = "Field can't be empty")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string MMEmail { get; set; }
         [DisplayName("Phone")]
         public string MMPhone { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
         public string UserName { get; set; }
     }
 }

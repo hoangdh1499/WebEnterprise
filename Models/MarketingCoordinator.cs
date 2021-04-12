@@ -22,8 +22,10 @@ namespace WebEnterprise.Models
             this.ContentAssigns = new HashSet<ContentAssign>();
         }
         [DisplayName("ID")]
+        [Required(ErrorMessage = "Field can't be empty")]
         public string MCID { get; set; }
         [DisplayName("MC")]
+        [Required(ErrorMessage = "Field can't be empty")]
         public string MCName { get; set; }
         [DisplayName("Address")]
         public string MCAddress { get; set; }
@@ -33,6 +35,8 @@ namespace WebEnterprise.Models
         public Nullable<int> FacultyID { get; set; }
         public string UserName { get; set; }
         [DisplayName("Email")]
+        [Required(ErrorMessage = "Field can't be empty")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
 
         public string MCEmail { get; set; }
     

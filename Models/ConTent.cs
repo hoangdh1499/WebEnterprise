@@ -12,6 +12,7 @@ namespace WebEnterprise.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Content
     {
@@ -20,20 +21,30 @@ namespace WebEnterprise.Models
         {
             this.ContentAssigns = new HashSet<ContentAssign>();
         }
-    
+        
         public int CTID { get; set; }
         [DisplayName("Title")]
+        [Required(ErrorMessage = "Field can't be empty")]
         public string CTName { get; set; }
         [DisplayName("Description")]
+        [Required(ErrorMessage = "Field can't be empty")]
         public string CTDescription { get; set; }
         public Nullable<int> FacultyID { get; set; }
         [DisplayName("Student")]
         public string StudentID { get; set; }
         [DisplayName(" ")]
-        public string Name { get; set; }
+        [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.pdf)$", 
+            ErrorMessage = "Only PDF  files allowed.")]
+        public string Name { get; set; } 
+        [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.pdf)$", 
+            ErrorMessage = "Only PDF  files allowed.")]
         public string ContentType { get; set; }
         public byte[] Data { get; set; }
+        [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg)$", 
+            ErrorMessage = "Only Image  files allowed.")]
         public string Name2 { get; set; }
+        [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg)$", 
+            ErrorMessage = "Only Image  files allowed.")]
         public string ContentType2 { get; set; }
         [DisplayName(" ")]
         public byte[] Data2 { get; set; }

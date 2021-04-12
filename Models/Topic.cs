@@ -12,6 +12,7 @@ namespace WebEnterprise.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Topic
     {
@@ -22,12 +23,16 @@ namespace WebEnterprise.Models
             this.ContentAssigns = new HashSet<ContentAssign>();
         }
         [DisplayName("Term")]
+        [Required(ErrorMessage = "Field can't be empty")]
         public string TopicID { get; set; }
         [DisplayName("Topic")]
+        [Required(ErrorMessage = "Field can't be empty")]
         public string TopicName { get; set; }
         [DisplayName("Description")]
         public string TopicDescription { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<System.DateTime> StartDate { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<int> FacultyID { get; set; }
     
