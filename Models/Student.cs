@@ -22,21 +22,21 @@ namespace WebEnterprise.Models
             this.Contents = new HashSet<Content>();
         }
         [DisplayName("ID")]
-        [Required(ErrorMessage = "Field can't be empty")]
+        
         public string StudentID { get; set; }
         [DisplayName("Student")]
-        [Required(ErrorMessage = "Field can't be empty")]
+      
         public string StudentName { get; set; }
         [DisplayName("Address")]
         public string StudentAddress { get; set; }
 
-        //[DataType(DataType.Date)]
+        [DataType(DataType.Date)]
         [DisplayName("Birthday")]
         public System.DateTime DOB { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
+   
         public string UserName { get; set; }
         [DisplayName("Email")]
-        [Required(ErrorMessage = "Field can't be empty")]
+      
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]  
         public string StudentEmail { get; set; }
         [DisplayName("Faculty")]
