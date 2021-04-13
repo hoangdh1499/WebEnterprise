@@ -27,6 +27,7 @@ namespace WebEnterprise.Controllers
         // GET: Students/Create
         public ActionResult Create()
         {
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
             return View();
         }
 
@@ -44,12 +45,13 @@ namespace WebEnterprise.Controllers
 
                 return RedirectToAction("Index");
             }
-
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", guest.FacultyID);
             return View(guest);
         }
         [Authorize(Roles = "Guest,Admin")]
         public ActionResult Edit(int id)
         {
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName");
             Guest guest = db.Guests.Find(id);
             return View(guest);
         }
@@ -66,6 +68,7 @@ namespace WebEnterprise.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.FacultyID = new SelectList(db.Faculties, "FacultyID", "FacultyName", guest.FacultyID);
             return View(guest);
         }
         [Authorize(Roles = "Admin")]

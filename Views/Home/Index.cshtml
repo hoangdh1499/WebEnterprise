@@ -78,41 +78,32 @@
             <table class="table" style="background-color:#337ab7">
                 <tr>
                     <th scope="col">
+                       
+                    </th>
+                    <th scope="col">
                         Term
                     </th>
                     <th scope="col">
                         Topic
                     </th>
-                    <th scope="col">
-                        Description
-                    </th>
-                    <th scope="col">
-                        Start Date
-                    </th>
-                    <th scope="col">
-                        End Date
-                    </th>
+                   
                     <th scope="col"></th>
                 </tr>
 
                 @foreach (var item in Model)
                 {
                     <tr>
+                        <td  scope="col">
+                            <img src="~/images/maga.jpg"
+                                 style="max-width:200px;max-height:100px" />
+                        </td>
                         <td scope="row">
                             @Html.DisplayFor(modelItem => item.TopicID)
                         </td>
                         <td scope="row">
                             @Html.DisplayFor(modelItem => item.TopicName)
                         </td>
-                        <td scope="row">
-                            @Html.DisplayFor(modelItem => item.TopicDescription)
-                        </td>
-                        <td scope="row">
-                            @Html.DisplayFor(modelItem => item.StartDate)
-                        </td>
-                        <td scope="row">
-                            @Html.DisplayFor(modelItem => item.EndDate)
-                        </td>
+                        
                         <td scope="row">
                             @Html.ActionLink("More. . .", "ViewTopic", "ContentAssign", new { id = item.TopicID }, new { @style = "color:white" })
                         </td>

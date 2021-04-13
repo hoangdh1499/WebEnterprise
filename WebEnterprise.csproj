@@ -611,6 +611,7 @@
     <Compile Include="Controllers\AuthenController.cs" />
     <Compile Include="Controllers\ContentAssignController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\GuestActionController.cs" />
     <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarketingCoordinatorActionController.cs" />
@@ -746,6 +747,8 @@
     <Content Include="Views\ContentAssign\Search.cshtml" />
     <Content Include="Views\MarketingManagerAction\MMprofile.cshtml" />
     <Content Include="Views\MarketingManagerAction\Edit.cshtml" />
+    <Content Include="Views\GuestAction\Edit.cshtml" />
+    <Content Include="Views\GuestAction\GProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

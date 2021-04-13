@@ -73,7 +73,12 @@
                         @Html.DisplayFor(modelItem => item.Content.CTName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Content.Name)
+                        <p>
+                            <img src="~/images/pdf.jpg"
+                                 style="max-width:30px;max-height:30px" />
+                        </p>
+
+                        <p>  @Html.DisplayFor(modelItem => item.Content.Name)</p>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Content.CTDescription)
