@@ -3,13 +3,7 @@
     ViewBag.Title = "ChangePass";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/Content/edit.css">
 
-</head>
 <head>
     <meta charset="utf-8">
     <title>university magazine</title>
@@ -23,36 +17,43 @@
 </head>
 
 <body>
-  
-    <table class="table">
-        <form action="/Authen/ChangePass" method="post">
-            <table>
-                <fieldset>
-                    <legend>ChangePassWord</legend>
-                   
-                    <label for="field2">
-                        <span>Password<span class="required">*</span>
-                        <input type="password" name="current" value="" />
-                    </label>
-                    <br />
-                    <label for="field3">
-                        <span>New Password<span class="required">*</span>
-                        <input type="password" name="newPass" value="" />
-                    </label>
-                    <br />
-                    <label for="field3">
-                      <span>Confirm NewPassword<span class="required">*</span>
-
-                      <input type="password" name="ConfirmNewPass" value="" />
-                    </label>
-                    @if (TempData["message"] != null)
-                    {
-                        <script type="text/javascript">
+    <body>
+        <div class="form-style-3">
+            <table class="table">
+                <form action="/Authen/ChangePass" method="post">
+                    <table>
+                        <fieldset>
+                            <legend>ChangePassWord</legend>
+                            <label for="field2">
+                                <span>
+                                    Password
+                                </span>
+                                <input type="password" name="current" value="" />
+                            </label>
+                            <br />
+                            <label for="field3">
+                                <span>
+                                    New Password
+                                </span>
+                                <input type="password" name="newPass" value="" />
+                            </label>
+                            <br />
+                            <label for="field3">
+                                <span>
+                                    Confirm NewPassword
+                                </span>
+                                <input type="password" name="ConfirmNewPass" value="" />
+                            </label>
+                            @if (TempData["message"] != null)
+                            {
+                                <script type="text/javascript">
                  alert(@Html.Raw(Json.Encode(TempData["message"])));
-                        </script>
-                    }
-                </fieldset>
+                                </script>
+}
+                        </fieldset>
+                        <label> <input type="submit" name="submit" value="submit"></label>
+                    </table>
+                </form>
             </table>
-        </form>
-    </table>
+        </div>
 </body>
