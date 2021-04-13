@@ -231,7 +231,9 @@ namespace WebEnterprise.Controllers
         [Authorize(Roles = "Student")]
         public ActionResult Delete(int id)
         {
+           
             ContentAssign ctas = db.ContentAssigns.Find(id);
+           
             Content ct = db.Contents.Find(id);
             return View(ct);
         }
@@ -239,10 +241,13 @@ namespace WebEnterprise.Controllers
 
         public ActionResult DeleteConfirmed(int id)
         {
+          
             Content ct = db.Contents.Find(id);
             ContentAssign ctas = db.ContentAssigns.Find(id);
+  
             db.ContentAssigns.Remove(ctas);
             db.Contents.Remove(ct);
+           
             db.SaveChanges();
             return RedirectToAction("Uploaded");
         }

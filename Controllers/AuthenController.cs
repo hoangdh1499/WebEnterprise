@@ -40,7 +40,7 @@ namespace WebEnterprise.Controllers
                 }
                 else
                 {
-                    Response.Write("<script>alert('wrong password or user dosent exist');</script>");
+                    TempData["message"]="wrong password or user dosent exist";
                 }
             }
 

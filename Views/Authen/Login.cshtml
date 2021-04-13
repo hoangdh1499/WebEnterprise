@@ -23,32 +23,39 @@
     <title>Sign in</title>
 </head>
 
-<body>
+    <body>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <div class="main">
-            <p class="sign" align="center">Login</p>
-            <form class="form1">
-                <div class="un " type="text" align="center">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="main">
+                <p class="sign" align="center">Login</p>
+                <form class="form1">
+                    <div class="un " type="text" align="center">
 
-                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { placeholder = "Username", @class = "form-control" } })
-                </div>
-                <div  <input class="pass" type="password" align="center" placeholder="Password">
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { placeholder = "Username", @class = "form-control" } })
+                    </div>
+                    <div  <input class="pass" type="password" align="center" placeholder="Password">
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Password", @class = "form-control" } })
                 </div>
-                <div>
                     <div>
-                        <input type="submit" value="Login" class="submit" />
+                        <div>
+                            <input type="submit" value="Login" class="submit" />
+                        </div>
                     </div>
-                </div>
                 }
-            </form>
-        </div>
-              
+    </form>
+    </div>
+    
+    @if (TempData["message"] != null)
+    {
+    <script type="text/javascript">
+        alert(@Html.Raw(Json.Encode(TempData["message"])));
+    </script>
+    }
+    
 
-</body>
+    </body>
 
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>

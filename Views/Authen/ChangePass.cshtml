@@ -29,21 +29,24 @@
             <table>
                 <fieldset>
                     <legend>ChangePassWord</legend>
-                   
-                    <label for="field2">
-                        <span>Password<span class="required">*</span>
-                        <input type="password" name="current" value="" />
-                    </label>
-                    <br />
-                    <label for="field3">
-                        <span>New Password<span class="required">*</span>
-                        <input type="password" name="newPass" value="" />
-                    </label>
-                    <br />
-                    <label for="field3">
-                      <span>Confirm NewPassword<span class="required">*</span>
 
-                      <input type="password" name="ConfirmNewPass" value="" />
+                    <label for="field2">
+                        <span>
+                            Password<span class="required">*</span>
+                            <input type="password" name="current" value="" />
+                    </label>
+                    <br />
+                    <label for="field3">
+                        <span>
+                            New Password<span class="required">*</span>
+                            <input type="password" name="newPass" value="" />
+                    </label>
+                    <br />
+                    <label for="field3">
+                        <span>
+                            Confirm NewPassword<span class="required">*</span>
+
+                            <input type="password" name="ConfirmNewPass" value="" />
                     </label>
                     @if (TempData["message"] != null)
                     {
@@ -52,6 +55,7 @@
                         </script>
                     }
                 </fieldset>
+               
             </table>
         </form>
     </table>

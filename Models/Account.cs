@@ -9,9 +9,10 @@ namespace WebEnterprise.Models
 
     public class Account
     {
-        [Required]
+      
+        [Required(ErrorMessage = "Field can't be empty")]
         public string Username { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Field can't be empty")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Required]
