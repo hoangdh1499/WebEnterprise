@@ -24,10 +24,10 @@ namespace WebEnterprise.Models
         
         public int CTID { get; set; }
         [DisplayName("Title")]
-        [Required(ErrorMessage = "Field can't be empty")]
+      
         public string CTName { get; set; }
         [DisplayName("Description")]
-        [Required(ErrorMessage = "Field can't be empty")]
+      
         public string CTDescription { get; set; }
         public Nullable<int> FacultyID { get; set; }
         [DisplayName("Student")]
