@@ -16,6 +16,15 @@
 
 </head>
 
+<head runat="server">
+    <title></title>
+    <script type="text/javascript">
+        function Navigate() {
+            history.go(-1);
+        }
+    </script>
+</head>
+
 <body>
     <h2>WriteCMT</h2>
 
@@ -50,6 +59,10 @@
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Details")
+        <form id="form1" runat="server">
+            <div>
+                <input action="action" type="button" value="Back" onclick="Navigate();" />
+            </div>
+        </form>
     </div>
 </body>
