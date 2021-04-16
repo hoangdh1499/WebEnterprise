@@ -11,17 +11,48 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="~/Content/Static.css">
 
 </head>
 
 <body>
+    
+    <script>
+        window.onload = function () {
 
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: "The percent contributions of the year - 2021"
+                },
+                data: [
+                    {
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0.00\"%\"",
+                    indexLabel: "{label} {y}",
+                    dataPoints: [
+                        { y: 32.45, label: "IT" },
+                        { y: 25.31, label: "Design" },
+                        { y: 25.33, label: "Bussiness" },
+                        { y: 16.91, label: "sport" },
+
+                    ]
+                    }
+                ]
+            });
+            chart.render();
+
+        }
+    </script>
     <div class="container-fluid">
         <div class="text-center">
             <h2>Static</h2>
             <h1> The contributions of the year </h1>
         </div></br>
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div></br>
         <div class="row">
             <div class="col-sm-3">
                 <div class="panel panel-default text-center">
@@ -80,18 +111,18 @@
                     </div>
                 </div>
             </div>
-        </div>  
-            <div class="col-md-auto">
-                <div class="panel panel-default text-center">
-                    <div class="panel-heading">
-                        <h1>Total</h1>
-                    </div>
-                    <div class="panel-body">
-                        <p>Total contributions 2021:    @ViewBag.Total</p>
-                        <p>Total contributors 2021 :    @ViewBag.TotalCTor</p>
-                    </div>
+        </div>
+        <div class="col-md-auto">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Total</h1>
+                </div>
+                <div class="panel-body">
+                    <p>Total contributions 2021:    @ViewBag.Total</p>
+                    <p>Total contributors 2021 :    @ViewBag.TotalCTor</p>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
