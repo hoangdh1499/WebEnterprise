@@ -23,7 +23,7 @@ namespace WebEnterprise.Models
         }
     
         public int CTassignID { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
+        
         public Nullable<int> CTID { get; set; }
         [DisplayName("MC")]
 
