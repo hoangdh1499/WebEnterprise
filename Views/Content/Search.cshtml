@@ -16,12 +16,12 @@
 </head>
 
 <body>
-
+    
     <h2>Search</h2>
 
     @using (Html.BeginForm("Search", "Content", FormMethod.Post))
-    {
-        <p>
+    {   
+        <p> 
             Find by name: @Html.TextBox("searchString", null, new { @class = "form-control mr-sm-2" })
             <input type="submit" value="Search" class="btn btn-light" />
         </p>
