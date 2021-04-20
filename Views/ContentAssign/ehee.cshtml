@@ -1,0 +1,76 @@
+﻿@model WebEnterprise.Models.ContentAssign
+
+@{
+    ViewBag.Title = "Grade";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/edit.css">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+
+</head>
+<body>
+    <h2>Edit</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+<label class="form-style-3">
+    <form>
+        <fieldset>
+            <legend>ContentAssign</legend>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.CTassignID)
+
+            <label for="field2">
+                <span>TopicID<span class="required">*</span></span>
+                @*@Html.DropDownList("TopicID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TopicID, "", new { @class = "text-danger" })*@
+                @ViewBag.TName
+            </label>
+
+            <label for="field2">
+                <span>TCID<span class="required">*</span></span>
+                    @*@Html.DropDownList("CTID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CTID, "", new { @class = "text-danger" })*@
+                    @ViewBag.CName
+            </label>
+
+            <label for="field2">
+                <span>MCName<span class="required">*</span></span>
+
+                    @ViewBag.MCName
+            </label>
+            <label for="field3">
+                <span>StatusID<span class="required">*</span></span>
+                    @Html.DropDownList("StatusID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
+            </label>
+            <label for="field3">
+                <span>feedback<span class="required">*</span></span>
+                    @Html.EditorFor(model => model.CommentA, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CommentA, "", new { @class = "text-danger" })
+            </label>
+</fieldset>
+    </form>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</label>
+                    }
+
+
+                    <div>
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+    </body>

@@ -11,23 +11,50 @@ namespace WebEnterprise.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class ConTent
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class Content
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ConTent()
+        public Content()
         {
-            this.MarketingCoordinators = new HashSet<MarketingCoordinator>();
+            this.ContentAssigns = new HashSet<ContentAssign>();
         }
-    
-        public string CTID { get; set; }
+        
+        public int CTID { get; set; }
+        [DisplayName("Title")]
+      
         public string CTName { get; set; }
+        [DisplayName("Description")]
+      
         public string CTDescription { get; set; }
-        public string CTTag { get; set; }
+        public Nullable<int> FacultyID { get; set; }
+        [DisplayName("Student")]
         public string StudentID { get; set; }
+        [DisplayName(" ")]
+        [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.pdf)$", 
+            ErrorMessage = "Only PDF  files allowed.")]
+        public string Name { get; set; } 
+        [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.pdf)$", 
+            ErrorMessage = "Only PDF  files allowed.")]
+        public string ContentType { get; set; }
+        public byte[] Data { get; set; }
+        [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg)$", 
+            ErrorMessage = "Only Image  files allowed.")]
+        public string Name2 { get; set; }
+        [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg)$", 
+            ErrorMessage = "Only Image  files allowed.")]
+        public string ContentType2 { get; set; }
+        [DisplayName(" ")]
+        public byte[] Data2 { get; set; }
+        [DisplayName("Topic")]
+        public string TopicID { get; set; }
     
+        public virtual Faculty Faculty { get; set; }
         public virtual Student Student { get; set; }
+        public virtual Topic Topic { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MarketingCoordinator> MarketingCoordinators { get; set; }
+        public virtual ICollection<ContentAssign> ContentAssigns { get; set; }
     }
 }

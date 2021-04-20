@@ -1,0 +1,76 @@
+﻿@model WebEnterprise.Models.Topic
+
+<head>
+    <meta charset="utf-8">
+    <title>university magazine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+
+</head>
+
+<body>
+   
+
+
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="~/Content/edit.css">
+        <title>Document</title>
+    </head>
+    <body>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-style-3">
+                <form>
+                    <fieldset>
+                        <legend>Topic</legend>
+                        <label for="field1">
+                            <span>FacultyID<span class="required">*</span></span>
+                            @Html.DropDownList("FacultyID", null, htmlAttributes: new { @class = "form-control" })
+                        </label>
+                        <label for="field2">
+                            <span>Term<span class="required">*</span></span>
+                            @Html.EditorFor(model => model.TopicID, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                        <label for="field3">
+                            <span>topic<span class="required">*</span></span>
+                            @Html.EditorFor(model => model.TopicName, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                        <label for="field3">
+                            <span>Description<span class="required">*</span></span>
+                            @Html.TextAreaFor(model => model.TopicDescription, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                        <label for="field3">
+                            <span>StartDate<span class="required">*</span></span>
+                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                        <label for="field3">
+                            <span>Enddate<span class="required">*</span></span>
+                            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+
+
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </div>
+            </div>
+
+
+
+        }
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+    </body>

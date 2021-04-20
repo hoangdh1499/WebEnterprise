@@ -1,0 +1,105 @@
+﻿@model WebEnterprise.Models.Content
+
+
+
+@{ ViewBag.Title = "Create";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+
+
+<head>
+    <meta charset="utf-8" >
+    <title>university magazine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+    <link rel="stylesheet" href="~/Content/edit.css">
+
+
+
+</head>
+
+
+
+<body>
+    <h2>Create</h2>
+    @using (Html.BeginForm("Create", "Content", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+@Html.AntiForgeryToken()
+                <div class="form-style-3">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.CTID)
+                    <form>
+                        <fieldset style="background-color:white; border-color:aqua">
+                            <legend>Create Your Content</legend>
+                            <label for="field1">
+                                <span>
+                                    Title<span class="required">*</span>
+                                </span>
+                                @Html.EditorFor(model => model.CTName, new { htmlAttributes = new { @class = "form-control" } })
+                            </label>
+                            <label for="field2">
+                                <span>Description<span class="required">*</span></span>
+                                @Html.TextAreaFor(model => model.CTDescription, new { htmlAttributes = new { @class = "form-control" } })
+                            </label>
+                            <label for="field3">
+                                <span>Faculty<span class="required">*</span></span>
+                                @ViewBag.Faculty
+                            </label>
+                            <label for="field3">
+                                <span>TopicID<span class="required">*</span></span>
+                                @ViewBag.TName
+                            </label>
+                            <label for="field3">
+                                <span>StudentName <span class="required">*</span></span>
+                                @ViewBag.StudentName
+                            </label>
+                            <label for="field3">
+                                <span>StudentID<span class="required">*</span></span>
+                                @ViewBag.StudentID
+                            </label>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="file" name="postedImg" value="Choose File" /> IMAGE ONLY
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="file" name="postedPDF" value="Choose File" /> PDF ONLY
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    @Html.CheckBox("Condition", false, new { @id = "chkcondition" }) <a href="~/Content/Term_And_Conditions"> Term and conditions</a><br>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" value="Upload" class="btn btn-default" onclick="javascript: return AcceptTermAndcondition() " ; />
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>}
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script language="javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script language="javascript" type="text/javascript">
+        function AcceptTermAndcondition() {
+            if ($("#chkcondition").is(':checked')) {
+                return true;
+            }
+            else {
+                alert("Please accept term and condition");
+                return false;
+            }
+        }
+    </script>
+</body>

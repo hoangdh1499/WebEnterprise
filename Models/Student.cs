@@ -11,22 +11,39 @@ namespace WebEnterprise.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Student
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
-            this.ConTents = new HashSet<ConTent>();
+            this.Contents = new HashSet<Content>();
         }
-    
+        [DisplayName("ID")]
+        
         public string StudentID { get; set; }
+        [DisplayName("Student")]
+      
         public string StudentName { get; set; }
+        [DisplayName("Address")]
         public string StudentAddress { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayName("Birthday")]
         public System.DateTime DOB { get; set; }
+   
         public string UserName { get; set; }
+        [DisplayName("Email")]
+      
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]  
+        public string StudentEmail { get; set; }
+        [DisplayName("Faculty")]
+        public Nullable<int> FacultyID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConTent> ConTents { get; set; }
+        public virtual ICollection<Content> Contents { get; set; }
+        public virtual Faculty Faculty { get; set; }
     }
 }

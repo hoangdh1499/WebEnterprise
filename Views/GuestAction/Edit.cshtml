@@ -1,0 +1,64 @@
+﻿@model WebEnterprise.Models.Guest
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/edit.css">
+</head>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-style-3">
+        <form>
+            <fieldset>
+                <legend>Edit Guest</legend>
+
+                <label for="field2">
+                    <span>Name<span class="required">*</span></span>
+                    @Html.EditorFor(model => model.GuestName, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+                <label for="field3">
+                    <span>StudentAddress<span class="required">*</span></span>
+                    @Html.EditorFor(model => model.GuestAddress, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+                <label for="field3">
+                    <span>Phone<span class="required">*</span></span>
+
+                    @Html.EditorFor(model => model.GuestPhone, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+                <label for="field3">
+                    <span>Faculty<span class="required">*</span></span>
+                    @ViewBag.Fac
+                </label>
+                <label for="field3">
+                    <span>UserName <span class="required">*</span></span>
+
+                    @ViewBag.uName
+                </label>
+                <label for="field3">
+                    <span>StudentEmail<span class="required">*</span></span>
+                    @Html.EditorFor(model => model.GuestEmail, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+            </fieldset>
+        </form>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back", "GProfile")
+</div>
+<head>
+    <meta charset="utf-8">
+    <title>university magazine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+</head>
+
+

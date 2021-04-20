@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "ViewStatic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="utf-8">
+    <title>university magazine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="~/Content/Static.css">
+
+</head>
+
+<body>
+    
+    <script>
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: "The percent contributions of the year - 2021"
+                },
+                data: [
+                    {
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0.00\"%\"",
+                    indexLabel: "{label} {y}",
+                    dataPoints: [
+                        { y: 32.45, label: "IT" },
+                        { y: 25.31, label: "Design" },
+                        { y: 25.33, label: "Bussiness" },
+                        { y: 16.91, label: "sport" },
+
+                    ]
+                    }
+                ]
+            });
+            chart.render();
+
+        }
+    </script>
+    <div class="container-fluid">
+        <div class="text-center">
+            <h2>Static</h2>
+            <h1> The contributions of the year </h1>
+        </div></br>
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div></br>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h1>IT</h1>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Number of contributions of InforTech 2021 :    @ViewBag.IT
+                            <br>   Percentage of contributions by IT: @ViewBag.PerIT
+                            <br> Number of contributors of IT 2021 : @ViewBag.StdIT    @*/   @ViewBag.CotIT (@ViewBag.perStdIT%)*@
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h1>Business</h1>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Number of contributions of Business 2021 :    @ViewBag.Business
+                            <br />Percentage of contributions by Business: @ViewBag.PerBusiness
+                            <br />Number of contributors of Business  2021 : @ViewBag.StdBusiness   @*/   @ViewBag.CotBusiness (@ViewBag.perStdBusiness%)*@
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h1>Design</h1>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Number of contributions of Design 2021 :    @ViewBag.Design
+                            <br /> Percentage of contributions by Design: @ViewBag.PerDesign
+                            <br />Number of contributors of Design 2021 : @ViewBag.StdDesign  @* /   @ViewBag.CotDesign (@ViewBag.perStdDesign%)*@
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h1>Sport</h1>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Number of contributions of Sport 2021 :    @ViewBag.Sport
+                            <br />Percentage of contributions by Sport : @ViewBag.PerSport
+                            <br />Number of contributors of Sport 2021 : @ViewBag.StdSport   @*/   @ViewBag.CotSport (@ViewBag.perStdSport%)*@
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-auto">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Total</h1>
+                </div>
+                <div class="panel-body">
+                    <p>Total contributions 2021:    @ViewBag.Total</p>
+                    <p>Total contributors 2021 :    @ViewBag.TotalCTor</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>

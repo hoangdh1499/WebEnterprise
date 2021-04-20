@@ -5,47 +5,82 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<head>
+    <meta charset="utf-8">
+    <title>university magazine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+    <link rel="stylesheet" href="~/Content/detail.css">
+</head>
 
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.StudentName)
-        </dt>
+<body>
+    <h2>Details</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.StudentName)
-        </dd>
+    <div class="content">
+        <h4>Student</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StudentAddress)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.StudentName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.StudentAddress)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Faculty.FacultyName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Faculty.FacultyName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.StudentAddress)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.StudentAddress)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DOB)
+            </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            <dd>
+                @Html.DisplayFor(model => model.DOB)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.StudentEmail)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StudentEmail)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @if (User.IsInRole("Student"))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID })
+        }
+        else
+        {
+        <p></p>
+    }
+        @Html.ActionLink("Back to List", "Index")
+        </p>
+    </body>

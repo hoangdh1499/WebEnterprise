@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "ChangePass";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="utf-8">
+    <title>university magazine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></script>
+    <link rel="stylesheet" href="~/Content/edit.css">
+
+</head>
+
+<body>
+    <body>
+        <div class="form-style-3">
+            <table class="table">
+                <form action="/Authen/ChangePass" method="post">
+                    <table>
+                        <fieldset>
+                            <legend>ChangePassWord</legend>
+                            <label for="field2">
+                                <span>
+                                    Password
+                                </span>
+                                <input type="password" name="current" value="" />
+                            </label>
+                            <br />
+                            <label for="field3">
+                                <span>
+                                    New Password
+                                </span>
+                                <input type="password" name="newPass" value="" />
+                            </label>
+                            <br />
+                            <label for="field3">
+                                <span>
+                                    Confirm NewPassword
+                                </span>
+                                <input type="password" name="ConfirmNewPass" value="" />
+                            </label>
+                            @if (TempData["message"] != null)
+                            {
+                                <script type="text/javascript">
+                 alert(@Html.Raw(Json.Encode(TempData["message"])));
+                                </script>
+}
+                        </fieldset>
+                        <label> <input type="submit" name="submit" value="submit"></label>
+                    </table>
+                </form>
+            </table>
+        </div>
+</body>
